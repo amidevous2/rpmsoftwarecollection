@@ -3649,7 +3649,7 @@ Epoch:          0
 Version:        3.28.01
 %if %{with perl_enables_groff}
 # Pod::Perldoc::ToMan executes roff
-Requires:       %{?scl_prefix}groff-base
+Requires:       groff-base
 %endif
 Requires:       %{?scl_prefix}%perl_compat
 Requires:       %{?scl_prefix}perl(File::Temp) >= 0.22
@@ -4680,64 +4680,64 @@ you're not running VMS, this module does nothing.
 %{?scl:scl enable %{scl} - << \EOF}
 set -ex
 %setup -q -n perl-%{perl_version}
-%patch1 -p1
+%patch -P 1 -p1
 %ifarch %{multilib_64_archs}
-%patch2 -p1
+%patch -P 2 -p1
 %endif
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
-%patch14 -p1
-%patch15 -p1
-%patch16 -p1
-%patch17 -p1
-%patch18 -p1
-%patch19 -p1
-%patch21 -p1
-%patch22 -p1
-%patch23 -p1
-%patch24 -p1
-%patch25 -p1
-%patch26 -p1
-%patch28 -p1
-%patch29 -p1
-%patch30 -p1
-%patch35 -p1
-%patch38 -p1
-%patch39 -p1
-%patch40 -p1
-%patch41 -p1
-%patch42 -p1
-%patch43 -p1
-%patch44 -p1
-%patch45 -p1
-%patch46 -p1
-%patch47 -p1
-%patch48 -p1
-%patch49 -p1
-%patch50 -p1
-%patch51 -p1
-%patch52 -p1
-%patch53 -p1
-%patch54 -p1
-%patch55 -p1
-%patch56 -p1
-%patch57 -p1
-%patch58 -p1
-%patch59 -p1
-%patch60 -p1
-%patch61 -p1
-%patch200 -p1
-%patch201 -p1
-%patch202 -p1
+%patch -P 3 -p1
+%patch -P 4 -p1
+%patch -P 5 -p1
+%patch -P 6 -p1
+%patch -P 7 -p1
+%patch -P 8 -p1
+%patch -P 9 -p1
+%patch -P 10 -p1
+%patch -P 11 -p1
+%patch -P 12 -p1
+%patch -P 13 -p1
+%patch -P 14 -p1
+%patch -P 15 -p1
+%patch -P 16 -p1
+%patch -P 17 -p1
+%patch -P 18 -p1
+%patch -P 19 -p1
+%patch -P 21 -p1
+%patch -P 22 -p1
+%patch -P 23 -p1
+%patch -P 24 -p1
+%patch -P 25 -p1
+%patch -P 26 -p1
+%patch -P 28 -p1
+%patch -P 29 -p1
+%patch -P 30 -p1
+%patch -P 35 -p1
+%patch -P 38 -p1
+%patch -P 39 -p1
+%patch -P 40 -p1
+%patch -P 41 -p1
+%patch -P 42 -p1
+%patch -P 43 -p1
+%patch -P 44 -p1
+%patch -P 45 -p1
+%patch -P 46 -p1
+%patch -P 47 -p1
+%patch -P 48 -p1
+%patch -P 49 -p1
+%patch -P 50 -p1
+%patch -P 51 -p1
+%patch -P 52 -p1
+%patch -P 53 -p1
+%patch -P 54 -p1
+%patch -P 55 -p1
+%patch -P 56 -p1
+%patch -P 57 -p1
+%patch -P 58 -p1
+%patch -P 59 -p1
+%patch -P 60 -p1
+%patch -P 61 -p1
+%patch -P 200 -p1
+%patch -P 201 -p1
+%patch -P 202 -p1
 
 %if !%{defined perl_bootstrap}
 # Local patch tracking
