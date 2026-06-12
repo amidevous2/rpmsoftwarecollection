@@ -1,0 +1,27 @@
+From 3de37537d6d4f0321645973790ecc9805266501f Mon Sep 17 00:00:00 2001
+From: Leon Timmermans <fawaka@gmail.com>
+Date: Mon, 9 Jun 2025 23:05:39 +0200
+Subject: [PATCH] Use PerlLIO_dup_cloexec in Perl_dirp_dup to set O_CLOEXEC
+
+dup doesn't mark the new descriptor as close-on-exec, which can lead to
+a descriptor leaking to the new process.
+---
+ sv.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sv.c b/sv.c
+index 8a005b2d16..06d6a84211 100644
+--- a/sv.c
++++ b/sv.c
+@@ -14111,7 +14111,7 @@ Perl_dirp_dup(pTHX_ DIR *const dp, CLONE_PARAMS *const param)
+ 
+     PERL_UNUSED_ARG(param);
+ 
+-    ret = fdopendir(dup(my_dirfd(dp)));
++    ret = fdopendir(PerlLIO_dup_cloexec(my_dirfd(dp)));
+ 
+ #elif defined(WIN32)
+     ret = win32_dirp_dup(dp, param);
+-- 
+2.50.0
+
