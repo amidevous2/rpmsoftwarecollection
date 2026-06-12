@@ -37,9 +37,9 @@ Release:       9%{?dist}
 Group:         Development/Languages
 License:       GPL-2.0-or-later
 
-Source0:       macros-build
-Source1:       README
-Source2:       LICENSE
+Source0:       https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/main/php56/macros-build
+Source1:       https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/main/php56/README
+Source2:       https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/main/php56/LICENSE
 
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: scl-utils-build
