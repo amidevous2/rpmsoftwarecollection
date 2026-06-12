@@ -294,7 +294,7 @@ BuildRequires: httpd-devel >= 2.0.46-1, pam-devel
 BuildRequires: httpd-filesystem
 %endif
 
-%if 0%{?fedora} >= 35 || 0%{?rhel} >= 8
+%if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
 BuildRequires: libstdc++-devel, openssl-devel, compat-openssl11-devel
 %else
 BuildRequires: libstdc++-devel, openssl-devel
@@ -515,7 +515,7 @@ Requires: krb5-devel%{?_isa}
 Requires: libedit-devel%{?_isa}
 Requires: libxml2-devel%{?_isa}
 
-%if 0%{?fedora} >= 35 || 0%{?rhel} >= 8
+%if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
 Requires: openssl-devel%{?_isa}, compat-openssl11-devel
 %else
 Requires: openssl-devel%{?_isa}
@@ -560,7 +560,7 @@ Group: Development/Languages
 # All files licensed under PHP version 3.01
 License: PHP
 Requires: %{?scl_prefix}php-common%{?_isa} = %{version}-%{release}
-%if 0%{?fedora} >= 35 || 0%{?rhel} >= 8
+%if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
 BuildRequires: krb5-devel, openssl-devel, compat-openssl11-devel, libc-client-devel
 %else
 BuildRequires: krb5-devel, openssl-devel, libc-client-devel
@@ -581,7 +581,7 @@ Group: Development/Languages
 # All files licensed under PHP version 3.01
 License: PHP
 Requires: %{?scl_prefix}php-common%{?_isa} = %{version}-%{release}
-%if 0%{?fedora} >= 35 || 0%{?rhel} >= 8
+%if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
 BuildRequires: cyrus-sasl-devel, openldap-devel, openssl-devel, compat-openssl11-devel
 %else
 BuildRequires: cyrus-sasl-devel, openldap-devel, openssl-devel
@@ -644,7 +644,7 @@ License: PHP
 Requires: %{?scl_prefix}php-pdo%{?_isa} = %{version}-%{release}
 Provides: %{?scl_prefix}php_database
 Provides: %{?scl_prefix}php-pdo_pgsql, %{?scl_prefix}php-pdo_pgsql%{?_isa}
-%if 0%{?fedora} >= 35 || 0%{?rhel} >= 8
+%if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
 BuildRequires: krb5-devel, openssl-devel, compat-openssl11-devel, postgresql-devel
 %else
 BuildRequires: krb5-devel, openssl-devel, postgresql-devel
@@ -1275,7 +1275,7 @@ touch configure.in
 ./buildconf --force
 
 CFLAGS="$RPM_OPT_FLAGS -fno-strict-aliasing -Wno-pointer-sign"
-%if 0%{?fedora} >= 35 || 0%{?rhel} >= 8
+%if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
 CFLAGS="-I%{_root_includedir}/openssl11 $CFLAGS"
 LDFLAGS="-L%{_root_libdir}/openssl11 $LDFLAGS"
 %endif
