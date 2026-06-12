@@ -6,8 +6,8 @@ Name: %{?scl_prefix}m4
 Version: 1.4.19
 Release: 1%{?dist}
 License: GPLv3+
-Source0: https://ftp.gnu.org/gnu/m4/m4-%{version}.tar.xz
-Source1: https://ftp.gnu.org/gnu/m4/m4-%{version}.tar.xz.sig
+Source0: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/m4-%{version}.tar.xz
+Source1: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/m4-%{version}.tar.xz.sig
 URL: https://www.gnu.org/software/m4/
 %{?scl:Requires: %{scl}-runtime}
 %{?scl:BuildRequires: %{scl}-runtime}
