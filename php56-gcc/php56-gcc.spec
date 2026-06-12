@@ -165,26 +165,26 @@ License: GPLv3+ and GPLv3+ with exceptions and GPLv2+ with exceptions and LGPLv2
 # git --git-dir=gcc-dir.tmp/.git fetch --depth 1 origin %%{gitrev}
 # git --git-dir=gcc-dir.tmp/.git archive --prefix=%%{name}-%%{version}-%%{DATE}/ %%{gitrev} | xz -9e > %%{name}-%%{version}-%%{DATE}.tar.xz
 # rm -rf gcc-dir.tmp
-Source0: gcc-%{version}-%{DATE}.tar.xz
-Source1: https://gcc.gnu.org/pub/gcc/infrastructure/isl-%{isl_version}.tar.bz2
-Source2: http://www.multiprecision.org/mpc/download/mpc-%{mpc_version}.tar.gz
-Source3: ftp://ftp.stack.nl/pub/users/dimitri/doxygen-%{doxygen_version}.src.tar.gz
+Source0: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/gcc-%{version}-%{DATE}.tar.xz
+Source1: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/isl-%{isl_version}.tar.bz2
+Source2: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/mpc-%{mpc_version}.tar.gz
+Source3: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/doxygen-%{doxygen_version}.src.tar.gz
 # The source for nvptx-tools package was pulled from upstream's vcs.  Use the
 # following commands to generate the tarball:
 # git clone --depth 1 git://github.com/MentorEmbedded/nvptx-tools.git nvptx-tools-dir.tmp
 # git --git-dir=nvptx-tools-dir.tmp/.git fetch --depth 1 origin %%{nvptx_tools_gitrev}
 # git --git-dir=nvptx-tools-dir.tmp/.git archive --prefix=nvptx-tools-%%{nvptx_tools_gitrev}/ %%{nvptx_tools_gitrev} | xz -9e > nvptx-tools-%%{nvptx_tools_gitrev}.tar.xz
 # rm -rf nvptx-tools-dir.tmp
-Source4: nvptx-tools-%{nvptx_tools_gitrev}.tar.xz
+Source4: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/nvptx-tools-%{nvptx_tools_gitrev}.tar.xz
 # The source for nvptx-newlib package was pulled from upstream's vcs.  Use the
 # following commands to generate the tarball:
 # git clone git://sourceware.org/git/newlib-cygwin.git newlib-cygwin-dir.tmp
 # git --git-dir=newlib-cygwin-dir.tmp/.git archive --prefix=newlib-cygwin-%%{newlib_cygwin_gitrev}/ %%{newlib_cygwin_gitrev} ":(exclude)newlib/libc/sys/linux/include/rpc/*.[hx]" | xz -9e > newlib-cygwin-%%{newlib_cygwin_gitrev}.tar.xz
 # rm -rf newlib-cygwin-dir.tmp
-Source5: newlib-cygwin-%{newlib_cygwin_gitrev}.tar.xz
+Source5: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/newlib-cygwin-%{newlib_cygwin_gitrev}.tar.xz
 Source6: libgomp_nonshared.c
-Source7: http://gcc.gnu.org/pub/gcc/infrastructure/mpfr-%{mpfr_version}.tar.bz2
-Source8: http://gcc.gnu.org/pub/gcc/infrastructure/gmp-%{gmp_version}.tar.bz2
+Source7: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/mpfr-%{mpfr_version}.tar.bz2
+Source8: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/gmp-%{gmp_version}.tar.bz2
 URL: http://gcc.gnu.org
 # Need binutils with -pie support >= 2.14.90.0.4-4
 # Need binutils which can omit dot symbols and overlap .opd on ppc64 >= 2.15.91.0.2-4
