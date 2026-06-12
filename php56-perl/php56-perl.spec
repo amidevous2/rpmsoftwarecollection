@@ -107,198 +107,198 @@ Release:        474%{?dist}
 Summary:        Practical Extraction and Report Language
 Url:            https://www.perl.org/
 Source0:        https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/perl-%{perl_version}.tar.xz
-Source3:        macros.perl
+Source3:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/macros.perl
 #Systemtap tapset and example that make use of systemtap-sdt-devel
 # build requirement. Written by lberk; Not yet upstream.
-Source4:        perl.stp
-Source5:        perl-example.stp
+Source4:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl.stp
+Source5:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-example.stp
 # Tom Christiansen confirms Pod::Html uses the same license as perl
-Source6:        Pod-Html-license-clarification
+Source6:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/Pod-Html-license-clarification
 
 # Pregenerated dependencies for bootstrap.
 # If your RPM tool fails on including the source file, then you forgot to
 # define _sourcedir macro to point to the directory with the sources.
-Source7:        gendep.macros
+Source7:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/gendep.macros
 %if %{defined perl_bootstrap}
 %include %{SOURCE7}
 %endif
 
 # Removes date check, Fedora/RHEL specific
-Patch1:         perl-perlbug-tag.patch
+Patch1:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-perlbug-tag.patch
 
 # Fedora/RHEL only (64bit only)
-Patch2:         perl-5.8.0-libdir64.patch
+Patch2:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.8.0-libdir64.patch
 
 # Fedora/RHEL specific (use libresolv instead of libbind), bug #151127
-Patch3:         perl-5.10.0-libresolv.patch
+Patch3:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.10.0-libresolv.patch
 
 # FIXME: May need the "Fedora" references removed before upstreaming
 # patches ExtUtils-MakeMaker
-Patch4:         perl-USE_MM_LD_RUN_PATH.patch
+Patch4:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-USE_MM_LD_RUN_PATH.patch
 
 # Provide maybe_command independently, bug #1129443
-Patch5:         perl-5.22.1-Provide-ExtUtils-MM-methods-as-standalone-ExtUtils-M.patch
+Patch5:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.22.1-Provide-ExtUtils-MM-methods-as-standalone-ExtUtils-M.patch
 
 # The Fedora builders started randomly failing this futime test
 # only on x86_64, so we just don't run it. Works fine on normal
 # systems.
-Patch6:         perl-5.10.0-x86_64-io-test-failure.patch
+Patch6:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.10.0-x86_64-io-test-failure.patch
 
 # switch off test, which is failing only on koji (fork)
-Patch7:         perl-5.14.1-offtest.patch
+Patch7:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.14.1-offtest.patch
 
 # Define SONAME for libperl.so
-Patch8:         perl-5.16.3-create_libperl_soname.patch
+Patch8:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.16.3-create_libperl_soname.patch
 
 # Install libperl.so to -Dshrpdir value
-Patch9:         perl-5.22.0-Install-libperl.so-to-shrpdir-on-Linux.patch
+Patch9:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.22.0-Install-libperl.so-to-shrpdir-on-Linux.patch
 
 # Make *DBM_File desctructors thread-safe, bug #1107543, RT#61912
-Patch10:        perl-5.18.2-Destroy-GDBM-NDBM-ODBM-SDBM-_File-objects-only-from-.patch
+Patch10:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.18.2-Destroy-GDBM-NDBM-ODBM-SDBM-_File-objects-only-from-.patch
 
 # Replace ExtUtils::MakeMaker dependency with ExtUtils::MM::Utils.
 # This allows not to require perl-devel. Bug #1129443
-Patch11:        perl-5.22.1-Replace-EU-MM-dependnecy-with-EU-MM-Utils-in-IPC-Cmd.patch
+Patch11:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.22.1-Replace-EU-MM-dependnecy-with-EU-MM-Utils-in-IPC-Cmd.patch
 
 # Link XS modules to pthread library to fix linking with -z defs,
 # <https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/3RHZEHLRUHJFF2XGHI5RB6YPDNLDR4HG/>
-Patch12:        perl-5.27.8-hints-linux-Add-lphtread-to-lddlflags.patch
+Patch12:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.27.8-hints-linux-Add-lphtread-to-lddlflags.patch
 
 # Pass the correct CFLAGS to dtrace
-Patch13:        perl-5.28.0-Pass-CFLAGS-to-dtrace.patch
+Patch13:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.28.0-Pass-CFLAGS-to-dtrace.patch
 
 # Do not use C compiler reserved identifiers, in upstream after 5.33.0
-Patch14:        perl-5.33.0-MUTABLE_PTR-Rmv-non-standard-syntax.patch
+Patch14:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-MUTABLE_PTR-Rmv-non-standard-syntax.patch
 
 # Fix SvUV_nomg() macro definition, in upstream after 5.33.0
-Patch15:        perl-5.33.0-sv.h-Wanted-UOK-but-said-IOK.patch
+Patch15:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-sv.h-Wanted-UOK-but-said-IOK.patch
 
 # Fix SvTRUE() documentation, in upstream after 5.33.0
-Patch16:        perl-5.33.0-Update-pod-for-SvTRUE-to-indicate-single-param-evalu.patch
+Patch16:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-Update-pod-for-SvTRUE-to-indicate-single-param-evalu.patch
 
 # Fix ext/XS-APItest/t/utf8_warn_base.pl tests, in upstream after 5.33.0
-Patch17:        perl-5.33.0-ext-XS-APItest-t-utf8_warn_base.pl-Fix-a-couple-test.patch
+Patch17:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-ext-XS-APItest-t-utf8_warn_base.pl-Fix-a-couple-test.patch
 
 # Fix IO::Handle::error() to report write errors, GH#6799, in upstream after 5.33.0
-Patch18:        perl-5.33.0-make-fh-error-report-errors-from-both-input-and-outp.patch
-Patch19:        perl-5.33.0-IO-Handle-clear-the-error-on-both-input-and-output-s.patch
+Patch18:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-make-fh-error-report-errors-from-both-input-and-outp.patch
+Patch19:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-IO-Handle-clear-the-error-on-both-input-and-output-s.patch
 
 # Fix setting a non-blocking mode in IO::Socket::UNIX, GH#17787,
 # in upstream after 5.33.0
-Patch21:        perl-5.33.0-IO-Socket-UNIX-synchronize-behavior-with-module-docu.patch
+Patch21:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-IO-Socket-UNIX-synchronize-behavior-with-module-docu.patch
 
 # Fix running actions after stepping in a debugger, GH#17901,
 # in upstream after 5.33.0
-Patch22:        perl-5.33.0-After-running-an-action-in-the-debugger-turn-it-off.patch
-Patch23:        perl-5.33.0-Clearing-DB-action-at-the-end-is-no-longer-needed.patch
-Patch24:        perl-5.33.0-Add-missing-MANIFEST-entry-from-fix-for-debugger.patch
+Patch22:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-After-running-an-action-in-the-debugger-turn-it-off.patch
+Patch23:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-Clearing-DB-action-at-the-end-is-no-longer-needed.patch
+Patch24:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-Add-missing-MANIFEST-entry-from-fix-for-debugger.patch
 
 # Fix a buffer size for asctime_r() and ctime_r() functions,
 # in upstream after 5.33.0
-Patch25:        perl-5.33.0-reentr.c-Buffer-sizes-for-asctime_r-ctime_r-are-smal.patch
+Patch25:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-reentr.c-Buffer-sizes-for-asctime_r-ctime_r-are-smal.patch
 
 # Prevent from an integer overflow in RenewDouble() macro,
 # in upstream after 5.33.0
-Patch26:        perl-5.33.0-reentr.c-Prevent-infinite-looping.patch
+Patch26:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-reentr.c-Prevent-infinite-looping.patch
 
 # Fix a number of arguments passed to a BOOT XS subroutine, GH#17755,
 # in upstream after 5.33.0
-Patch28:        perl-5.33.0-XSUB.h-fix-MARK-and-items-variables-inside-BOOT-XSUB.patch
+Patch28:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-XSUB.h-fix-MARK-and-items-variables-inside-BOOT-XSUB.patch
 
 # Fix an IO::Handle spurious error reported for regular file handles,
 # GH#18019, in upstream after 5.33.0
-Patch29:        perl-5.33.0-IO-Handle-Fix-a-spurious-error-reported-for-regular-.patch
+Patch29:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-IO-Handle-Fix-a-spurious-error-reported-for-regular-.patch
 
 # Fix inheritance resolution of lexial objects in a debugger, GH#17661,
 # in upstream after 5.33.0
-Patch30:        perl-5.33.0-fix-C-i-obj-where-obj-is-a-lexical.patch
+Patch30:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.0-fix-C-i-obj-where-obj-is-a-lexical.patch
 
 # Fix sorting with a block that calls return, GH#18081,
 # in upstream after 5.33.1
-Patch35:        perl-5.33.1-sort-return-foo.patch
+Patch35:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.1-sort-return-foo.patch
 
 # Fix sv_collxfrm macro to respect locale, in upstream after 5.33.2
-Patch38:        perl-5.33.2-sv.h-sv_collxfrm-didn-t-work-properly.patch
+Patch38:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.2-sv.h-sv_collxfrm-didn-t-work-properly.patch
 
 # Fix an iterator signedness in handling an mro exception, GH#18155,
 # in upstream after 5.33.2
-Patch39:        perl-5.33.2-mro.xs-Fix-compiler-warning.patch
+Patch39:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.2-mro.xs-Fix-compiler-warning.patch
 
 # Fix a code flow in Perl_sv_inc_nomg(), in upstream after 5.33.2
-Patch40:        perl-5.33.2-sv.c-Added-missing-braces-in-Perl_sv_inc_nomg.patch
+Patch40:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.2-sv.c-Added-missing-braces-in-Perl_sv_inc_nomg.patch
 
 # Fix an undefined behavior in Perl_custom_op_get_field(),
 # in upstream after 5.33.3
-Patch41:        perl-5.33.3-Perl_custom_op_get_field-remove-undef-behaviour.patch
+Patch41:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.3-Perl_custom_op_get_field-remove-undef-behaviour.patch
 
 # Fix Config variable names in in t/op tests, in upstream after 5.33.3
-Patch42:        perl-5.33.3-t-op-inc.t-t-op-hexfp.t-t-op-sprintf2.t-Add-missing-.patch
+Patch42:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.3-t-op-inc.t-t-op-hexfp.t-t-op-sprintf2.t-Add-missing-.patch
 
 # Fix fetching a magic on the stacked file test operators,
 # in upstream after 5.33.3
-Patch43:        perl-5.33.3-fetch-magic-on-the-first-stacked-filetest-not-the-la.patch
+Patch43:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.3-fetch-magic-on-the-first-stacked-filetest-not-the-la.patch
 
 # Fix a crash in optimizing split(), GH#18232, in upstream after 5.33.3
-Patch44:        perl-5.32.0-Add-av_count.patch
-Patch45:        perl-5.33.2-Remove-Perl_av_top_index.patch
-Patch46:        perl-5.32.0-pp_split-no-SWITCHSTACK-in-ary-split-.-optimisation.patch
-Patch47:        perl-5.33.3-pp_split-add-TonyC-s-stack-not-refcounted-suggestion.patch
+Patch44:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.32.0-Add-av_count.patch
+Patch45:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.2-Remove-Perl_av_top_index.patch
+Patch46:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.32.0-pp_split-no-SWITCHSTACK-in-ary-split-.-optimisation.patch
+Patch47:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.3-pp_split-add-TonyC-s-stack-not-refcounted-suggestion.patch
 
 # Make accessing environment by DynaLoader thread-safe,
 # in upstream after 5.33.4
-Patch48:        perl-5.32.1-DynaLoader-use-PerlEnv_getenv.patch
+Patch48:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.32.1-DynaLoader-use-PerlEnv_getenv.patch
 
 # Use duplocale() if available, in upstream after 5.33.4
-Patch49:        perl-5.33.4-locale.c-Fix-typo-in-ifdef.patch
+Patch49:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.4-locale.c-Fix-typo-in-ifdef.patch
 
 # Fix fc() in Turkish locale, in upstream after 5.33.5
-Patch50:        perl-5.33.5-Fix-buggy-fc-in-Turkish-locale.patch
+Patch50:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.5-Fix-buggy-fc-in-Turkish-locale.patch
 
 # Fix croaking on "my $_" when "use utf8" is in effect, GH#18449,
 # in upstream after 5.33.5
-Patch51:        perl-5.33.5-op.c-croak-on-my-_-when-use-utf8-is-in-effect.patch
+Patch51:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.5-op.c-croak-on-my-_-when-use-utf8-is-in-effect.patch
 
 # Fix PERL_UNUSED_ARG() definition in XSUB.h, in upstream after 5.33.5
-Patch52:        perl-5.33.5-Use-perl.h-versions-of-PERL_UNUSED_foo-in-XSUB.h.patch
+Patch52:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.5-Use-perl.h-versions-of-PERL_UNUSED_foo-in-XSUB.h.patch
 
 # Add missing entries to perldiag, GH#18276, in upstream after 5.33.6
-Patch53:        perl-5.33.6-Add-missing-entries-to-perldiag-GH-18276.patch
+Patch53:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.6-Add-missing-entries-to-perldiag-GH-18276.patch
 
 # Protect locale tests from LANGUAGE environment variable,
 # in upstream after 5.33.6
-Patch54:        perl-5.33.6-t-run-locale.t-Rmv-LANGUAGE-from-environment.patch
+Patch54:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.6-t-run-locale.t-Rmv-LANGUAGE-from-environment.patch
 
 # Prevent the number of buckets in a hash from getting too large,
 # in upstream after 5.33.6
-Patch55:        perl-5.32.1-hv.c-add-a-guard-clause-to-prevent-the-number-of-buc.patch
+Patch55:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.32.1-hv.c-add-a-guard-clause-to-prevent-the-number-of-buc.patch
 
 # Fix a memory leak when compiling a regular expression, GH#18604,
 # in upstream after 5.33.7
-Patch56:        perl-5.33.7-regcomp.c-Remove-memory-leak.patch
+Patch56:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.7-regcomp.c-Remove-memory-leak.patch
 
 # Fix dumping a hash entry of PL_strtab type, in upstream after 5.33.7
-Patch57:        perl-5.32.1-Perl_do_sv_dump-handle-PL_strtab.patch
+Patch57:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.32.1-Perl_do_sv_dump-handle-PL_strtab.patch
 
 # Fix an arithmetic left shift of a minimal integer value, GH#18639,
 # in upstream after 5.33.8
-Patch58:        perl-5.33.8-Fix-broken-left-shift-of-IV_MIN-under-use-integer.patch
+Patch58:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.33.8-Fix-broken-left-shift-of-IV_MIN-under-use-integer.patch
 
 # Fix write past buffer end via illegal user-defined Unicode property
 # CVE-2023-47038
-Patch59:        perl-5.32.1-CVE-2023-47038.patch
+Patch59:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.32.1-CVE-2023-47038.patch
 
 # Fix CVE-2025-40909 - Fixed in upstream since 5.42.0
-Patch60:        perl-5.42.0-CVE-2025-40909-Clone-dirhandles-without-fchdir.patch
-Patch61:        perl-5.42.0-Use-PerlLIO_dup_cloexec-in-Perl_dirp_dup-to-set-O_CL.patch
+Patch60:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.42.0-CVE-2025-40909-Clone-dirhandles-without-fchdir.patch
+Patch61:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.42.0-Use-PerlLIO_dup_cloexec-in-Perl_dirp_dup-to-set-O_CL.patch
 
 # Link XS modules to libperl.so with EU::CBuilder on Linux, bug #960048
-Patch200:       perl-5.16.3-Link-XS-modules-to-libperl.so-with-EU-CBuilder-on-Li.patch
+Patch200:       https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.16.3-Link-XS-modules-to-libperl.so-with-EU-CBuilder-on-Li.patch
 
 # Link XS modules to libperl.so with EU::MM on Linux, bug #960048
-Patch201:       perl-5.16.3-Link-XS-modules-to-libperl.so-with-EU-MM-on-Linux.patch
+Patch201:       https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.16.3-Link-XS-modules-to-libperl.so-with-EU-MM-on-Linux.patch
 
 # If optimizing -O is used, add the definition to .ph files, bug #2159760
-Patch202:       perl-5.36.0-Add-definition-of-OPTIMIZE-to-.ph-files.patch
+Patch202:       https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.36.0-Add-definition-of-OPTIMIZE-to-.ph-files.patch
 
 # Update some of the bundled modules
 # see http://fedoraproject.org/wiki/Perl/perl.spec for instructions
