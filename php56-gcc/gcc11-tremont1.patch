@@ -1,0 +1,294 @@
+From cbd145b132c79c36e990a0eaf10c86159009f18d Mon Sep 17 00:00:00 2001
+From: "H.J. Lu" <hjl.tools@gmail.com>
+Date: Wed, 15 Sep 2021 14:15:10 +0800
+Subject: [PATCH 1/3] x86: Update -mtune=tremont
+
+Initial -mtune=tremont update
+
+1. Use Haswell scheduling model.
+2. Assume that stack engine allows to execute push&pop instructions in
+parall.
+3. Prepare for scheduling pass as -mtune=generic.
+4. Use the same issue rate as -mtune=generic.
+5. Enable partial_reg_dependency.
+6. Disable accumulate_outgoing_args
+7. Enable use_leave
+8. Enable push_memory
+9. Disable four_jump_limit
+10. Disable opt_agu
+11. Disable avoid_lea_for_addr
+12. Disable avoid_mem_opnd_for_cmove
+13. Enable misaligned_move_string_pro_epilogues
+14. Enable use_cltd
+16. Enable avoid_false_dep_for_bmi
+17. Enable avoid_mfence
+18. Disable expand_abs
+19. Enable sse_typeless_stores
+20. Enable sse_load0_by_pxor
+21. Disable split_mem_opnd_for_fp_converts
+22. Disable slow_pshufb
+23. Enable partial_reg_dependency
+
+This is the first patch to tune for Tremont.  With all patches applied,
+performance impacts on SPEC CPU 2017 are:
+
+500.perlbench_r         1.81%
+502.gcc_r               0.57%
+505.mcf_r               1.16%
+520.omnetpp_r           0.00%
+523.xalancbmk_r         0.00%
+525.x264_r              4.55%
+531.deepsjeng_r         0.00%
+541.leela_r             0.39%
+548.exchange2_r         1.13%
+557.xz_r                0.00%
+geomean for intrate     0.95%
+503.bwaves_r            0.00%
+507.cactuBSSN_r         6.94%
+508.namd_r              12.37%
+510.parest_r            1.01%
+511.povray_r            3.70%
+519.lbm_r               36.61%
+521.wrf_r               8.79%
+526.blender_r           2.91%
+527.cam4_r              6.23%
+538.imagick_r           0.28%
+544.nab_r               21.99%
+549.fotonik3d_r         3.63%
+554.roms_r              -1.20%
+geomean for fprate      7.50%
+
+gcc/ChangeLog
+
+	* common/config/i386/i386-common.c: Use Haswell scheduling model
+	for Tremont.
+	* config/i386/i386.c (ix86_sched_init_global): Prepare for Tremont
+	scheduling pass.
+	* config/i386/x86-tune-sched.c (ix86_issue_rate): Change Tremont
+	issue rate to 4.
+	(ix86_adjust_cost): Handle Tremont.
+	* config/i386/x86-tune.def (X86_TUNE_SSE_PARTIAL_REG_DEPENDENCY):
+	Enable for Tremont.
+	(X86_TUNE_USE_LEAVE): Likewise.
+	(X86_TUNE_PUSH_MEMORY): Likewise.
+	(X86_TUNE_MISALIGNED_MOVE_STRING_PRO_EPILOGUES): Likewise.
+	(X86_TUNE_USE_CLTD): Likewise.
+	(X86_TUNE_AVOID_FALSE_DEP_FOR_BMI): Likewise.
+	(X86_TUNE_AVOID_MFENCE): Likewise.
+	(X86_TUNE_SSE_TYPELESS_STORES): Likewise.
+	(X86_TUNE_SSE_LOAD0_BY_PXOR): Likewise.
+	(X86_TUNE_ACCUMULATE_OUTGOING_ARGS): Disable for Tremont.
+	(X86_TUNE_FOUR_JUMP_LIMIT): Likewise.
+	(X86_TUNE_OPT_AGU): Likewise.
+	(X86_TUNE_AVOID_LEA_FOR_ADDR): Likewise.
+	(X86_TUNE_AVOID_MEM_OPND_FOR_CMOVE): Likewise.
+	(X86_TUNE_EXPAND_ABS): Likewise.
+	(X86_TUNE_SPLIT_MEM_OPND_FOR_FP_CONVERTS): Likewise.
+	(X86_TUNE_SLOW_PSHUFB): Likewise.
+---
+ gcc/common/config/i386/i386-common.c |  2 +-
+ gcc/config/i386/i386.c               |  1 +
+ gcc/config/i386/x86-tune-sched.c     |  2 ++
+ gcc/config/i386/x86-tune.def         | 37 ++++++++++++++--------------
+ 4 files changed, 23 insertions(+), 19 deletions(-)
+
+diff --git a/gcc/common/config/i386/i386-common.c b/gcc/common/config/i386/i386-common.c
+index 38dbb9d9263..ef382ec9a22 100644
+--- a/gcc/common/config/i386/i386-common.c
++++ b/gcc/common/config/i386/i386-common.c
+@@ -1916,7 +1916,7 @@ const pta processor_alias_table[] =
+     M_CPU_TYPE (INTEL_GOLDMONT), P_PROC_SSE4_2},
+   {"goldmont-plus", PROCESSOR_GOLDMONT_PLUS, CPU_GLM, PTA_GOLDMONT_PLUS,
+     M_CPU_TYPE (INTEL_GOLDMONT_PLUS), P_PROC_SSE4_2},
+-  {"tremont", PROCESSOR_TREMONT, CPU_GLM, PTA_TREMONT,
++  {"tremont", PROCESSOR_TREMONT, CPU_HASWELL, PTA_TREMONT,
+     M_CPU_TYPE (INTEL_TREMONT), P_PROC_SSE4_2},
+   {"knl", PROCESSOR_KNL, CPU_SLM, PTA_KNL,
+     M_CPU_TYPE (INTEL_KNL), P_PROC_AVX512F},
+diff --git a/gcc/config/i386/i386.c b/gcc/config/i386/i386.c
+index 42c47d2b12b..fc2a27b5cbf 100644
+--- a/gcc/config/i386/i386.c
++++ b/gcc/config/i386/i386.c
+@@ -16732,6 +16732,7 @@ ix86_sched_init_global (FILE *, int, int)
+     case PROCESSOR_NEHALEM:
+     case PROCESSOR_SANDYBRIDGE:
+     case PROCESSOR_HASWELL:
++    case PROCESSOR_TREMONT:
+     case PROCESSOR_GENERIC:
+       /* Do not perform multipass scheduling for pre-reload schedule
+          to save compile time.  */
+diff --git a/gcc/config/i386/x86-tune-sched.c b/gcc/config/i386/x86-tune-sched.c
+index 2bcc64b865a..278035eec0b 100644
+--- a/gcc/config/i386/x86-tune-sched.c
++++ b/gcc/config/i386/x86-tune-sched.c
+@@ -71,6 +71,7 @@ ix86_issue_rate (void)
+     case PROCESSOR_NEHALEM:
+     case PROCESSOR_SANDYBRIDGE:
+     case PROCESSOR_HASWELL:
++    case PROCESSOR_TREMONT:
+     case PROCESSOR_GENERIC:
+       return 4;
+ 
+@@ -430,6 +431,7 @@ ix86_adjust_cost (rtx_insn *insn, int dep_type, rtx_insn *dep_insn, int cost,
+     case PROCESSOR_NEHALEM:
+     case PROCESSOR_SANDYBRIDGE:
+     case PROCESSOR_HASWELL:
++    case PROCESSOR_TREMONT:
+     case PROCESSOR_GENERIC:
+       /* Stack engine allows to execute push&pop instructions in parall.  */
+       if ((insn_type == TYPE_PUSH || insn_type == TYPE_POP)
+diff --git a/gcc/config/i386/x86-tune.def b/gcc/config/i386/x86-tune.def
+index eb057a67750..6bd7087a03f 100644
+--- a/gcc/config/i386/x86-tune.def
++++ b/gcc/config/i386/x86-tune.def
+@@ -62,7 +62,7 @@ DEF_TUNE (X86_TUNE_PARTIAL_REG_DEPENDENCY, "partial_reg_dependency",
+    that can be partly masked by careful scheduling of moves.  */
+ DEF_TUNE (X86_TUNE_SSE_PARTIAL_REG_DEPENDENCY, "sse_partial_reg_dependency",
+           m_PPRO | m_P4_NOCONA | m_CORE_ALL | m_BONNELL | m_AMDFAM10
+-	  | m_BDVER | m_ZNVER | m_GENERIC)
++	  | m_BDVER | m_ZNVER | m_TREMONT | m_GENERIC)
+ 
+ /* X86_TUNE_SSE_SPLIT_REGS: Set for machines where the type and dependencies
+    are resolved on SSE register parts instead of whole registers, so we may
+@@ -136,7 +136,7 @@ DEF_TUNE (X86_TUNE_FUSE_ALU_AND_BRANCH, "fuse_alu_and_branch",
+ 
+ DEF_TUNE (X86_TUNE_ACCUMULATE_OUTGOING_ARGS, "accumulate_outgoing_args",
+ 	  m_PPRO | m_P4_NOCONA | m_BONNELL | m_SILVERMONT | m_KNL | m_KNM | m_INTEL
+-	  | m_GOLDMONT | m_GOLDMONT_PLUS | m_TREMONT | m_ATHLON_K8)
++	  | m_GOLDMONT | m_GOLDMONT_PLUS | m_ATHLON_K8)
+ 
+ /* X86_TUNE_PROLOGUE_USING_MOVE: Do not use push/pop in prologues that are
+    considered on critical path.  */
+@@ -150,14 +150,15 @@ DEF_TUNE (X86_TUNE_EPILOGUE_USING_MOVE, "epilogue_using_move",
+ 
+ /* X86_TUNE_USE_LEAVE: Use "leave" instruction in epilogues where it fits.  */
+ DEF_TUNE (X86_TUNE_USE_LEAVE, "use_leave",
+-	  m_386 | m_CORE_ALL | m_K6_GEODE | m_AMD_MULTIPLE | m_GENERIC)
++	  m_386 | m_CORE_ALL | m_K6_GEODE | m_AMD_MULTIPLE | m_TREMONT
++	  | m_GENERIC)
+ 
+ /* X86_TUNE_PUSH_MEMORY: Enable generation of "push mem" instructions.
+    Some chips, like 486 and Pentium works faster with separate load
+    and push instructions.  */
+ DEF_TUNE (X86_TUNE_PUSH_MEMORY, "push_memory",
+           m_386 | m_P4_NOCONA | m_CORE_ALL | m_K6_GEODE | m_AMD_MULTIPLE
+-          | m_GENERIC)
++          | m_TREMONT | m_GENERIC)
+ 
+ /* X86_TUNE_SINGLE_PUSH: Enable if single push insn is preferred
+    over esp subtraction.  */
+@@ -198,8 +199,7 @@ DEF_TUNE (X86_TUNE_PAD_RETURNS, "pad_returns",
+    than 4 branch instructions in the 16 byte window.  */
+ DEF_TUNE (X86_TUNE_FOUR_JUMP_LIMIT, "four_jump_limit",
+           m_PPRO | m_P4_NOCONA | m_BONNELL | m_SILVERMONT | m_KNL | m_KNM
+-	  | m_GOLDMONT | m_GOLDMONT_PLUS | m_TREMONT | m_INTEL | m_ATHLON_K8
+-	  | m_AMDFAM10)
++	  | m_GOLDMONT | m_GOLDMONT_PLUS | m_INTEL | m_ATHLON_K8 | m_AMDFAM10)
+ 
+ /*****************************************************************************/
+ /* Integer instruction selection tuning                                      */
+@@ -240,11 +240,11 @@ DEF_TUNE (X86_TUNE_INTEGER_DFMODE_MOVES, "integer_dfmode_moves",
+ /* X86_TUNE_OPT_AGU: Optimize for Address Generation Unit. This flag
+    will impact LEA instruction selection. */
+ DEF_TUNE (X86_TUNE_OPT_AGU, "opt_agu", m_BONNELL | m_SILVERMONT | m_KNL
+-	 | m_KNM | m_GOLDMONT | m_GOLDMONT_PLUS | m_TREMONT | m_INTEL)
++	 | m_KNM | m_GOLDMONT | m_GOLDMONT_PLUS | m_INTEL)
+ 
+ /* X86_TUNE_AVOID_LEA_FOR_ADDR: Avoid lea for address computation.  */
+ DEF_TUNE (X86_TUNE_AVOID_LEA_FOR_ADDR, "avoid_lea_for_addr",
+-	  m_BONNELL | m_SILVERMONT | m_GOLDMONT | m_GOLDMONT_PLUS | m_TREMONT
++	  m_BONNELL | m_SILVERMONT | m_GOLDMONT | m_GOLDMONT_PLUS
+ 	  | m_KNL | m_KNM)
+ 
+ /* X86_TUNE_SLOW_IMUL_IMM32_MEM: Imul of 32-bit constant and memory is
+@@ -263,7 +263,7 @@ DEF_TUNE (X86_TUNE_SLOW_IMUL_IMM8, "slow_imul_imm8",
+    a conditional move.  */
+ DEF_TUNE (X86_TUNE_AVOID_MEM_OPND_FOR_CMOVE, "avoid_mem_opnd_for_cmove",
+ 	  m_BONNELL | m_SILVERMONT | m_GOLDMONT | m_GOLDMONT_PLUS | m_KNL
+-	  | m_KNM | m_TREMONT | m_INTEL)
++	  | m_KNM | m_INTEL)
+ 
+ /* X86_TUNE_SINGLE_STRINGOP: Enable use of single string operations, such
+    as MOVS and STOS (without a REP prefix) to move/set sequences of bytes.  */
+@@ -282,7 +282,8 @@ DEF_TUNE (X86_TUNE_PREFER_KNOWN_REP_MOVSB_STOSB,
+    FIXME: This may actualy be a win on more targets than listed here.  */
+ DEF_TUNE (X86_TUNE_MISALIGNED_MOVE_STRING_PRO_EPILOGUES,
+ 	  "misaligned_move_string_pro_epilogues",
+-	  m_386 | m_486 | m_CORE_ALL | m_AMD_MULTIPLE | m_GENERIC)
++	  m_386 | m_486 | m_CORE_ALL | m_AMD_MULTIPLE | m_TREMONT
++	  | m_GENERIC)
+ 
+ /* X86_TUNE_USE_SAHF: Controls use of SAHF.  */
+ DEF_TUNE (X86_TUNE_USE_SAHF, "use_sahf",
+@@ -294,7 +295,7 @@ DEF_TUNE (X86_TUNE_USE_SAHF, "use_sahf",
+ /* X86_TUNE_USE_CLTD: Controls use of CLTD and CTQO instructions.  */
+ DEF_TUNE (X86_TUNE_USE_CLTD, "use_cltd",
+ 	  ~(m_PENT | m_LAKEMONT | m_BONNELL | m_SILVERMONT | m_KNL | m_KNM | m_INTEL
+-	    | m_K6 | m_GOLDMONT | m_GOLDMONT_PLUS | m_TREMONT))
++	    | m_K6 | m_GOLDMONT | m_GOLDMONT_PLUS))
+ 
+ /* X86_TUNE_USE_BT: Enable use of BT (bit test) instructions.  */
+ DEF_TUNE (X86_TUNE_USE_BT, "use_bt",
+@@ -305,7 +306,7 @@ DEF_TUNE (X86_TUNE_USE_BT, "use_bt",
+ /* X86_TUNE_AVOID_FALSE_DEP_FOR_BMI: Avoid false dependency
+    for bit-manipulation instructions.  */
+ DEF_TUNE (X86_TUNE_AVOID_FALSE_DEP_FOR_BMI, "avoid_false_dep_for_bmi",
+-	  m_SANDYBRIDGE | m_CORE_AVX2 | m_GENERIC)
++	  m_SANDYBRIDGE | m_CORE_AVX2 | m_TREMONT | m_GENERIC)
+ 
+ /* X86_TUNE_ADJUST_UNROLL: This enables adjusting the unroll factor based
+    on hardware capabilities. Bdver3 hardware has a loop buffer which makes
+@@ -321,14 +322,14 @@ DEF_TUNE (X86_TUNE_ONE_IF_CONV_INSN, "one_if_conv_insn",
+ 
+ /* X86_TUNE_AVOID_MFENCE: Use lock prefixed instructions instead of mfence.  */
+ DEF_TUNE (X86_TUNE_AVOID_MFENCE, "avoid_mfence",
+-	 m_CORE_ALL | m_BDVER | m_ZNVER | m_GENERIC)
++	 m_CORE_ALL | m_BDVER | m_ZNVER | m_TREMONT | m_GENERIC)
+ 
+ /* X86_TUNE_EXPAND_ABS: This enables a new abs pattern by
+    generating instructions for abs (x) = (((signed) x >> (W-1) ^ x) -
+    (signed) x >> (W-1)) instead of cmove or SSE max/abs instructions.  */
+ DEF_TUNE (X86_TUNE_EXPAND_ABS, "expand_abs",
+ 	  m_CORE_ALL | m_SILVERMONT | m_KNL | m_KNM | m_GOLDMONT
+-	  | m_GOLDMONT_PLUS | m_TREMONT )
++	  | m_GOLDMONT_PLUS)
+ 
+ /*****************************************************************************/
+ /* 387 instruction selection tuning                                          */
+@@ -386,13 +387,13 @@ DEF_TUNE (X86_TUNE_SSE_PACKED_SINGLE_INSN_OPTIMAL, "sse_packed_single_insn_optim
+ 
+ /* X86_TUNE_SSE_TYPELESS_STORES: Always movaps/movups for 128bit stores.   */
+ DEF_TUNE (X86_TUNE_SSE_TYPELESS_STORES, "sse_typeless_stores",
+-	  m_AMD_MULTIPLE | m_CORE_ALL | m_GENERIC)
++	  m_AMD_MULTIPLE | m_CORE_ALL | m_TREMONT | m_GENERIC)
+ 
+ /* X86_TUNE_SSE_LOAD0_BY_PXOR: Always use pxor to load0 as opposed to
+    xorps/xorpd and other variants.  */
+ DEF_TUNE (X86_TUNE_SSE_LOAD0_BY_PXOR, "sse_load0_by_pxor",
+ 	  m_PPRO | m_P4_NOCONA | m_CORE_ALL | m_BDVER | m_BTVER | m_ZNVER
+-	  | m_GENERIC)
++	  | m_TREMONT | m_GENERIC)
+ 
+ /* X86_TUNE_INTER_UNIT_MOVES_TO_VEC: Enable moves in from integer
+    to SSE registers.  If disabled, the moves will be done by storing
+@@ -419,7 +420,7 @@ DEF_TUNE (X86_TUNE_INTER_UNIT_CONVERSIONS, "inter_unit_conversions",
+    fp converts to destination register.  */
+ DEF_TUNE (X86_TUNE_SPLIT_MEM_OPND_FOR_FP_CONVERTS, "split_mem_opnd_for_fp_converts",
+ 	  m_SILVERMONT | m_KNL | m_KNM | m_GOLDMONT | m_GOLDMONT_PLUS
+-	  | m_TREMONT | m_INTEL)
++	  | m_INTEL)
+ 
+ /* X86_TUNE_USE_VECTOR_FP_CONVERTS: Prefer vector packed SSE conversion
+    from FP to FP.  This form of instructions avoids partial write to the
+@@ -434,7 +435,7 @@ DEF_TUNE (X86_TUNE_USE_VECTOR_CONVERTS, "use_vector_converts", m_AMDFAM10)
+ /* X86_TUNE_SLOW_SHUFB: Indicates tunings with slow pshufb instruction.  */
+ DEF_TUNE (X86_TUNE_SLOW_PSHUFB, "slow_pshufb",
+ 	  m_BONNELL | m_SILVERMONT | m_KNL | m_KNM | m_GOLDMONT
+-	  | m_GOLDMONT_PLUS | m_TREMONT | m_INTEL)
++	  | m_GOLDMONT_PLUS | m_INTEL)
+ 
+ /* X86_TUNE_AVOID_4BYTE_PREFIXES: Avoid instructions requiring 4+ bytes of prefixes.  */
+ DEF_TUNE (X86_TUNE_AVOID_4BYTE_PREFIXES, "avoid_4byte_prefixes",
+-- 
+2.18.2
+

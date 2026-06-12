@@ -1,0 +1,196 @@
+From 80c2ed8228817fb6438120997227811a746272ba Mon Sep 17 00:00:00 2001
+From: "H.J. Lu" <hjl.tools@gmail.com>
+Date: Wed, 15 Sep 2021 14:17:08 +0800
+Subject: [PATCH 2/3] x86: Update memcpy/memset inline strategies for
+ -mtune=tremont
+
+Simply memcpy and memset inline strategies to avoid branches for
+-mtune=tremont:
+
+1. Create Tremont cost model from generic cost model.
+2. With MOVE_RATIO and CLEAR_RATIO == 17, GCC will use integer/vector
+   load and store for up to 16 * 16 (256) bytes when the data size is
+   fixed and known.
+3. Inline only if data size is known to be <= 256.
+   a. Use "rep movsb/stosb" with simple code sequence if the data size
+      is a constant.
+   b. Use loop if data size is not a constant.
+4. Use memcpy/memset libray function if data size is unknown or > 256.
+
+	* config/i386/i386-options.c (processor_cost_table): Use
+	tremont_cost for Tremont.
+	* config/i386/x86-tune-costs.h (tremont_memcpy): New.
+	(tremont_memset): Likewise.
+	(tremont_cost): Likewise.
+	* config/i386/x86-tune.def (X86_TUNE_PREFER_KNOWN_REP_MOVSB_STOSB):
+	Enable for Tremont.
+---
+ gcc/config/i386/i386-options.c   |   2 +-
+ gcc/config/i386/x86-tune-costs.h | 124 +++++++++++++++++++++++++++++++
+ gcc/config/i386/x86-tune.def     |   2 +-
+ 3 files changed, 126 insertions(+), 2 deletions(-)
+
+diff --git a/gcc/config/i386/i386-options.c b/gcc/config/i386/i386-options.c
+index 19632b5fd6b..4b77d62926f 100644
+--- a/gcc/config/i386/i386-options.c
++++ b/gcc/config/i386/i386-options.c
+@@ -719,7 +719,7 @@ static const struct processor_costs *processor_cost_table[] =
+   &slm_cost,
+   &slm_cost,
+   &slm_cost,
+-  &slm_cost,
++  &tremont_cost,
+   &slm_cost,
+   &slm_cost,
+   &skylake_cost,
+diff --git a/gcc/config/i386/x86-tune-costs.h b/gcc/config/i386/x86-tune-costs.h
+index ffe810f2bcb..93644be9cb3 100644
+--- a/gcc/config/i386/x86-tune-costs.h
++++ b/gcc/config/i386/x86-tune-costs.h
+@@ -2734,6 +2734,130 @@ struct processor_costs slm_cost = {
+   "16",					/* Func alignment.  */
+ };
+ 
++static stringop_algs tremont_memcpy[2] = {
++  {libcall,
++   {{256, rep_prefix_1_byte, true},
++    {256, loop, false},
++    {-1, libcall, false}}},
++  {libcall,
++   {{256, rep_prefix_1_byte, true},
++    {256, loop, false},
++    {-1, libcall, false}}}};
++static stringop_algs tremont_memset[2] = {
++  {libcall,
++   {{256, rep_prefix_1_byte, true},
++    {256, loop, false},
++    {-1, libcall, false}}},
++  {libcall,
++   {{256, rep_prefix_1_byte, true},
++    {256, loop, false},
++    {-1, libcall, false}}}};
++static const
++struct processor_costs tremont_cost = {
++  {
++  /* Start of register allocator costs.  integer->integer move cost is 2. */
++  6,				     /* cost for loading QImode using movzbl */
++  {6, 6, 6},				/* cost of loading integer registers
++					   in QImode, HImode and SImode.
++					   Relative to reg-reg move (2).  */
++  {6, 6, 6},				/* cost of storing integer registers */
++  4,					/* cost of reg,reg fld/fst */
++  {6, 6, 12},				/* cost of loading fp registers
++					   in SFmode, DFmode and XFmode */
++  {6, 6, 12},				/* cost of storing fp registers
++					   in SFmode, DFmode and XFmode */
++  2,					/* cost of moving MMX register */
++  {6, 6},				/* cost of loading MMX registers
++					   in SImode and DImode */
++  {6, 6},				/* cost of storing MMX registers
++					   in SImode and DImode */
++  2, 3, 4,				/* cost of moving XMM,YMM,ZMM register */
++  {6, 6, 6, 10, 15},			/* cost of loading SSE registers
++					   in 32,64,128,256 and 512-bit */
++  {6, 6, 6, 10, 15},			/* cost of storing SSE registers
++					   in 32,64,128,256 and 512-bit */
++  6, 6,				/* SSE->integer and integer->SSE moves */
++  6, 6,				/* mask->integer and integer->mask moves */
++  {6, 6, 6},				/* cost of loading mask register
++					   in QImode, HImode, SImode.  */
++  {6, 6, 6},			/* cost if storing mask register
++					   in QImode, HImode, SImode.  */
++  2,					/* cost of moving mask register.  */
++  /* End of register allocator costs.  */
++  },
++
++  COSTS_N_INSNS (1),			/* cost of an add instruction */
++  /* Setting cost to 2 makes our current implementation of synth_mult result in
++     use of unnecessary temporary registers causing regression on several
++     SPECfp benchmarks.  */
++  COSTS_N_INSNS (1) + 1,		/* cost of a lea instruction */
++  COSTS_N_INSNS (1),			/* variable shift costs */
++  COSTS_N_INSNS (1),			/* constant shift costs */
++  {COSTS_N_INSNS (3),			/* cost of starting multiply for QI */
++   COSTS_N_INSNS (4),			/*				 HI */
++   COSTS_N_INSNS (3),			/*				 SI */
++   COSTS_N_INSNS (4),			/*				 DI */
++   COSTS_N_INSNS (4)},			/*			      other */
++  0,					/* cost of multiply per each bit set */
++  {COSTS_N_INSNS (16),			/* cost of a divide/mod for QI */
++   COSTS_N_INSNS (22),			/*			    HI */
++   COSTS_N_INSNS (30),			/*			    SI */
++   COSTS_N_INSNS (74),			/*			    DI */
++   COSTS_N_INSNS (74)},			/*			    other */
++  COSTS_N_INSNS (1),			/* cost of movsx */
++  COSTS_N_INSNS (1),			/* cost of movzx */
++  8,					/* "large" insn */
++  17,					/* MOVE_RATIO */
++  17,					/* CLEAR_RATIO */
++  {6, 6, 6},				/* cost of loading integer registers
++					   in QImode, HImode and SImode.
++					   Relative to reg-reg move (2).  */
++  {6, 6, 6},				/* cost of storing integer registers */
++  {6, 6, 6, 10, 15},			/* cost of loading SSE register
++					   in 32bit, 64bit, 128bit, 256bit and 512bit */
++  {6, 6, 6, 10, 15},			/* cost of storing SSE register
++					   in 32bit, 64bit, 128bit, 256bit and 512bit */
++  {6, 6, 6, 10, 15},			/* cost of unaligned loads.  */
++  {6, 6, 6, 10, 15},			/* cost of unaligned storess.  */
++  2, 3, 4,				/* cost of moving XMM,YMM,ZMM register */
++  6,					/* cost of moving SSE register to integer.  */
++  18, 6,				/* Gather load static, per_elt.  */
++  18, 6,				/* Gather store static, per_elt.  */
++  32,					/* size of l1 cache.  */
++  512,					/* size of l2 cache.  */
++  64,					/* size of prefetch block */
++  6,					/* number of parallel prefetches */
++  /* Benchmarks shows large regressions on K8 sixtrack benchmark when this
++     value is increased to perhaps more appropriate value of 5.  */
++  3,					/* Branch cost */
++  COSTS_N_INSNS (3),			/* cost of FADD and FSUB insns.  */
++  COSTS_N_INSNS (5),			/* cost of FMUL instruction.  */
++  COSTS_N_INSNS (17),			/* cost of FDIV instruction.  */
++  COSTS_N_INSNS (1),			/* cost of FABS instruction.  */
++  COSTS_N_INSNS (1),			/* cost of FCHS instruction.  */
++  COSTS_N_INSNS (14),			/* cost of FSQRT instruction.  */
++
++  COSTS_N_INSNS (1),			/* cost of cheap SSE instruction.  */
++  COSTS_N_INSNS (3),			/* cost of ADDSS/SD SUBSS/SD insns.  */
++  COSTS_N_INSNS (4),			/* cost of MULSS instruction.  */
++  COSTS_N_INSNS (5),			/* cost of MULSD instruction.  */
++  COSTS_N_INSNS (5),			/* cost of FMA SS instruction.  */
++  COSTS_N_INSNS (5),			/* cost of FMA SD instruction.  */
++  COSTS_N_INSNS (13),			/* cost of DIVSS instruction.  */
++  COSTS_N_INSNS (17),			/* cost of DIVSD instruction.  */
++  COSTS_N_INSNS (14),			/* cost of SQRTSS instruction.  */
++  COSTS_N_INSNS (18),			/* cost of SQRTSD instruction.  */
++  1, 4, 3, 3,				/* reassoc int, fp, vec_int, vec_fp.  */
++  tremont_memcpy,
++  tremont_memset,
++  COSTS_N_INSNS (4),			/* cond_taken_branch_cost.  */
++  COSTS_N_INSNS (2),			/* cond_not_taken_branch_cost.  */
++  "16:11:8",				/* Loop alignment.  */
++  "16:11:8",				/* Jump alignment.  */
++  "0:0:8",				/* Label alignment.  */
++  "16",					/* Func alignment.  */
++};
++
+ static stringop_algs intel_memcpy[2] = {
+   {libcall, {{11, loop, false}, {-1, rep_prefix_4_byte, false}}},
+   {libcall, {{32, loop, false}, {64, rep_prefix_4_byte, false},
+diff --git a/gcc/config/i386/x86-tune.def b/gcc/config/i386/x86-tune.def
+index 6bd7087a03f..636e0c788bf 100644
+--- a/gcc/config/i386/x86-tune.def
++++ b/gcc/config/i386/x86-tune.def
+@@ -273,7 +273,7 @@ DEF_TUNE (X86_TUNE_SINGLE_STRINGOP, "single_stringop", m_386 | m_P4_NOCONA)
+    move/set sequences of bytes with known size.  */
+ DEF_TUNE (X86_TUNE_PREFER_KNOWN_REP_MOVSB_STOSB,
+ 	  "prefer_known_rep_movsb_stosb",
+-	  m_SKYLAKE | m_ALDERLAKE | m_CORE_AVX512)
++	  m_SKYLAKE | m_ALDERLAKE | m_TREMONT | m_CORE_AVX512)
+ 
+ /* X86_TUNE_MISALIGNED_MOVE_STRING_PRO_EPILOGUES: Enable generation of
+    compact prologues and epilogues by issuing a misaligned moves.  This
+-- 
+2.18.2
+

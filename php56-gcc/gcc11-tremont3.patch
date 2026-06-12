@@ -1,0 +1,185 @@
+From c4c7244349999f91ef2a7cd2108eee0372490be9 Mon Sep 17 00:00:00 2001
+From: "H.J. Lu" <hjl.tools@gmail.com>
+Date: Wed, 15 Sep 2021 14:18:21 +0800
+Subject: [PATCH 3/3] x86: Add TARGET_SSE_PARTIAL_REG_[FP_]CONVERTS_DEPENDENCY
+
+1. Replace TARGET_SSE_PARTIAL_REG_DEPENDENCY with
+TARGET_SSE_PARTIAL_REG_FP_CONVERTS_DEPENDENCY in SSE FP to FP splitters.
+2. Replace TARGET_SSE_PARTIAL_REG_DEPENDENCY with
+TARGET_SSE_PARTIAL_REG_CONVERTS_DEPENDENCY in SSE INT to FP splitters.
+
+gcc/
+
+	* config/i386/i386.h (TARGET_SSE_PARTIAL_REG_FP_CONVERTS_DEPENDENCY):
+	New.
+	(TARGET_SSE_PARTIAL_REG_CONVERTS_DEPENDENCY): Likewise.
+	* config/i386/i386.md (SSE FP to FP splitters): Replace
+	TARGET_SSE_PARTIAL_REG_DEPENDENCY with
+	TARGET_SSE_PARTIAL_REG_FP_CONVERTS_DEPENDENCY.
+	(SSE INT to FP splitter): Replace TARGET_SSE_PARTIAL_REG_DEPENDENCY
+	with TARGET_SSE_PARTIAL_REG_CONVERTS_DEPENDENCY.
+	* config/i386/x86-tune.def
+	(X86_TUNE_SSE_PARTIAL_REG_FP_CONVERTS_DEPENDENCY): New.
+	(X86_TUNE_SSE_PARTIAL_REG_CONVERTS_DEPENDENCY): Likewise.
+
+gcc/testsuite/
+
+	* gcc.target/i386/sse-covert-1.c: Likewise.
+	* gcc.target/i386/sse-fp-covert-1.c: Likewise.
+	* gcc.target/i386/sse-int-covert-1.c: Likewise.
+---
+ gcc/config/i386/i386.h                        |  4 ++++
+ gcc/config/i386/i386.md                       |  9 ++++++---
+ gcc/config/i386/x86-tune.def                  | 15 +++++++++++++++
+ gcc/testsuite/gcc.target/i386/sse-covert-1.c  | 19 +++++++++++++++++++
+ .../gcc.target/i386/sse-fp-covert-1.c         | 15 +++++++++++++++
+ .../gcc.target/i386/sse-int-covert-1.c        | 14 ++++++++++++++
+ 6 files changed, 73 insertions(+), 3 deletions(-)
+ create mode 100644 gcc/testsuite/gcc.target/i386/sse-covert-1.c
+ create mode 100644 gcc/testsuite/gcc.target/i386/sse-fp-covert-1.c
+ create mode 100644 gcc/testsuite/gcc.target/i386/sse-int-covert-1.c
+
+diff --git a/gcc/config/i386/i386.h b/gcc/config/i386/i386.h
+index 73e118900f7..5b992195df7 100644
+--- a/gcc/config/i386/i386.h
++++ b/gcc/config/i386/i386.h
+@@ -553,6 +553,10 @@ extern unsigned char ix86_tune_features[X86_TUNE_LAST];
+ 	ix86_tune_features[X86_TUNE_PARTIAL_REG_DEPENDENCY]
+ #define TARGET_SSE_PARTIAL_REG_DEPENDENCY \
+ 	ix86_tune_features[X86_TUNE_SSE_PARTIAL_REG_DEPENDENCY]
++#define TARGET_SSE_PARTIAL_REG_FP_CONVERTS_DEPENDENCY \
++	ix86_tune_features[X86_TUNE_SSE_PARTIAL_REG_FP_CONVERTS_DEPENDENCY]
++#define TARGET_SSE_PARTIAL_REG_CONVERTS_DEPENDENCY \
++	ix86_tune_features[X86_TUNE_SSE_PARTIAL_REG_CONVERTS_DEPENDENCY]
+ #define TARGET_SSE_UNALIGNED_LOAD_OPTIMAL \
+ 	ix86_tune_features[X86_TUNE_SSE_UNALIGNED_LOAD_OPTIMAL]
+ #define TARGET_SSE_UNALIGNED_STORE_OPTIMAL \
+diff --git a/gcc/config/i386/i386.md b/gcc/config/i386/i386.md
+index 97325e38676..053bec1c1e1 100644
+--- a/gcc/config/i386/i386.md
++++ b/gcc/config/i386/i386.md
+@@ -4378,7 +4378,8 @@
+         (float_extend:DF
+           (match_operand:SF 1 "nonimmediate_operand")))]
+   "!TARGET_AVX
+-   && TARGET_SSE_PARTIAL_REG_DEPENDENCY && epilogue_completed
++   && TARGET_SSE_PARTIAL_REG_FP_CONVERTS_DEPENDENCY
++   && epilogue_completed
+    && optimize_function_for_speed_p (cfun)
+    && (!REG_P (operands[1])
+        || (!TARGET_AVX && REGNO (operands[0]) != REGNO (operands[1])))
+@@ -4540,7 +4541,8 @@
+         (float_truncate:SF
+ 	  (match_operand:DF 1 "nonimmediate_operand")))]
+   "!TARGET_AVX
+-   && TARGET_SSE_PARTIAL_REG_DEPENDENCY && epilogue_completed
++   && TARGET_SSE_PARTIAL_REG_FP_CONVERTS_DEPENDENCY
++   && epilogue_completed
+    && optimize_function_for_speed_p (cfun)
+    && (!REG_P (operands[1])
+        || (!TARGET_AVX && REGNO (operands[0]) != REGNO (operands[1])))
+@@ -5053,7 +5055,8 @@
+   [(set (match_operand:MODEF 0 "sse_reg_operand")
+ 	(float:MODEF (match_operand:SWI48 1 "nonimmediate_operand")))]
+   "!TARGET_AVX
+-   && TARGET_SSE_PARTIAL_REG_DEPENDENCY && epilogue_completed
++   && TARGET_SSE_PARTIAL_REG_CONVERTS_DEPENDENCY
++   && epilogue_completed
+    && optimize_function_for_speed_p (cfun)
+    && (!EXT_REX_SSE_REG_P (operands[0])
+        || TARGET_AVX512VL)"
+diff --git a/gcc/config/i386/x86-tune.def b/gcc/config/i386/x86-tune.def
+index 636e0c788bf..b5166fb1316 100644
+--- a/gcc/config/i386/x86-tune.def
++++ b/gcc/config/i386/x86-tune.def
+@@ -64,6 +64,21 @@ DEF_TUNE (X86_TUNE_SSE_PARTIAL_REG_DEPENDENCY, "sse_partial_reg_dependency",
+           m_PPRO | m_P4_NOCONA | m_CORE_ALL | m_BONNELL | m_AMDFAM10
+ 	  | m_BDVER | m_ZNVER | m_TREMONT | m_GENERIC)
+ 
++/* X86_TUNE_SSE_PARTIAL_REG_FP_CONVERTS_DEPENDENCY: This knob avoids
++   partial write to the destination in scalar SSE conversion from FP
++   to FP.  */
++DEF_TUNE (X86_TUNE_SSE_PARTIAL_REG_FP_CONVERTS_DEPENDENCY,
++	  "sse_partial_reg_fp_converts_dependency",
++	  m_PPRO | m_P4_NOCONA | m_CORE_ALL | m_BONNELL | m_AMDFAM10
++	  | m_BDVER | m_ZNVER | m_GENERIC)
++
++/* X86_TUNE_SSE_PARTIAL_REG_CONVERTS_DEPENDENCY: This knob avoids partial
++   write to the destination in scalar SSE conversion from integer to FP.  */
++DEF_TUNE (X86_TUNE_SSE_PARTIAL_REG_CONVERTS_DEPENDENCY,
++	  "sse_partial_reg_converts_dependency",
++	  m_PPRO | m_P4_NOCONA | m_CORE_ALL | m_BONNELL | m_AMDFAM10
++	  | m_BDVER | m_ZNVER | m_GENERIC)
++
+ /* X86_TUNE_SSE_SPLIT_REGS: Set for machines where the type and dependencies
+    are resolved on SSE register parts instead of whole registers, so we may
+    maintain just lower part of scalar values in proper format leaving the
+diff --git a/gcc/testsuite/gcc.target/i386/sse-covert-1.c b/gcc/testsuite/gcc.target/i386/sse-covert-1.c
+new file mode 100644
+index 00000000000..c30af694505
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/i386/sse-covert-1.c
+@@ -0,0 +1,19 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=x86-64 -mfpmath=sse -mtune-ctrl=^sse_partial_reg_fp_converts_dependency,^sse_partial_reg_converts_dependency" } */
++
++extern float f;
++extern double d;
++extern int i;
++
++void
++foo (void)
++{
++  d = f;
++  f = i;
++}
++
++/* { dg-final { scan-assembler "cvtss2sd" } } */
++/* { dg-final { scan-assembler "cvtsi2ssl" } } */
++/* { dg-final { scan-assembler-not "cvtps2pd" } } */
++/* { dg-final { scan-assembler-not "cvtdq2ps" } } */
++/* { dg-final { scan-assembler-not "pxor" } } */
+diff --git a/gcc/testsuite/gcc.target/i386/sse-fp-covert-1.c b/gcc/testsuite/gcc.target/i386/sse-fp-covert-1.c
+new file mode 100644
+index 00000000000..b6567e60e3e
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/i386/sse-fp-covert-1.c
+@@ -0,0 +1,15 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=x86-64 -mfpmath=sse -mtune-ctrl=^sse_partial_reg_fp_converts_dependency" } */
++
++extern float f;
++extern double d;
++
++void
++foo (void)
++{
++  d = f;
++}
++
++/* { dg-final { scan-assembler "cvtss2sd" } } */
++/* { dg-final { scan-assembler-not "cvtps2pd" } } */
++/* { dg-final { scan-assembler-not "pxor" } } */
+diff --git a/gcc/testsuite/gcc.target/i386/sse-int-covert-1.c b/gcc/testsuite/gcc.target/i386/sse-int-covert-1.c
+new file mode 100644
+index 00000000000..107f7241def
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/i386/sse-int-covert-1.c
+@@ -0,0 +1,14 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=x86-64 -mfpmath=sse -mtune-ctrl=^sse_partial_reg_converts_dependency" } */
++
++extern float f;
++extern int i;
++
++void
++foo (void)
++{
++  f = i;
++}
++
++/* { dg-final { scan-assembler "cvtsi2ssl" } } */
++/* { dg-final { scan-assembler-not "pxor" } } */
+-- 
+2.18.2
+
