@@ -12,19 +12,19 @@ Version:    2.69
 Release:    41%{?dist}
 License:    GPLv2+ and GFDL
 Source0:    https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/autoconf-2.69.tar.xz
-Source1:    config.site
-Source2:    autoconf-init.el
+Source1:    https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-autoconf/config.site
+Source2:    https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-autoconf/autoconf-init.el
 URL:        https://www.gnu.org/software/autoconf/
 
-Patch1:     autoconf-2.69-perl-5.22-autoscan.patch            
-Patch2:     autoconf-2.69-bash-5-LINENO.patch
-Patch3:     autoconf-2.69-backport-runstatedir-option.patch
+Patch1:     https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-autoconf/autoconf-2.69-perl-5.22-autoscan.patch            
+Patch2:     https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-autoconf/autoconf-2.69-bash-5-LINENO.patch
+Patch3:     https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-autoconf/autoconf-2.69-backport-runstatedir-option.patch
 
 # Backport: see RHEL-40739
-Patch4:     0001-Port-AC_F77_LIBRARY_LDFLAGS-to-oneAPI-HPC-Toolkit.patch
+Patch4:     https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-autoconf/0001-Port-AC_F77_LIBRARY_LDFLAGS-to-oneAPI-HPC-Toolkit.patch
 
 # Backport: see RHEL-47138
-Patch5:     0001-Fix-test-suite-with-modern-Perl.patch
+Patch5:     https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-autoconf/0001-Fix-test-suite-with-modern-Perl.patch
 
 BuildArch:  noarch
 
