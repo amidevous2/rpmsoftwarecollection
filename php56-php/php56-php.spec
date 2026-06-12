@@ -151,7 +151,7 @@ License: PHP and Zend and BSD and MIT and ASL 1.0
 Group: Development/Languages
 URL: http://www.php.net/
 
-Source0: php-%{version}%{?rcver}-strip.tar.xz
+Source0: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/php-%{version}%{?rcver}-strip.tar.xz
 Source1: php.conf
 Source2: php.ini
 Source3: macros.php
