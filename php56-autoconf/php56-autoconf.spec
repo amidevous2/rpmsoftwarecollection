@@ -11,7 +11,7 @@ Name:       %{?scl_prefix}autoconf
 Version:    2.69
 Release:    41%{?dist}
 License:    GPLv2+ and GFDL
-Source0:    https://ftp.gnu.org/gnu/autoconf/autoconf-%{version}.tar.xz
+Source0:    https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/autoconf-2.69.tar.xz
 Source1:    config.site
 Source2:    autoconf-init.el
 URL:        https://www.gnu.org/software/autoconf/
