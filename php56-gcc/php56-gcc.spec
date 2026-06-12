@@ -182,7 +182,7 @@ Source4: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/d
 # git --git-dir=newlib-cygwin-dir.tmp/.git archive --prefix=newlib-cygwin-%%{newlib_cygwin_gitrev}/ %%{newlib_cygwin_gitrev} ":(exclude)newlib/libc/sys/linux/include/rpc/*.[hx]" | xz -9e > newlib-cygwin-%%{newlib_cygwin_gitrev}.tar.xz
 # rm -rf newlib-cygwin-dir.tmp
 Source5: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/newlib-cygwin-%{newlib_cygwin_gitrev}.tar.xz
-Source6: libgomp_nonshared.c
+Source6: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/libgomp_nonshared.c
 Source7: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/mpfr-%{mpfr_version}.tar.bz2
 Source8: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/gmp-%{gmp_version}.tar.bz2
 URL: http://gcc.gnu.org
@@ -341,69 +341,69 @@ ExclusiveArch: x86_64 %{ix86}
 ExcludeArch: aarch64
 %endif
 
-Patch0: gcc11-hack.patch
-Patch2: gcc11-sparc-config-detection.patch
-Patch3: gcc11-libgomp-omp_h-multilib.patch
-Patch4: gcc11-libtool-no-rpath.patch
-Patch5: gcc11-isl-dl.patch
-Patch6: gcc11-isl-dl2.patch
-Patch7: gcc11-libstdc++-docs.patch
-Patch8: gcc11-no-add-needed.patch
-Patch9: gcc11-foffload-default.patch
-Patch10: gcc11-Wno-format-security.patch
-Patch11: gcc11-rh1574936.patch
-Patch12: gcc11-d-shared-libphobos.patch
-Patch14: gcc11-libgcc-link.patch
-Patch15: gcc11-pr101786.patch
-Patch16: gcc11-stringify-__VA_OPT__.patch
-Patch17: gcc11-stringify-__VA_OPT__-2.patch
-Patch18: gcc11-Wbidi-chars.patch
-Patch19: gcc11-dejagnu-multiline.patch
+Patch0: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-hack.patch
+Patch2: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-sparc-config-detection.patch
+Patch3: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-libgomp-omp_h-multilib.patch
+Patch4: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-libtool-no-rpath.patch
+Patch5: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-isl-dl.patch
+Patch6: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-isl-dl2.patch
+Patch7: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-libstdc++-docs.patch
+Patch8: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-no-add-needed.patch
+Patch9: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-foffload-default.patch
+Patch10: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-Wno-format-security.patch
+Patch11: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-rh1574936.patch
+Patch12: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-d-shared-libphobos.patch
+Patch14: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-libgcc-link.patch
+Patch15: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-pr101786.patch
+Patch16: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-stringify-__VA_OPT__.patch
+Patch17: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-stringify-__VA_OPT__-2.patch
+Patch18: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-Wbidi-chars.patch
+Patch19: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-dejagnu-multiline.patch
 # Patches were taken from upstream:
 # https://gcc.gnu.org/git/?p=gcc.git;a=patch;h=03af8492bee6243a9d10e78fea1a3e423bd5f9cd
-Patch20: libstdc-Mark-non-exported-function-always_inline.patch
+Patch20: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/libstdc-Mark-non-exported-function-always_inline.patch
 # https://gcc.gnu.org/git/?p=gcc.git;a=patch;h=d308b11fa94728507984b4ccc949219511273ab6
-Patch21: libstdc-Check-conversion-from-filesystem-path-to-wide.patch
+Patch21: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/libstdc-Check-conversion-from-filesystem-path-to-wide.patch
 
-Patch100: gcc11-fortran-fdec-duplicates.patch
-Patch101: gcc11-fortran-flogical-as-integer.patch
-Patch102: gcc11-fortran-fdec-ichar.patch
-Patch103: gcc11-fortran-fdec-non-integer-index.patch
-Patch104: gcc11-fortran-fdec-old-init.patch
-Patch105: gcc11-fortran-fdec-override-kind.patch
-Patch106: gcc11-fortran-fdec-non-logical-if.patch
-Patch107: gcc11-fortran-fdec-promotion.patch
-Patch108: gcc11-fortran-fdec-sequence.patch
-Patch109: gcc11-fortran-fdec-add-missing-indexes.patch
+Patch100: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-fortran-fdec-duplicates.patch
+Patch101: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-fortran-flogical-as-integer.patch
+Patch102: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-fortran-fdec-ichar.patch
+Patch103: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-fortran-fdec-non-integer-index.patch
+Patch104: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-fortran-fdec-old-init.patch
+Patch105: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-fortran-fdec-override-kind.patch
+Patch106: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-fortran-fdec-non-logical-if.patch
+Patch107: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-fortran-fdec-promotion.patch
+Patch108: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-fortran-fdec-sequence.patch
+Patch109: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-fortran-fdec-add-missing-indexes.patch
 
-Patch200: gcc11-tremont1.patch
-Patch201: gcc11-tremont2.patch
-Patch202: gcc11-tremont3.patch
-Patch203: gcc11-mtune-alderlake.patch
+Patch200: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-tremont1.patch
+Patch201: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-tremont2.patch
+Patch202: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-tremont3.patch
+Patch203: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-mtune-alderlake.patch
 
-Patch1000: gcc11-libstdc++-compat.patch
-Patch1001: gcc11-alt-compat-test.patch
-Patch1002: gcc11-libgfortran-compat.patch
+Patch1000: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-libstdc++-compat.patch
+Patch1001: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-alt-compat-test.patch
+Patch1002: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-libgfortran-compat.patch
 
-Patch2001: doxygen-1.7.1-config.patch
-Patch2002: doxygen-1.7.5-timestamp.patch
-Patch2003: doxygen-1.8.0-rh856725.patch
+Patch2001: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/doxygen-1.7.1-config.patch
+Patch2002: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/doxygen-1.7.5-timestamp.patch
+Patch2003: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/doxygen-1.8.0-rh856725.patch
 
-Patch3000: 0001-basic_string-reserve-n-semantics-are-not-available-i.patch
-Patch3001: 0004-operator-istream-char-N-eofbit-fixes-are-not-availab.patch
-Patch3002: 0005-Disable-tests-for-PR-libstdc-79820-and-PR-libstdc-81.patch
-Patch3003: 0006-Don-t-assume-has_facet-codecvt_c16-when-run-against-.patch
-Patch3004: 0008-testsuite-build-plugins-with-std-c-11.patch
-Patch3005: 0009-Fix-22_locale-locale-cons-unicode.cc-when-run-under-.patch
-Patch3006: 0010-Don-t-verify-exception-handling-in-basic_filebuf-clo.patch
-Patch3007: 0011-Add-dts.exp-and-use-it-to-fix-22_locale-messages-136.patch
-Patch3008: 0012-dts.exp-use-usr-bin-gcc.patch
-Patch3009: 0013-Rename-__CXXSTDLIB_SO_VERSION__-to-__LIBSTDCXX_SO_VE.patch
-Patch3010: 0014-Conditionalize-tests-for-PR-libstdc-98466-on-__LIBST.patch
-Patch3011: 0015-Conditionalize-test-for-PR-libstdc-87135-on-__LIBSTD.patch
-Patch3012: 0016-Conditionalize-test-for-hashtable-bucket-sizes-on-__.patch
-Patch3013: 0017-Conditionalize-test-for-PR-libstdc-71181-on-__LIBSTD.patch
-Patch3014: gcc11-dg-ice-fixes.patch
+Patch3000: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0001-basic_string-reserve-n-semantics-are-not-available-i.patch
+Patch3001: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0004-operator-istream-char-N-eofbit-fixes-are-not-availab.patch
+Patch3002: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0005-Disable-tests-for-PR-libstdc-79820-and-PR-libstdc-81.patch
+Patch3003: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0006-Don-t-assume-has_facet-codecvt_c16-when-run-against-.patch
+Patch3004: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0008-testsuite-build-plugins-with-std-c-11.patch
+Patch3005: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0009-Fix-22_locale-locale-cons-unicode.cc-when-run-under-.patch
+Patch3006: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0010-Don-t-verify-exception-handling-in-basic_filebuf-clo.patch
+Patch3007: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0011-Add-dts.exp-and-use-it-to-fix-22_locale-messages-136.patch
+Patch3008: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0012-dts.exp-use-usr-bin-gcc.patch
+Patch3009: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0013-Rename-__CXXSTDLIB_SO_VERSION__-to-__LIBSTDCXX_SO_VE.patch
+Patch3010: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0014-Conditionalize-tests-for-PR-libstdc-98466-on-__LIBST.patch
+Patch3011: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0015-Conditionalize-test-for-PR-libstdc-87135-on-__LIBSTD.patch
+Patch3012: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0016-Conditionalize-test-for-hashtable-bucket-sizes-on-__.patch
+Patch3013: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/0017-Conditionalize-test-for-PR-libstdc-71181-on-__LIBSTD.patch
+Patch3014: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-gcc/gcc11-dg-ice-fixes.patch
 
 
 
@@ -447,11 +447,7 @@ e.g. for exception handling support.
 %package c++
 Summary: C++ support for GCC  version 11
 Requires: %{?scl_prefix}gcc%{!?scl:11} = %{version}-%{release}
-%if 0%{?rhel} >= 7
 Requires: libstdc++
-%else
-Requires: libstdc++ >= 4.4.4-13
-%endif
 Requires: %{?scl_prefix}libstdc++%{!?scl:11}-devel = %{version}-%{release}
 Autoreq: true
 
@@ -718,55 +714,55 @@ to NVidia PTX capable devices if available.
 %else
 %setup -q -n gcc-%{version}-%{DATE} -a 1 -a 2 -a 3 -a 7 -a 8
 %endif
-%patch0 -p0 -b .hack~
-%patch2 -p0 -b .sparc-config-detection~
-%patch3 -p0 -b .libgomp-omp_h-multilib~
-%patch4 -p0 -b .libtool-no-rpath~
+%patch -P 0 -p0 -b .hack~
+%patch -P 2 -p0 -b .sparc-config-detection~
+%patch -P 3 -p0 -b .libgomp-omp_h-multilib~
+%patch -P 4 -p0 -b .libtool-no-rpath~
 %if %{build_isl}
-%patch5 -p0 -b .isl-dl~
-%patch6 -p0 -b .isl-dl2~
+%patch -P 5 -p0 -b .isl-dl~
+%patch -P 6 -p0 -b .isl-dl2~
 %endif
 %if %{build_libstdcxx_docs}
-%patch7 -p0 -b .libstdc++-docs~
+%patch -P 7 -p0 -b .libstdc++-docs~
 %endif
-%patch8 -p0 -b .no-add-needed~
-%patch9 -p0 -b .foffload-default~
-%patch10 -p0 -b .Wno-format-security~
+%patch -P 8 -p0 -b .no-add-needed~
+%patch -P 9 -p0 -b .foffload-default~
+%patch -P 10 -p0 -b .Wno-format-security~
 %if 0%{?fedora} >= 29 || 0%{?rhel} > 7
-%patch11 -p0 -b .rh1574936~
+%patch -P 11 -p0 -b .rh1574936~
 %endif
-%patch12 -p0 -b .d-shared-libphobos~
-%patch14 -p0 -b .libgcc-link~
-%patch15 -p0 -b .pr101786~
-%patch16 -p0 -b .stringify-__VA_OPT__~
-%patch17 -p0 -b .stringify-__VA_OPT__-2~
-%patch18 -p1 -b .bidi~
-%patch19 -p1 -b .dejagnu-multiline~
-%patch20 -p1 -b .libstdc++-mark~
-%patch21 -p1 -b .libstdc++-check~
+%patch -P 12 -p0 -b .d-shared-libphobos~
+%patch -P 14 -p0 -b .libgcc-link~
+%patch -P 15 -p0 -b .pr101786~
+%patch -P 16 -p0 -b .stringify-__VA_OPT__~
+%patch -P 17 -p0 -b .stringify-__VA_OPT__-2~
+%patch -P 18 -p1 -b .bidi~
+%patch -P 19 -p1 -b .dejagnu-multiline~
+%patch -P 20 -p1 -b .libstdc++-mark~
+%patch -P 21 -p1 -b .libstdc++-check~
 
-%patch100 -p1 -b .fortran-fdec-duplicates~
-%patch101 -p1 -b .fortran-flogical-as-integer~
-%patch102 -p1 -b .fortran-fdec-ichar~
-%patch103 -p1 -b .fortran-fdec-non-integer-index~
-%patch104 -p1 -b .fortran-fdec-old-init~
-%patch105 -p1 -b .fortran-fdec-override-kind~
-%patch106 -p1 -b .fortran-fdec-non-logical-if~
-%patch107 -p1 -b .fortran-fdec-promotion~
-%patch108 -p1 -b .fortran-fdec-sequence~
-%patch109 -p1 -b .fortran-fdec-add-missing-indexes~
+%patch -P 100 -p1 -b .fortran-fdec-duplicates~
+%patch -P 101 -p1 -b .fortran-flogical-as-integer~
+%patch -P 102 -p1 -b .fortran-fdec-ichar~
+%patch -P 103 -p1 -b .fortran-fdec-non-integer-index~
+%patch -P 104 -p1 -b .fortran-fdec-old-init~
+%patch -P 105 -p1 -b .fortran-fdec-override-kind~
+%patch -P 106 -p1 -b .fortran-fdec-non-logical-if~
+%patch -P 107 -p1 -b .fortran-fdec-promotion~
+%patch -P 108 -p1 -b .fortran-fdec-sequence~
+%patch -P 109 -p1 -b .fortran-fdec-add-missing-indexes~
 
-%patch200 -p1 -b .tremont1~
-%patch201 -p1 -b .tremont2~
-%patch202 -p1 -b .tremont3~
-%patch203 -p1 -b .alderlake~
+%patch -P 200 -p1 -b .tremont1~
+%patch -P 201 -p1 -b .tremont2~
+%patch -P 202 -p1 -b .tremont3~
+%patch -P 203 -p1 -b .alderlake~
 
-%patch1000 -p0 -b .libstdc++-compat~
+%patch -P 1000 -p0 -b .libstdc++-compat~
 %ifarch %{ix86} x86_64
 %if 0%{?rhel} < 7
 # On i?86/x86_64 there are some incompatibilities in _Decimal* as well as
 # aggregates containing larger vector passing.
-%patch1001 -p0 -b .alt-compat-test~
+%patch -P 1001 -p0 -b .alt-compat-test~
 %endif
 %endif
 %patch1002 -p0 -b .libgfortran-compat~
@@ -774,29 +770,29 @@ to NVidia PTX capable devices if available.
 %if %{build_libstdcxx_docs}
 %if 0%{?rhel} < 7
 cd doxygen-%{doxygen_version}
-%patch2001 -p1 -b .config~
-%patch2002 -p1 -b .timestamp~
-%patch2003 -p1 -b .rh856725~
+%patch -P 2001 -p1 -b .config~
+%patch -P 2002 -p1 -b .timestamp~
+%patch -P 2003 -p1 -b .rh856725~
 cd ..
 %endif
 %endif
 
 # Apply DTS-specific testsuite patches.
-%patch3000 -p1 -b .dts-test-0~
-%patch3001 -p1 -b .dts-test-1~
-%patch3002 -p1 -b .dts-test-2~
-%patch3003 -p1 -b .dts-test-3~
-%patch3004 -p1 -b .dts-test-4~
-%patch3005 -p1 -b .dts-test-5~
-%patch3006 -p1 -b .dts-test-6~
-%patch3007 -p1 -b .dts-test-7~
-%patch3008 -p1 -b .dts-test-8~
-%patch3009 -p1 -b .dts-test-9~
-%patch3010 -p1 -b .dts-test-10~
-%patch3011 -p1 -b .dts-test-11~
-%patch3012 -p1 -b .dts-test-12~
-%patch3013 -p1 -b .dts-test-13~
-%patch3014 -p1 -b .dts-test-14~
+%patch -P 3000 -p1 -b .dts-test-0~
+%patch -P 3001 -p1 -b .dts-test-1~
+%patch -P 3002 -p1 -b .dts-test-2~
+%patch -P 3003 -p1 -b .dts-test-3~
+%patch -P 3004 -p1 -b .dts-test-4~
+%patch -P 3005 -p1 -b .dts-test-5~
+%patch -P 3006 -p1 -b .dts-test-6~
+%patch -P 3007 -p1 -b .dts-test-7~
+%patch -P 3008 -p1 -b .dts-test-8~
+%patch -P 3009 -p1 -b .dts-test-9~
+%patch -P 3010 -p1 -b .dts-test-10~
+%patch -P 3011 -p1 -b .dts-test-11~
+%patch -P 3012 -p1 -b .dts-test-12~
+%patch -P 3013 -p1 -b .dts-test-13~
+%patch -P 3014 -p1 -b .dts-test-14~
 
 find gcc/testsuite -name \*.pr96939~ | xargs rm -f
 
