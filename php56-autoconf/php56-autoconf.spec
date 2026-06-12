@@ -35,7 +35,7 @@ BuildArch:  noarch
 # m4 >= 1.4.6 is required, >= 1.4.14 is recommended:
 %{?scl:Requires: %{scl}-runtime}
 %{?scl:BuildRequires: %{scl}-runtime}
-BuildRequires:      %{?scl_prefix}perl
+BuildRequires:      perl
 BuildRequires:      %{?scl_prefix}m4 >= 1.4.14
 Requires:           %{?scl_prefix}m4 >= 1.4.14
 %if %{with autoconf_enables_emacs}
@@ -43,24 +43,24 @@ Requires:           %{?scl_prefix}emacs-filesystem
 BuildRequires:      %{?scl_prefix}emacs
 %endif
 # the filtering macros are currently in /etc/rpm/macros.perl:
-BuildRequires:      %{?scl_prefix}perl-generators
-BuildRequires:      %{?scl_prefix}perl-macros
-BuildRequires:      %{?scl_prefix}perl(Data::Dumper)
+BuildRequires:      perl-generators
+BuildRequires:      perl-macros
+BuildRequires:      perl(Data::Dumper)
 # from f19, Text::ParseWords is not the part of 'perl' package
-BuildRequires:      %{?scl_prefix}perl(Text::ParseWords)
+BuildRequires:      perl(Text::ParseWords)
 
 # %%configure replaces config.guess/config.sub for us, which confuses autoconf
 # build system and it produces empty man pages for those scripts if help2man is
 # not installed
-BuildRequires:      %{?scl_prefix}help2man
+BuildRequires:      help2man
 BuildRequires:      %{?scl_prefix}make
 
 %if %{with check}
 %if %{with autoconf_enables_optional_test}
 # For extended testsuite coverage
-BuildRequires:      %{?scl_prefix}gcc-gfortran
+BuildRequires:      gcc-gfortran
 %if 0%{?fedora} >= 15
-BuildRequires:      %{?scl_prefix}erlang
+BuildRequires:      erlang
 %endif
 %endif
 %endif
@@ -91,7 +91,7 @@ their use.
 %prep
 %{?scl:scl enable %{scl} - << \EOF}
 set -ex
-%autosetup -p1
+%autosetup -n autoconf-2.69 -p1
 %{?scl:EOF}
 
 
