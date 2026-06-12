@@ -2585,10 +2585,10 @@ License:        GPL+ or Artistic
 # Epoch bump for clean upgrade over old standalone package
 Epoch:          1
 Version:        1.10
-BuildRequires:  %{?scl_prefix}gzip
+BuildRequires:  gzip
 # The code defaults to Compress::Zlib, but a user can override it to gzip by
 # importing :gzip_external symbol
-Requires:       %{?scl_prefix}gzip
+Requires:       gzip
 Requires:       %{?scl_prefix}perl(Compress::Zlib) >= 2
 # IO::Handle used if gzip backend is requested
 Requires:       %{?scl_prefix}perl(IO::Handle)
