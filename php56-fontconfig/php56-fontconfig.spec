@@ -1,6 +1,7 @@
 %{?scl:%scl_package fontconfig}
 %{!?scl:%global pkg_name %{name}}
 
+
 # ifdef'd in source code but runtime dep will be made for FT_Done_MM_Var symbol in freetype-2.9.1
 # so update the build deps as well to keep deps consistency between runtime and build time.
 %global freetype_version 2.9.1
@@ -96,6 +97,13 @@ for i in doc/*.fncs; do
   touch -r $i ${i//.fncs/.sgml}
 done
 autoreconf
+CFLAGS=$RPM_OPT_FLAGS
+CFLAGS="-I%{_includedir}/ $CFLAGS"
+LDFLAGS="-L%{_libdir}/ $LDFLAGS"
+PKG_CONFIG_PATH="%{_libdir}/pkgconfig:$PKG_CONFIG_PATH"
+export LDFLAGS
+export CFLAGS
+export PKG_CONFIG_PATH
 %configure	--with-add-fonts=/usr/share/X11/fonts/Type1,/usr/share/X11/fonts/TTF,/usr/local/share/fonts \
 		--enable-libxml2 \
 		--disable-static --with-cache-dir=/usr/lib/fontconfig/cache
@@ -107,6 +115,13 @@ make %{?_smp_mflags}
 %install
 %{?scl:scl enable %{scl} - << \EOF}
 set -ex
+CFLAGS=$RPM_OPT_FLAGS
+CFLAGS="-I%{_includedir}/ $CFLAGS"
+LDFLAGS="-L%{_libdir}/ $LDFLAGS"
+PKG_CONFIG_PATH="%{_libdir}/pkgconfig:$PKG_CONFIG_PATH"
+export LDFLAGS
+export CFLAGS
+export PKG_CONFIG_PATH
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
