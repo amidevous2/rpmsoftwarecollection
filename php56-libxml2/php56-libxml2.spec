@@ -1,7 +1,22 @@
 %{?scl:%scl_package libxml2}
 %{!?scl:%global pkg_name %{name}}
 %{?scl:%global _scl_prefix /opt/remi}
-%{?scl:%global _prefix /opt/remi/php56/usr}
+%{?scl:%global _scl_root /opt/remi/php56/root/}
+%{?scl:%global _prefix /opt/remi/php56root//usr}
+# no debug infos with:
+%global debug_package %{nil}
+
+# disable check-buildroot (normally /usr/lib/rpm/check-buildroot) with:
+%define __arch_install_post %{nil}
+
+%define __os_install_post %{nil}
+
+# disable automatic dependency and provides generation with:
+%define __find_provides %{nil} 
+%define __find_requires %{nil} 
+%define _use_internal_dependency_generator 0
+Autoprov: 0
+Autoreq: 0
 
 
 %if 0%{?rhel} > 7
