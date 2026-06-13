@@ -365,6 +365,23 @@ rm -rf $RPM_BUILD_ROOT%{_mandir}
 %config(noreplace) %{_sysconfdir}/pki/tls/openssl11.cnf
 %dir %{_sysconfdir}/pki/tls
 %attr(0644,root,root) %{_sysconfdir}/pki/tls/openssl11.cnf
+%{_sysconfdir}/pki/tls/ct_log_list.cnf
+%{_sysconfdir}/pki/tls/ct_log_list.cnf.dist
+%{_sysconfdir}/pki/tls/misc/CA.pl
+%{_sysconfdir}/pki/tls/misc/tsget
+%{_sysconfdir}/pki/tls/misc/tsget.pl
+%{_sysconfdir}/pki/tls/openssl11.cnf.dist
+%{_bindir}/c_rehash
+%{_bindir}/openssl
+%{_libdir}/engines-1.1/afalg.so
+%{_libdir}/engines-1.1/capi.so
+%{_libdir}/engines-1.1/padlock.so
+%{_libdir}/libcrypto.a
+%{_libdir}/libcrypto.so
+%{_libdir}/libcrypto.so.1.1
+%{_libdir}/libssl.a
+%{_libdir}/libssl.so
+%{_libdir}/libssl.so.1.1
 #%#endif
 
 
@@ -375,6 +392,9 @@ rm -rf $RPM_BUILD_ROOT%{_mandir}
 #%#else
 %{_libdir}/openssl
 %{_includedir}/openssl
+%{_libdir}/pkgconfig/libcrypto.pc
+%{_libdir}/pkgconfig/libssl.pc
+%{_libdir}/pkgconfig/openssl.pc
 #%#endif
 
 
