@@ -103,33 +103,33 @@ URL: http://www.openssl.org/
 %if 0%{?fedora} < 35 && 0%{?rhel} < 9
 %{?scl:Requires: %{scl}-runtime}
 %{?scl:BuildRequires: %{scl}-runtime}
-BuildRequires: %{?scl_prefix}make
-BuildRequires: %{?scl_prefix}gcc
-BuildRequires: %{?scl_prefix}coreutils, %{?scl_prefix}perl-interpreter, %{?scl_prefix}sed, %{?scl_prefix}zlib-devel, %{?_scl_root}/usr/bin/cmp
-BuildRequires: %{?scl_prefix}lksctp-tools-devel
+BuildRequires: make
+BuildRequires: gcc
+BuildRequires: coreutils, perl-interpreter, sed, zlib-devel, /usr/bin/cmp
+BuildRequires: lksctp-tools-devel
 BuildRequires: /usr/bin/rename
 BuildRequires: /usr/bin/pod2man
 BuildRequires: /usr/sbin/sysctl
-BuildRequires: %{?scl_prefix}perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
-BuildRequires: %{?scl_prefix}perl(Module::Load::Conditional), perl(File::Temp)
-BuildRequires: %{?scl_prefix}perl(Time::HiRes)
-BuildRequires: %{?scl_prefix}perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
-Requires: %{?scl_prefix}coreutils, %{?scl_prefix}crypto-policies
+BuildRequires: perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
+BuildRequires: perl(Module::Load::Conditional), perl(File::Temp)
+BuildRequires: perl(Time::HiRes)
+BuildRequires: perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
+Requires: coreutils, crypto-policies
 Requires: %{?scl_prefix}openssl, %{?scl_prefix}openssl-libs
 %else
-BuildRequires: %{?scl_prefix}make
-BuildRequires: %{?scl_prefix}gcc
-BuildRequires: %{?scl_prefix}coreutils, %{?scl_prefix}perl-interpreter, %{?scl_prefix}sed, %{?scl_prefix}zlib-devel, %{?_scl_root}/usr/bin/cmp
-BuildRequires: %{?scl_prefix}lksctp-tools-devel
+BuildRequires: make
+BuildRequires: gcc
+BuildRequires: coreutils, perl-interpreter, sed, zlib-devel, /usr/bin/cmp
+BuildRequires: lksctp-tools-devel
 BuildRequires: /usr/bin/rename
 BuildRequires: /usr/bin/pod2man
 BuildRequires: /usr/sbin/sysctl
-BuildRequires: %{?scl_prefix}perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
-BuildRequires: %{?scl_prefix}perl(Module::Load::Conditional), perl(File::Temp)
-BuildRequires: %{?scl_prefix}perl(Time::HiRes)
-BuildRequires: %{?scl_prefix}perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
-Requires: %{?scl_prefix}coreutils, %{?scl_prefix}crypto-policies
-Conflicts: %{?scl_prefix}openssl < 1:3.0, %{?scl_prefix}openssl-libs < 1:3.0
+BuildRequires: perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
+BuildRequires: perl(Module::Load::Conditional), perl(File::Temp)
+BuildRequires: perl(Time::HiRes)
+BuildRequires: perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
+Requires: coreutils, crypto-policies
+%{?scl:Conflicts: openssl < 1:3.0, openssl-libs < 1:3.0}
 %endif
 
 
