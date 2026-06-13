@@ -1,6 +1,8 @@
 %{?scl:%scl_package libxml2}
 %{!?scl:%global pkg_name %{name}}
 %{?scl:%global _scl_prefix /opt/remi}
+%{?scl:%global _prefix /opt/remi/php56/usr}
+
 
 %if 0%{?rhel} > 7
 # Disable python2 build by default
