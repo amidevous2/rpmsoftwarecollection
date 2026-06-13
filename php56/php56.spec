@@ -231,7 +231,6 @@ ln -s %{_bindir}/phar    %{buildroot}%{_root_bindir}/phar
 ln -s %{_bindir}/php-cgi %{buildroot}%{_root_bindir}/php-cgi
 ln -s %{_bindir}/php-config %{buildroot}%{_root_bindir}/php-config
 ln -s %{_bindir}/phpize %{buildroot}%{_root_bindir}/phpize
-ln -s %{_bindir}/php-cgi %{buildroot}%{_root_bindir}/php-cgi
 mkdir -p %{buildroot}%{_root_mandir}/man1
 ln -s %{_mandir}/man1/php.1.gz     %{buildroot}%{_root_mandir}/man1/php.1.gz
 ln -s %{_mandir}/man1/phar.1.gz    %{buildroot}%{_root_mandir}/man1/phar.1.gz
