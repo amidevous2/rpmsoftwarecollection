@@ -1,3 +1,7 @@
+
+%{?scl:%global _scl_vendor remi}
+%{?scl:%global _vendor remi}
+
 # no debug infos with:
 %global debug_package %{nil}
 
