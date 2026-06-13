@@ -9,6 +9,8 @@
 #
 # Please, preserve the changelog entries
 #
+%{?scl:%global _scl_vendor remi}
+%{?scl:%global _vendor remi}
 
 %{?scl:%scl_package    php-pecl-zip}
 
