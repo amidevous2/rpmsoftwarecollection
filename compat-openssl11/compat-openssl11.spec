@@ -28,54 +28,54 @@ Epoch: 1
 # tarball with the hobble-openssl script which is included below.
 # The original openssl upstream tarball cannot be shipped in the .src.rpm.
 Source: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/openssl-%{version}-hobbled.tar.xz
-Source1: hobble-openssl
-Source2: Makefile.certificate
-Source6: make-dummy-cert
-Source7: renew-dummy-cert
-Source12: ec_curve.c
-Source13: ectest.c
+Source1: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/hobble-openssl
+Source2: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/Makefile.certificate
+Source6: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/make-dummy-cert
+Source7: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/renew-dummy-cert
+Source12: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/ec_curve.c
+Source13: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/ectest.c
 # Build changes
-Patch1: openssl-1.1.1-build.patch
-Patch2: openssl-1.1.1-defaults.patch
-Patch3: openssl-1.1.1-no-html.patch
-Patch4: openssl-1.1.1-man-rename.patch
+Patch1: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-build.patch
+Patch2: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-defaults.patch
+Patch3: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-no-html.patch
+Patch4: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-man-rename.patch
 
 # Functionality changes
-Patch31: openssl-1.1.1-conf-paths.patch
-Patch32: openssl-1.1.1-version-add-engines.patch
-Patch33: openssl-1.1.1-apps-dgst.patch
-Patch36: openssl-1.1.1-no-brainpool.patch
-Patch37: openssl-1.1.1-ec-curves.patch
-Patch38: openssl-1.1.1-no-weak-verify.patch
-Patch40: openssl-1.1.1-disable-ssl3.patch
-Patch41: openssl-1.1.1-system-cipherlist.patch
-Patch42: openssl-1.1.1-fips.patch
-Patch45: openssl-1.1.1-weak-ciphers.patch
-Patch46: openssl-1.1.1-seclevel.patch
-Patch47: openssl-1.1.1-ts-sha256-default.patch
-Patch48: openssl-1.1.1-fips-post-rand.patch
-Patch49: openssl-1.1.1-evp-kdf.patch
-Patch50: openssl-1.1.1-ssh-kdf.patch
-Patch51: openssl-1.1.1-intel-cet.patch
-Patch60: openssl-1.1.1-krb5-kdf.patch
-Patch61: openssl-1.1.1-edk2-build.patch
-Patch62: openssl-1.1.1-fips-curves.patch
-Patch65: openssl-1.1.1-fips-drbg-selftest.patch
-Patch66: openssl-1.1.1-fips-dh.patch
-Patch67: openssl-1.1.1-kdf-selftest.patch
-Patch69: openssl-1.1.1-alpn-cb.patch
-Patch70: openssl-1.1.1-rewire-fips-drbg.patch
-Patch71: openssl-1.1.1-new-config-file.patch
+Patch31: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-conf-paths.patch
+Patch32: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-version-add-engines.patch
+Patch33: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-apps-dgst.patch
+Patch36: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-no-brainpool.patch
+Patch37: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-ec-curves.patch
+Patch38: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-no-weak-verify.patch
+Patch40: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-disable-ssl3.patch
+Patch41: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-system-cipherlist.patch
+Patch42: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-fips.patch
+Patch45: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-weak-ciphers.patch
+Patch46: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-seclevel.patch
+Patch47: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-ts-sha256-default.patch
+Patch48: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-fips-post-rand.patch
+Patch49: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-evp-kdf.patch
+Patch50: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-ssh-kdf.patch
+Patch51: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-intel-cet.patch
+Patch60: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-krb5-kdf.patch
+Patch61: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-edk2-build.patch
+Patch62: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-fips-curves.patch
+Patch65: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-fips-drbg-selftest.patch
+Patch66: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-fips-dh.patch
+Patch67: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-kdf-selftest.patch
+Patch69: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-alpn-cb.patch
+Patch70: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-rewire-fips-drbg.patch
+Patch71: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-new-config-file.patch
 # This modifies code that was patched before, but removing all FIPS patches
 # comes with a much greater risk of introducing regressions.
-Patch72: openssl-1.1.1-disable-fips.patch
+Patch72: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-disable-fips.patch
 
 # Backported fixes including security fixes
-Patch52: openssl-1.1.1-s390x-update.patch
-Patch53: openssl-1.1.1-fips-crng-test.patch
-Patch55: openssl-1.1.1-arm-update.patch
-Patch56: openssl-1.1.1-s390x-ecc.patch
-Patch73: openssl-1.1.1-cve-2022-0778.patch
+Patch52: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-s390x-update.patch
+Patch53: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-fips-crng-test.patch
+Patch55: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-arm-update.patch
+Patch56: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-s390x-ecc.patch
+Patch73: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/compat-openssl11/openssl-1.1.1-cve-2022-0778.patch
 
 License: OpenSSL and ASL 2.0
 URL: http://www.openssl.org/
@@ -124,6 +124,10 @@ releases.
 %package devel
 Summary: Development package for %{name}
 Requires: %{name} = %{epoch}:%{version}-%{release}
+%if 0%{?fedora} < 35 && 0%{?rhel} < 9
+Requires: openssl-devel
+%endif
+
 
 %description devel
 Development package for %{name}.
