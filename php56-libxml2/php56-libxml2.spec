@@ -39,7 +39,8 @@ Summary:        Library providing XML and HTML support
 
 License:        MIT
 URL:            http://xmlsoft.org/
-Source:         https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download//libxml2-%{version}.tar.gz
+#Source:         https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download//libxml2-%{version}.tar.gz
+Source:         https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download//libxml2-%{version}.tar.xz
 Patch0:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-multilib.patch
 # workaround for #877567 - Very weird bug gzip decompression bug in "recent" libxml2 versions
 #Patch1:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.0-do-not-check-crc.patch
