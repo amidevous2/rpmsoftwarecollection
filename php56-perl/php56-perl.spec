@@ -1,5 +1,7 @@
 %{?scl:%scl_package perl}
 %{!?scl:%global pkg_name %{name}}
+%{?scl:%global _scl_vendor remi}
+%{?scl:%global _vendor remi}
 
 %global perl_version    5.32.1
 %global perl_epoch      4
