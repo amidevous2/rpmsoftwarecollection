@@ -1,7 +1,7 @@
 # no debug infos with:#
 %global debug_package %{nil}
 
-# disable check-buildroot (normally /usr/lib/rpm/check-buildroot) with:
+# disable check-buildroot (normally /usr/lib/rpm/check-buildroot) with:#
 %define __arch_install_post %{nil}
 
 %define __os_install_post %{nil}
