@@ -14,7 +14,7 @@ Release:	2%{?dist}
 # fc-case/CaseFolding.txt is in the UCD
 # otherwise MIT
 License:	MIT and Public Domain and UCD
-Source:		http://fontconfig.org/release/%{pkg_name}-%{version}.tar.xz
+Source:		https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/%{pkg_name}-%{version}.tar.xz
 URL:		http://fontconfig.org
 Source1:	25-no-bitmap-fedora.conf
 Source2:	fc-cache
