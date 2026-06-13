@@ -1,3 +1,18 @@
+# no debug infos with:
+%global debug_package %{nil}
+
+# disable check-buildroot (normally /usr/lib/rpm/check-buildroot) with:
+%define __arch_install_post %{nil}
+
+%define __os_install_post %{nil}
+
+# disable automatic dependency and provides generation with:
+%define __find_provides %{nil} 
+%define __find_requires %{nil} 
+%define _use_internal_dependency_generator 0
+Autoprov: 0
+Autoreq: 0
+
 # remirepo spec file for php56 SCL metapackage
 #
 # Copyright (c) 2013-2023 Remi Collet
