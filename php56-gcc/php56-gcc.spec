@@ -72,20 +72,6 @@ Autoreq: 0
 %global build_d 0
 %endif
 %endif
-%if 0%{?rhel} >= 7
-%ifarch %{ix86} x86_64 ia64 ppc ppc64 ppc64le
-%global build_libquadmath 1
-%else
-%global build_libquadmath 0
-%endif
-%endif
-%if 0%{?rhel} == 6
-%ifarch %{ix86} x86_64 ia64 ppc64le
-%global build_libquadmath 1
-%else
-%global build_libquadmath 0
-%endif
-%endif
 %ifarch %{ix86} x86_64 ppc ppc64 ppc64le ppc64p7 s390 s390x %{arm} aarch64
 %global build_libasan 1
 %else
@@ -495,12 +481,6 @@ Requires: %{?scl_prefix}gcc%{!?scl:11} = %{version}-%{release}
 Requires: libgfortran >= 8.1.1
 %else
 Requires: libgfortran5 >= 8.1.1
-%endif
-%if %{build_libquadmath}
-%if 0%{!?scl:1}
-Requires: libquadmath
-%endif
-Requires: %{?scl_prefix}libquadmath-devel = %{version}-%{release}
 %endif
 Autoreq: true
 
@@ -1225,11 +1205,6 @@ done)
 (cd libgfortran; for i in ChangeLog*; do
 	cp -p $i ../rpm.doc/gfortran/$i.libgfortran
 done)
-%if %{build_libquadmath}
-(cd libquadmath; for i in ChangeLog* COPYING.LIB; do
-	cp -p $i ../rpm.doc/libquadmath/$i.libquadmath
-done)
-%endif
 %if %{build_libitm}
 (cd libitm; for i in ChangeLog*; do
 	cp -p $i ../rpm.doc/libitm/$i.libitm
@@ -1567,20 +1542,6 @@ echo '/* GNU ld script
    the static library, so try that secondarily.  */
 %{oformat}
 INPUT ( %{?scl:%{_root_prefix}}%{!?scl:%{_prefix}}/%{_lib}/libgfortran.so.5 -lgfortran_nonshared )' > libgfortran.so
-%if %{build_libquadmath}
-rm -f libquadmath.so
-echo '/* GNU ld script */
-%{oformat}
-%if 0%{!?scl:1}
-INPUT ( %{_prefix}/%{_lib}/libquadmath.so.0 )' > libquadmath.so
-%else
-%if 0%{?rhel} >= 7
-INPUT ( %{_root_prefix}/%{_lib}/libquadmath.so.0 )' > libquadmath.so
-%else
-INPUT ( libquadmath.a )' > libquadmath.so
-%endif
-%endif
-%endif
 %if %{build_libitm}
 rm -f libitm.so
 echo '/* GNU ld script */
@@ -1622,9 +1583,6 @@ mv -f %{buildroot}%{_prefix}/%{_lib}/libstdc++fs.*a $FULLLPATH/
 mv -f %{buildroot}%{_prefix}/%{_lib}/libsupc++.*a .
 mv -f %{buildroot}%{_prefix}/%{_lib}/libgfortran.*a .
 mv -f %{buildroot}%{_prefix}/%{_lib}/libgomp.*a .
-%if %{build_libquadmath}
-mv -f %{buildroot}%{_prefix}/%{_lib}/libquadmath.*a $FULLLPATH/
-%endif
 %if %{build_libitm}
 mv -f %{buildroot}%{_prefix}/%{_lib}/libitm.*a $FULLLPATH/
 %endif
@@ -1673,20 +1631,6 @@ INPUT ( %{?scl:%{_root_prefix}}%{!?scl:%{_prefix}}/lib64/libgomp.so.1 )' > 64/li
 echo '/* GNU ld script */
 %{oformat2}
 INPUT ( %{_prefix}/lib64/libgccjit.so.0 )' > 64/libgccjit.so
-%if %{build_libquadmath}
-rm -f 64/libquadmath.so
-echo '/* GNU ld script */
-%{oformat2}
-%if 0%{!?scl:1}
-INPUT ( %{_prefix}/lib64/libquadmath.so.0 )' > 64/libquadmath.so
-%else
-%if 0%{?rhel} >= 7
-INPUT ( %{_root_prefix}/lib64/libquadmath.so.0 )' > 64/libquadmath.so
-%else
-INPUT ( libquadmath.a )' > 64/libquadmath.so
-%endif
-%endif
-%endif
 %if %{build_libitm}
 rm -f 64/libitm.so
 echo '/* GNU ld script */
@@ -1714,19 +1658,12 @@ INPUT ( %{?scl:%{_root_prefix}}%{!?scl:%{_prefix}}/lib64/libubsan.so.1 )' > 64/l
 mv -f %{buildroot}%{_prefix}/lib64/libsupc++.*a 64/
 mv -f %{buildroot}%{_prefix}/lib64/libgfortran.*a 64/
 mv -f %{buildroot}%{_prefix}/lib64/libgomp.*a 64/
-%if %{build_libquadmath}
-mv -f %{buildroot}%{_prefix}/lib64/libquadmath.*a 64/
-%endif
 ln -sf lib32/libstdc++.a libstdc++.a
 ln -sf ../lib64/libstdc++.a 64/libstdc++.a
 ln -sf lib32/libstdc++fs.a libstdc++fs.a
 ln -sf ../lib64/libstdc++fs.a 64/libstdc++fs.a
 ln -sf lib32/libstdc++_nonshared.a libstdc++_nonshared.a
 ln -sf ../lib64/libstdc++_nonshared.a 64/libstdc++_nonshared.a
-%if %{build_libquadmath}
-ln -sf lib32/libquadmath.a libquadmath.a
-ln -sf ../lib64/libquadmath.a 64/libquadmath.a
-%endif
 %if %{build_libitm}
 ln -sf lib32/libitm.a libitm.a
 ln -sf ../lib64/libitm.a 64/libitm.a
@@ -1783,20 +1720,6 @@ INPUT ( %{?scl:%{_root_prefix}}%{!?scl:%{_prefix}}/lib/libgomp.so.1 )' > 32/libg
 echo '/* GNU ld script */
 %{oformat2}
 INPUT ( %{_prefix}/lib/libgccjit.so.0 )' > 32/libgccjit.so
-%if %{build_libquadmath}
-rm -f 32/libquadmath.so
-echo '/* GNU ld script */
-%{oformat2}
-%if 0%{!?scl:1}
-INPUT ( %{_prefix}/lib/libquadmath.so.0 )' > 32/libquadmath.so
-%else
-%if 0%{?rhel} >= 7
-INPUT ( %{_root_prefix}/lib/libquadmath.so.0 )' > 32/libquadmath.so
-%else
-INPUT ( libquadmath.a )' > 32/libquadmath.so
-%endif
-%endif
-%endif
 %if %{build_libitm}
 rm -f 32/libitm.so
 echo '/* GNU ld script */
@@ -1824,10 +1747,6 @@ INPUT ( %{?scl:%{_root_prefix}}%{!?scl:%{_prefix}}/lib/libubsan.so.1 )' > 32/lib
 mv -f %{buildroot}%{_prefix}/lib/libsupc++.*a 32/
 mv -f %{buildroot}%{_prefix}/lib/libgfortran.*a 32/
 mv -f %{buildroot}%{_prefix}/lib/libgomp.*a 32/
-%if %{build_libquadmath}
-mv -f %{buildroot}%{_prefix}/lib/libquadmath.*a 32/
-%endif
-%endif
 %ifarch sparc64 ppc64
 ln -sf ../lib32/libstdc++.a 32/libstdc++.a
 ln -sf lib64/libstdc++.a libstdc++.a
@@ -1841,10 +1760,6 @@ ln -sf lib64/libstdc++_nonshared.a libstdc++_nonshared.a
 ln -sf ../lib32/libgfortran_nonshared.a 32/libgfortran_nonshared.a
 ln -sf lib64/libgfortran_nonshared.a libgfortran_nonshared.a
 ln -sf lib64/libgomp_nonshared.a libgomp_nonshared.a
-%endif
-%if %{build_libquadmath}
-ln -sf ../lib32/libquadmath.a 32/libquadmath.a
-ln -sf lib64/libquadmath.a libquadmath.a
 %endif
 %if %{build_libitm}
 ln -sf ../lib32/libitm.a 32/libitm.a
@@ -1874,9 +1789,6 @@ ln -sf ../../../%{multilib_32_arch}-%{_vendor}-%{_target_os}%{?_gnu}/%{gcc_major
 %endif
 %if 0%{?rhel} <= 8
 ln -sf ../../../%{multilib_32_arch}-%{_vendor}-%{_target_os}%{?_gnu}/%{gcc_major}/libgfortran_nonshared.a 32/libgfortran_nonshared.a
-%endif
-%if %{build_libquadmath}
-ln -sf ../../../%{multilib_32_arch}-%{_vendor}-%{_target_os}%{?_gnu}/%{gcc_major}/libquadmath.a 32/libquadmath.a
 %endif
 %if %{build_libitm}
 ln -sf ../../../%{multilib_32_arch}-%{_vendor}-%{_target_os}%{?_gnu}/%{gcc_major}/libitm.a 32/libitm.a
@@ -1932,11 +1844,6 @@ popd
 chmod 755 %{buildroot}%{_prefix}/%{_lib}/libgfortran.so.5.*
 chmod 755 %{buildroot}%{_prefix}/%{_lib}/libgomp.so.1.*
 chmod 755 %{buildroot}%{_prefix}/%{_lib}/libcc1.so.0.*
-%if %{build_libquadmath}
-%if 0%{!?scl:1}
-chmod 755 %{buildroot}%{_prefix}/%{_lib}/libquadmath.so.0.*
-%endif
-%endif
 %if %{build_libitm}
 chmod 755 %{buildroot}%{_prefix}/%{_lib}/libitm.so.1.*
 %if 0%{?scl:1}
@@ -2456,10 +2363,6 @@ fi
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/libsanitizer.spec
 %endif
 %ifarch sparcv9 sparc64 ppc ppc64
-%if %{build_libquadmath}
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/libquadmath.a
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/libquadmath.so
-%endif
 %endif
 %if %{build_isl}
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/libisl.so.*
@@ -2474,10 +2377,6 @@ fi
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/64/libgomp.a
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/64/libgomp.so
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/64/libgccjit.so
-%if %{build_libquadmath}
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/64/libquadmath.a
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/64/libquadmath.so
-%endif
 %if %{build_libitm}
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/64/libitm.a
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/64/libitm.so
@@ -2520,10 +2419,6 @@ fi
 %endif
 
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/32/libgccjit.so
-%if %{build_libquadmath}
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/32/libquadmath.a
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/32/libquadmath.so
-%endif
 %if %{build_libitm}
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/32/libitm.a
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/32/libitm.so
@@ -2543,10 +2438,6 @@ fi
 %endif
 %endif
 %ifarch sparcv9 sparc64 ppc ppc64 ppc64p7
-%if %{build_libquadmath}
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/libquadmath.a
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/libquadmath.so
-%endif
 %if %{build_libitm}
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/libitm.a
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/libitm.so
@@ -2707,34 +2598,6 @@ fi
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/lib64/libgfortran_nonshared.a
 %endif
 %doc rpm.doc/gfortran/*
-
-%if %{build_libquadmath}
-%files -n %{?scl_prefix}libquadmath-devel
-%dir %{_prefix}/lib/gcc
-%dir %{_prefix}/lib/gcc/%{gcc_target_platform}
-%dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
-%dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/include
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/include/quadmath.h
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/include/quadmath_weak.h
-%ifarch sparcv9 ppc
-%dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/lib32
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/lib32/libquadmath.a
-%endif
-%ifarch sparc64 ppc64 ppc64p7
-%dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/lib64
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/lib64/libquadmath.a
-%endif
-%ifnarch sparcv9 sparc64 ppc ppc64 ppc64p7
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/libquadmath.a
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/libquadmath.so
-%endif
-%dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
-%ifarch %{ix86}
-# Need it for -m32.
-%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/libgfortran_nonshared.a
-%endif
-%doc rpm.doc/libquadmath/ChangeLog*
-%endif
 
 %if %{build_libitm}
 %files -n %{?scl_prefix}libitm-devel
