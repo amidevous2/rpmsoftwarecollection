@@ -122,7 +122,7 @@ export CFLAGS
 export PKG_CONFIG_PATH
 %configure	--with-add-fonts=/usr/share/X11/fonts/Type1,/usr/share/X11/fonts/TTF,/usr/local/share/fonts \
 		--enable-libxml2 \
-		--disable-static --with-cache-dir=/usr/lib/fontconfig/cache
+		--disable-static --with-cache-dir=%{_prefix}/lib/fontconfig/cache
 
 make %{?_smp_mflags}
 %{?scl:EOF}
@@ -143,7 +143,7 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 install -p -m 0644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/fonts/conf.d
-ln -s %{_fontconfig_templatedir}/25-unhint-nonlatin.conf $RPM_BUILD_ROOT%{_fontconfig_confdir}/
+ln -s %{_prefix}/share/fontconfig/conf.avail/25-unhint-nonlatin.conf $RPM_BUILD_ROOT%{_sysconfdir}/fonts/conf.d
 
 # move installed doc files back to build directory to package them
 # in the right place
