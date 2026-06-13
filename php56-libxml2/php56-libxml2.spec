@@ -2,7 +2,6 @@
 %{!?scl:%global pkg_name %{name}}
 %{?scl:%global _scl_vendor remi}
 %{?scl:%global _vendor remi}
-
 %{?scl:%global _scl_prefix /opt/remi}
 %{?scl:%global _scl_root /opt/remi/php56/root/}
 %{?scl:%global _prefix /opt/remi/php56/root/usr}
@@ -44,7 +43,7 @@ Name:           php56-libxml2
 #Version:        2.9.7
 Version:        2.9.13
 #Release:        21%{?dist}.4
-Release:        14%{?dist}
+Release:        14.99%{?dist}
 Summary:        Library providing XML and HTML support
 
 License:        MIT
