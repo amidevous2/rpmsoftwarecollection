@@ -16,7 +16,7 @@ Autoreq: 0
 Name: sudomock
 Summary: sudomock
 Version: 1.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Group: System Environment/Base
 License: GPL-2.0-or-later AND LGPL-2.1-or-later
 URL: https://copr.fedorainfracloud.org/coprs/amidevous/rpmsoftwarecollection/builds/
@@ -34,33 +34,29 @@ Requires: scl-utils-build wget dnf sudo
 sudomock
 sudomock.
 
-
-
-
-
-
-
 %install
 mkdir -p $RPM_BUILD_ROOT
 touch $RPM_BUILD_ROOT/sudomock
 
 %post
-cat /etc/sudoers > /etc/sudoers.bk
-echo "mock ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-echo "mockbuild ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-echo "mock-build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-sleep 10
-sudo echo "root"
-sleep 10
-echo "no root"
-sleep 10
+if ! grep -q "mock ALL=(ALL) NOPASSWD: ALL" "/etc/sudoers"; then
+    echo "mock ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers;
+fi
+if ! grep -q "echo "mockbuild ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers" "/etc/sudoers"; then
+    echo "mockbuild ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers" >> /etc/sudoers;
+fi
+if ! grep -q "echo "mock-build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers" "/etc/sudoers"; then
+    echo "mock-build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers" >> /etc/sudoers;
+fi
 
-
+%postun
+sed '|mock ALL=(ALL) NOPASSWD: ALL|d' /etc/sudoers
+sed '|mockbuild ALL=(ALL) NOPASSWD: ALL|d' /etc/sudoers
+sed '|mock-build ALL=(ALL) NOPASSWD: ALL|d' /etc/sudoers
 
 
 %files
 /sudomock
-
 
 
 %changelog
