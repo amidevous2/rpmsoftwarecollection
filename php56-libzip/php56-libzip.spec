@@ -8,6 +8,22 @@
 #
 # Please preserve changelog entries
 #
+%{?scl:%global _scl_vendor remi}
+%{?scl:%global _vendor remi}
+%{?scl:%global _scl_prefix /opt/remi}
+%{?scl:%global _scl_root /opt/remi/php56/root/}
+%{?scl:%global _prefix /opt/remi/php56/root/usr}
+%{?scl:%global _sysconfdir /opt/remi/php56/root/etc}
+%{?scl:%global _exec_prefix /opt/remi/php56/root/usr}
+%{?scl:%global _includedir /opt/remi/php56/root/usr/include}
+%{?scl:%global _bindir /opt/remi/php56/root/usr/bin}
+%{?scl:%global _sbindir /opt/remi/php56/root/usr/sbin}
+%{?scl:%global _libdir /opt/remi/php56/root/usr/lib64}
+%{?scl:%global _libexecdir /opt/remi/php56/root/usr/libexec}
+%{?scl:%global _datadir /opt/remi/php56/root/usr/share}
+%{?scl:%global _infodir /opt/remi/php56/root/usr/share/info}
+%{?scl:%global _mandir /opt/remi/php56/root/usr/share/man}
+%{?scl:%global _docdir /opt/remi/php56/root/usr/share/doc}
 
 ## FOR EL-8
 ##     1st build --with    move_to_opt for SCL
@@ -33,7 +49,7 @@
 Name:    php56-%{libname}
 
 Version: 1.11.1
-Release: 4%{?dist}
+Release: 4.99%{?dist}
 Summary: C library for reading, creating, and modifying zip archives
 
 License: BSD-3-Clause
@@ -182,14 +198,14 @@ mkdir -p %{buildroot}%{_datadir}/doc
 %files
 %license LICENSE
 %{_libdir}/libzip.so.%{soname}*
-%if %{with move_to_opt}
-%dir %{_prefix}
-%dir %{_mandir}
-%dir %{_libdir}
-%dir %{_libdir}
-%dir %{_datadir}
-%dir %{_datadir}/licenses
-%endif
+#%if %{with move_to_opt}
+#%dir %{_prefix}
+#%dir %{_mandir}
+#%dir %{_libdir}
+#%dir %{_libdir}
+#%dir %{_datadir}
+#%dir %{_datadir}/licenses
+#%endif
 
 %files tools
 %{_bindir}/zipcmp
