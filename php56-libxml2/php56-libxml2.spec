@@ -4,7 +4,7 @@
 %{?scl:%global _scl_root /opt/remi/php56/root/}
 #%#{?scl:%global _prefix /opt/remi/php56root//usr}
 # no debug infos with:
-%global debug_package %{nil}
+#%#global debug_package %{nil}
 
 # disable check-buildroot (normally /usr/lib/rpm/check-buildroot) with:
 %define __arch_install_post %{nil}
