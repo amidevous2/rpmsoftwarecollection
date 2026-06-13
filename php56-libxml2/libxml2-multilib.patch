@@ -6,9 +6,9 @@
   exec_prefix=@exec_prefix@
   includedir=@includedir@
 ! libdir=@libdir@
+  cflags=
+  libs=
   
-  usage()
-  {
 --- 3,14 ----
   prefix=@prefix@
   exec_prefix=@exec_prefix@
@@ -19,6 +19,6 @@
 ! else
 !     libdir=${exec_prefix}/lib64
 ! fi
+  cflags=
+  libs=
   
-  usage()
-  {
