@@ -297,9 +297,9 @@ BuildRequires: httpd-filesystem
 %endif
 
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-BuildRequires: libstdc++-devel, openssl-devel, php56-openssl-devel
+BuildRequires: libstdc++-devel, php56-openssl-devel
 %else
-BuildRequires: libstdc++-devel, openssl-devel
+BuildRequires: libstdc++-devel, php56-openssl-devel
 %endif
 
 %if %{with_sqlite3}
@@ -518,9 +518,9 @@ Requires: libedit-devel%{?_isa}
 Requires: %{?scl_prefix}libxml2-devel%{?_isa}
 
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-Requires: openssl-devel%{?_isa}, php56-openssl-devel
+Requires: php56-openssl-devel
 %else
-Requires: openssl-devel%{?_isa}
+Requires: php56-openssl-devel
 %endif
 
 
@@ -563,9 +563,9 @@ Group: Development/Languages
 License: PHP
 Requires: %{?scl_prefix}php-common%{?_isa} = %{version}-%{release}
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-BuildRequires: krb5-devel, openssl-devel, php56-openssl-devel, libc-client-devel
+BuildRequires: krb5-devel, php56-openssl-devel, libc-client-devel
 %else
-BuildRequires: krb5-devel, openssl-devel, libc-client-devel
+BuildRequires: krb5-devel, php56-openssl-devel, libc-client-devel
 %endif
 
 
@@ -584,9 +584,9 @@ Group: Development/Languages
 License: PHP
 Requires: %{?scl_prefix}php-common%{?_isa} = %{version}-%{release}
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-BuildRequires: cyrus-sasl-devel, openldap-devel, openssl-devel, php56-openssl-devel
+BuildRequires: cyrus-sasl-devel, openldap-devel, php56-openssl-devel
 %else
-BuildRequires: cyrus-sasl-devel, openldap-devel, openssl-devel
+BuildRequires: cyrus-sasl-devel, openldap-devel, php56-openssl-devel
 %endif
 
 %description ldap
@@ -647,9 +647,9 @@ Requires: %{?scl_prefix}php-pdo%{?_isa} = %{version}-%{release}
 Provides: %{?scl_prefix}php_database
 Provides: %{?scl_prefix}php-pdo_pgsql, %{?scl_prefix}php-pdo_pgsql%{?_isa}
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-BuildRequires: krb5-devel, openssl-devel, php56-openssl-devel, postgresql-devel
+BuildRequires: krb5-devel, php56-openssl-devel, postgresql-devel
 %else
-BuildRequires: krb5-devel, openssl-devel, postgresql-devel
+BuildRequires: krb5-devel, php56-openssl-devel, postgresql-devel
 %endif
 
 %description pgsql
