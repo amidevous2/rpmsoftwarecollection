@@ -1,7 +1,7 @@
 # no debug infos with:#
 %global debug_package %{nil}
-%{?scl:%global _scl_vendor remi}
-%{?scl:%global _vendor remi}
+%{?scl:%global scl_vendor remi}
+%{?scl:%global vendor remi}
 
 # disable check-buildroot (normally /usr/lib/rpm/check-buildroot) with:#
 %define __arch_install_post %{nil}
@@ -23,7 +23,6 @@ Autoreq: 0
 #
 # Please, preserve the changelog entries
 #
-%global _scl_prefix /opt/remi
 %global scl_name_base    php
 %global scl_name_version 56
 %global scl              %{scl_name_base}%{scl_name_version}
@@ -50,7 +49,7 @@ Autoreq: 0
 Summary:       Package that installs PHP 5.6
 Name:          %scl_name
 Version:       5.6
-Release:       10%{?dist}
+Release:       10.90%{?dist}
 Group:         Development/Languages
 License:       GPL-2.0-or-later
 
