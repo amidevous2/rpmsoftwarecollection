@@ -214,6 +214,7 @@ rm -rf %{buildroot}%{python3_sitearch}/__pycache__/libxml2.*
 rm -rf %{buildroot}%{python3_sitearch}/drv_libxml2.py
 rm -rf %{buildroot}%{python3_sitearch}/__pycache__/drv_libxml2.*
 rm -rf %{buildroot}%{python3_sitearch}/libxml2mod.so
+rm -rf %{buildroot}/usr/lib/debug/
 %{?scl:EOF}
 
 
