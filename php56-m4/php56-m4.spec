@@ -1,5 +1,7 @@
 %{?scl:%scl_package m4}
 %{!?scl:%global pkg_name %{name}}
+%{?scl:%global _scl_vendor remi}
+%{?scl:%global _vendor remi}
 
 Summary: GNU macro processor
 Name: %{?scl_prefix}m4
