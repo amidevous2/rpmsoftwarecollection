@@ -71,11 +71,11 @@ Source0:       https://github.com/amidevous2/rpmsoftwarecollection/releases/down
 %endif
 
 # Needed by PHP see https://github.com/libgd/libgd/pull/766
-Patch0:        libgd-flip.patch
+Patch0:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/gd3-php/libgd-flip.patch
 # Missing header see https://github.com/libgd/libgd/pull/766
-Patch1:        libgd-iostream.patch
+Patch1:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/gd3-php/libgd-iostream.patch
 # But soname for PHP usage
-Patch2:        libgd-bumpsoname.patch
+Patch2:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/gd3-php/libgd-bumpsoname.patch
 
 
 BuildRequires: freetype-devel
