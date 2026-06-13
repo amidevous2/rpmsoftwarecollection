@@ -49,7 +49,7 @@ Version:      %{upstream_version}%{?upstream_prever:~%{upstream_lower}}
 Release:      2%{?dist}
 License:      PHP-3.01
 URL:          %{forgeurl}
-Source0:      %{forgesource}
+Source0:      https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/php_zip-1.22.8.tar.gz
 
 BuildRequires: make
 BuildRequires: %{?dtsprefix}gcc
@@ -63,8 +63,8 @@ Requires:      %{?vendeur:%{vendeur}-}libzip%{?_isa} >= %{libzip_version}
 %global __requires_exclude ^libzip\\.so.*$
 %else
 # Ensure latest version is used
-BuildRequires: libzip-devel    >= %{libzip_version}
-Requires:      libzip%{?_isa}  >= %{libzip_version}
+BuildRequires: %{?scl_prefix}libzip-devel    >= %{libzip_version}
+Requires:      %{?scl_prefix}libzip%{?_isa}  >= %{libzip_version}
 %endif
 
 Requires:     %{?scl_prefix}php(zend-abi) = %{php_zend_api}
