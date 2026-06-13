@@ -173,7 +173,7 @@ cat %{pkg_name}-conf.lang >> %{pkg_name}.lang
 set -ex
 umask 0022
 
-mkdir -p /usr/lib/fontconfig/cache
+mkdir -p %{_prefix}/lib/fontconfig/cache
 
 [[ -d %{_localstatedir}/cache/fontconfig ]] && rm -rf %{_localstatedir}/cache/fontconfig/* 2> /dev/null || :
 
@@ -181,15 +181,15 @@ mkdir -p /usr/lib/fontconfig/cache
 # The check for existance is needed on dual-arch installs (the second
 #  copy of fontconfig might install the binary instead of the first)
 # The HOME setting is to avoid problems if HOME hasn't been reset
-if [ -x /usr/bin/fc-cache ] && /usr/bin/fc-cache --version 2>&1 | grep -q %{version} ; then
-  HOME=/root /usr/bin/fc-cache -f
+if [ -x %{_bindir}/fc-cache ] && %{_bindir}/fc-cache --version 2>&1 | grep -q %{version} ; then
+  HOME=/root %{_bindir}/fc-cache -f
 fi
 
-%transfiletriggerin -- /usr/share/fonts /usr/share/X11/fonts/Type1 /usr/share/X11/fonts/TTF /usr/local/share/fonts
-HOME=/root /usr/bin/fc-cache -s
+%transfiletriggerin -- %{_prefix}/share/fonts /usr/share/X11/fonts/Type1 %{_prefix}/share/X11/fonts/TTF %{_prefix}/local/share/fonts
+HOME=/root %{_bindir}/fc-cache -s
 
-%transfiletriggerpostun -- /usr/share/fonts /usr/share/X11/fonts/Type1 /usr/share/X11/fonts/TTF /usr/local/share/fonts
-HOME=/root /usr/bin/fc-cache -s
+%transfiletriggerpostun -- %{_prefix}/share/fonts /usr/share/X11/fonts/Type1 %{_prefix}/share/X11/fonts/TTF %{_prefix}/local/share/fonts
+HOME=/root %{_bindir}/fc-cache -s
 %{?scl:EOF}
 
 
@@ -217,7 +217,7 @@ fi
 %files -f %{pkg_name}.lang
 %doc README AUTHORS
 %doc fontconfig-user.txt fontconfig-user.html
-%doc %{_fontconfig_confdir}/README
+%doc %{_sysconfdir}/fonts/conf.d/README
 %license COPYING
 %{_libdir}/libfontconfig.so.*
 %{_bindir}/fc-cache*
@@ -229,13 +229,13 @@ fi
 %{_bindir}/fc-query
 %{_bindir}/fc-scan
 %{_bindir}/fc-validate
-%{_fontconfig_templatedir}/*.conf
+%{_prefix}/share/fontconfig/conf.avail/*.conf
 %{_datadir}/xml/fontconfig
 # fonts.conf is not supposed to be modified.
 # If you want to do so, you should use local.conf instead.
-%config %{_fontconfig_masterdir}/fonts.conf
-%config(noreplace) %{_fontconfig_confdir}/*.conf
-%dir /usr/lib/fontconfig/cache
+%config %{_prefix}/share/fontconfig/conf.avail/fonts.conf
+%config(noreplace) %{_prefix}/share/fontconfig/conf.avail/*.conf
+%dir %{_prefix}/usr/lib/fontconfig/cache
 %{_mandir}/man1/*
 %{_mandir}/man5/*
 
