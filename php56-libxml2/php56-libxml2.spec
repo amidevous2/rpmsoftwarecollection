@@ -255,7 +255,7 @@ rm -rf usr/src/debug
 
 %files
 %license Copyright
-%doc AUTHORS NEWS README TODO
+#%doc AUTHORS NEWS README TODO
 %{_libdir}/libxml2.so.2*
 %{_mandir}/man3/libxml.3*
 %{_bindir}/xmllint
