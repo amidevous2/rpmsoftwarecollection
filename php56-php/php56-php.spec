@@ -1,4 +1,4 @@
-# remirepo spec file for php56-php
+## remirepo spec file for php56-php
 # with SCL and backport stuff, adapted from
 #
 # Fedora spec file for php
