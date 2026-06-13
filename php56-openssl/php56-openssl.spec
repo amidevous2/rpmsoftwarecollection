@@ -333,27 +333,6 @@ for lib in $RPM_BUILD_ROOT%{_libdir}/*.so.%{version} ; do
 	chmod 755 ${lib}
 	ln -s -f `basename ${lib}` $RPM_BUILD_ROOT%{_libdir}/`basename ${lib} .%{version}`.%{soversion}
 done
-# Delete static library
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.a || :
-# Delete non-devel man pages in the compat package
-rm -rf $RPM_BUILD_ROOT%{_mandir}/man[157]*
-# Delete configuration files
-rm -rf  $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/*
-# Remove binaries
-rm -rf $RPM_BUILD_ROOT/%{_bindir}
-# Remove useless capi engine
-rm -f $RPM_BUILD_ROOT/%{_libdir}/engines-1.1/capi.so
-# Delete devel files
-#rm -rf $RPM_BUILD_ROOT%{_includedir}/openssl
-rm -rf $RPM_BUILD_ROOT%{_mandir}/man3*
-rm -rf $RPM_BUILD_ROOT%{_libdir}/*.so
-rm -rf $RPM_BUILD_ROOT%{_libdir}/pkgconfig
-mkdir -p $RPM_BUILD_ROOT{%{_includedir},%{_libdir}}/openssl11
-mv $RPM_BUILD_ROOT%{_includedir}/openssl $RPM_BUILD_ROOT%{_includedir}/openssl11/
-for lib in crypto ssl
-do
-    ln -sf ../lib${lib}.so.%{version} $RPM_BUILD_ROOT%{_libdir}/openssl11/lib${lib}.so
-done
 # Install compat config file
 install -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl11.cnf
 %endif
@@ -386,8 +365,8 @@ install -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl1
 %if 0%{?fedora} < 35 && 0%{?rhel} < 9
 /usr/bin/compat-openssl11-devel
 %else
-%{_libdir}/openssl11
-%{_includedir}/openssl11
+%{_libdir}/openssl
+%{_includedir}/openssl
 %endif
 
 
