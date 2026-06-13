@@ -36,7 +36,7 @@
 %global __arch_install_post /bin/true
 Name:    php56-%{libname}
 %else
-Name:    %{libname}
+Name:    php56-%{libname}
 %endif
 
 Version: 1.11.1
