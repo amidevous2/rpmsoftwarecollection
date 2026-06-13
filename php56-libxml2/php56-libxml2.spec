@@ -68,7 +68,7 @@ Patch7:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollecti
 #Patch8:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2020-7595.patch
 Patch8:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.11.0-fix-CVE-2023-39615.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1810058
-Patch9:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2019-20388.patch
+#Patch9:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2019-20388.patch
 Patch9:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.11.6-CVE-2024-25062.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1878252
 #Patch10:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2020-24977.patch
