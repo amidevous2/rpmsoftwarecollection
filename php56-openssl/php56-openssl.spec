@@ -1,10 +1,7 @@
 %{?scl:%scl_package openssl}
 %{!?scl:%global pkg_name %{name}}
-#%#{?scl:%global _scl_prefix /opt/remi}
 %{?scl:%global _scl_vendor remi}
 %{?scl:%global _vendor remi}
-#%#{?scl:%global _scl_root /opt/remi/%scl_name/root/}
-#%#{?scl:%global _libdir /opt/remi/%scl_name/root/usr/lib64}
 
 # no debug infos with:
 %global debug_package %{nil}
@@ -312,8 +309,6 @@ done
 #%#endif
 
 
-
-
 %{?scl:EOF}
 
 
@@ -330,7 +325,7 @@ set -ex
 # Install OpenSSL.
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_mandir},%{_libdir}/openssl,%{_pkgdocdir}}
 %make_install
-rename so.%{soversion} so.%{version} $RPM_BUILD_ROOT%{_libdir}/*.so.%{soversion}
+#rename so.%{soversion} so.%{version} $RPM_BUILD_ROOT%{_libdir}/*.so.%{soversion}
 for lib in $RPM_BUILD_ROOT%{_libdir}/*.so.%{version} ; do
 	chmod 755 ${lib}
 	ln -s -f `basename ${lib}` $RPM_BUILD_ROOT%{_libdir}/`basename ${lib} .%{version}`.%{soversion}
