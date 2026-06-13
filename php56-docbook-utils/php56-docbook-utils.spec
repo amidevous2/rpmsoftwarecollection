@@ -10,10 +10,10 @@ URL: http://sources.redhat.com/docbook-tools/
 
 License: GPLv2+
 
-Requires: %{?scl_prefix}docbook-style-dsssl >= 1.72
-Requires: %{?scl_prefix}docbook-dtds
+Requires: docbook-style-dsssl >= 1.72
+Requires: docbook-dtds
 Requires: perl-SGMLSpm >= 1.03ii
-Requires: which grep %{?scl_prefix}gawk
+Requires: which grep gawk
 Requires: text-www-browser
 
 # In the absence of an already-installed text-www-browser, prefer lynx
@@ -26,7 +26,7 @@ BuildRequires: perl-SGMLSpm, openjade, docbook-style-dsssl
 BuildRequires: make
 
 BuildArch: noarch
-Source0: ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/%{pkg_name}-%{version}.tar.gz
+Source0: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/%{pkg_name}-%{version}.tar.gz
 Source1: db2html
 Source2: gdp-both.dsl
 #We will ship newer version of docbook2man-spec.pl for better handling of docbook2man conversion
