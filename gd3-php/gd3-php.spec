@@ -67,7 +67,7 @@ URL:           http://libgd.github.io/
 # git archive  --format=tgz --output=libgd-%{version}-%{commit}.tgz --prefix=libgd-%{version}/  master
 Source0:       libgd-%{version}-%{commit}.tgz
 %else
-Source0:       https://github.com/libgd/libgd/releases/download/gd-%{version}/libgd-%{version}.tar.xz
+Source0:       https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/libgd-%{version}.tar.xz
 %endif
 
 # Needed by PHP see https://github.com/libgd/libgd/pull/766
