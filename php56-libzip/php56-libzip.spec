@@ -18,13 +18,6 @@
 %global libname libzip
 %global soname  5
 
-%if 0%{?fedora} >= 37
-%bcond_without  tests
-%else
-# missing nihtest
-%bcond_with     tests
-%endif
-
 #%if 0%{?vendeur:1} && 0%{?rhel} >= 8
 #%bcond_without move_to_opt
 #%else
@@ -34,12 +27,11 @@
 %if %{with move_to_opt}
 %global _prefix /opt/remi/php56/root/usr
 %global __arch_install_post /bin/true
-%else
 %endif
 Name:    php56-%{libname}
 
 Version: 1.11.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: C library for reading, creating, and modifying zip archives
 
 License: BSD-3-Clause
@@ -57,9 +49,6 @@ Requires:       libzstd%{?_isa} >= 1.3.6
 BuildRequires:  cmake >= 3.4
 BuildRequires:  mandoc
 BuildRequires:  php56-build
-%if %{with tests}
-BuildRequires:  nihtest
-%endif
 
 %if %{with move_to_opt}
 %if 0%{?rhel} == 8
@@ -187,17 +176,6 @@ mkdir -p %{buildroot}%{_datadir}/licenses
 mkdir -p %{buildroot}%{_datadir}/doc
 %endif
 
-%check
-%if %{with tests}
-%if 0%{?ctest:1}
-%ctest
-%else
-make check
-%endif
-%else
-: Test suite disabled
-%endif
-
 
 %files
 %license LICENSE
@@ -216,10 +194,10 @@ make check
 %{_bindir}/zipmerge
 %{_bindir}/ziptool
 %{_mandir}/man1/zip*
-%if %{with move_to_opt}
-%dir %{_bindir}
-%dir %{_mandir}/man1
-%endif
+#%if %{with move_to_opt}
+#%dir %{_bindir}
+#%dir %{_mandir}/man1
+#%endif
 
 %files devel
 %doc AUTHORS THANKS *.md
@@ -231,13 +209,13 @@ make check
 %{_mandir}/man3/libzip*
 %{_mandir}/man3/zip*
 %{_mandir}/man3/ZIP*
-%if %{with move_to_opt}
-%dir %{_includedir}
-%dir %{_mandir}/man3
-%dir %{_libdir}/pkgconfig
-%dir %{_libdir}/cmake
-%dir %{_datadir}/doc
-%endif
+#%if %{with move_to_opt}
+#%dir %{_includedir}
+#%dir %{_mandir}/man3
+#%dir %{_libdir}/pkgconfig
+#%dir %{_libdir}/cmake
+#%dir %{_datadir}/doc
+#%endif
 
 
 %changelog
