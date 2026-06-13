@@ -33,7 +33,7 @@ BuildRequires:	freetype-devel >= %{freetype_version}
 BuildRequires:	fontpackages-devel
 BuildRequires:	autoconf automake libtool gettext
 BuildRequires:	gperf
-BuildRequires:  docbook-utils docbook-utils-pdf
+BuildRequires:  %{?scl_prefix}docbook-utils %{?scl_prefix}docbook-utils-pdf
 BuildRequires: make
 
 Requires:	fonts-filesystem %{?scl_prefix}freetype
