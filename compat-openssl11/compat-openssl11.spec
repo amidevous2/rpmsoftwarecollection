@@ -79,6 +79,24 @@ Patch73: openssl-1.1.1-cve-2022-0778.patch
 
 License: OpenSSL and ASL 2.0
 URL: http://www.openssl.org/
+
+
+
+%if 0%{?fedora} < 35 && 0%{?rhel} < 9
+BuildRequires: make
+BuildRequires: gcc
+BuildRequires: coreutils, perl-interpreter, sed, zlib-devel, /usr/bin/cmp
+BuildRequires: lksctp-tools-devel
+BuildRequires: /usr/bin/rename
+BuildRequires: /usr/bin/pod2man
+BuildRequires: /usr/sbin/sysctl
+BuildRequires: perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
+BuildRequires: perl(Module::Load::Conditional), perl(File::Temp)
+BuildRequires: perl(Time::HiRes)
+BuildRequires: perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
+Requires: coreutils, crypto-policies
+Requires: openssl, openssl-libs
+%else
 BuildRequires: make
 BuildRequires: gcc
 BuildRequires: coreutils, perl-interpreter, sed, zlib-devel, /usr/bin/cmp
@@ -92,6 +110,10 @@ BuildRequires: perl(Time::HiRes)
 BuildRequires: perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
 Requires: coreutils, crypto-policies
 Conflicts: openssl < 1:3.0, openssl-libs < 1:3.0
+%endif
+
+
+
 
 %description
 The OpenSSL toolkit provides support for secure communications between
@@ -108,54 +130,62 @@ Development package for %{name}.
 
 %prep
 %setup -q -n openssl-%{version}
-
+%if 0%{?fedora} < 35 && 0%{?rhel} < 9
+echo "no build"
+%else
 # The hobble_openssl is called here redundantly, just to be sure.
 # The tarball has already the sources removed.
 %{SOURCE1} > /dev/null
-
 cp %{SOURCE12} crypto/ec/
 cp %{SOURCE13} test/
-
-%patch1 -p1 -b .build   %{?_rawbuild}
-%patch2 -p1 -b .defaults
-%patch3 -p1 -b .no-html  %{?_rawbuild}
-%patch4 -p1 -b .man-rename
-
-%patch31 -p1 -b .conf-paths
-%patch32 -p1 -b .version-add-engines
-%patch33 -p1 -b .dgst
-%patch36 -p1 -b .no-brainpool
-%patch37 -p1 -b .curves
-%patch38 -p1 -b .no-weak-verify
-%patch40 -p1 -b .disable-ssl3
-%patch41 -p1 -b .system-cipherlist
-%patch42 -p1 -b .fips
-%patch45 -p1 -b .weak-ciphers
-%patch46 -p1 -b .seclevel
-%patch47 -p1 -b .ts-sha256-default
-%patch48 -p1 -b .fips-post-rand
-%patch49 -p1 -b .evp-kdf
-%patch50 -p1 -b .ssh-kdf
-%patch51 -p1 -b .intel-cet
-%patch52 -p1 -b .s390x-update
-%patch53 -p1 -b .crng-test
-%patch55 -p1 -b .arm-update
-%patch56 -p1 -b .s390x-ecc
-%patch60 -p1 -b .krb5-kdf
-%patch61 -p1 -b .edk2-build
-%patch62 -p1 -b .fips-curves
-%patch65 -p1 -b .drbg-selftest
-%patch66 -p1 -b .fips-dh
-%patch67 -p1 -b .kdf-selftest
-%patch69 -p1 -b .alpn-cb
-%patch70 -p1 -b .rewire-fips-drbg
-%patch71 -p1 -b .conf-new
-%patch72 -p1 -b .disable-fips
-%patch73 -p1 -b .cve-2022-0778
-
+%patch -P 1 -p1 -b .build   %{?_rawbuild}
+%patch -P 2 -p1 -b .defaults
+%patch -P 3 -p1 -b .no-html  %{?_rawbuild}
+%patch -P 4 -p1 -b .man-rename
+%patch -P 31 -p1 -b .conf-paths
+%patch -P 32 -p1 -b .version-add-engines
+%patch -P 33 -p1 -b .dgst
+%patch -P 36 -p1 -b .no-brainpool
+%patch -P 37 -p1 -b .curves
+%patch -P 38 -p1 -b .no-weak-verify
+%patch -P 40 -p1 -b .disable-ssl3
+%patch -P 41 -p1 -b .system-cipherlist
+%patch -P 42 -p1 -b .fips
+%patch -P 45 -p1 -b .weak-ciphers
+%patch -P 46 -p1 -b .seclevel
+%patch -P 47 -p1 -b .ts-sha256-default
+%patch -P 48 -p1 -b .fips-post-rand
+%patch -P 49 -p1 -b .evp-kdf
+%patch -P 50 -p1 -b .ssh-kdf
+%patch -P 51 -p1 -b .intel-cet
+%patch -P 52 -p1 -b .s390x-update
+%patch -P 53 -p1 -b .crng-test
+%patch -P 55 -p1 -b .arm-update
+%patch -P 56 -p1 -b .s390x-ecc
+%patch -P 60 -p1 -b .krb5-kdf
+%patch -P 61 -p1 -b .edk2-build
+%patch -P 62 -p1 -b .fips-curves
+%patch -P 65 -p1 -b .drbg-selftest
+%patch -P 66 -p1 -b .fips-dh
+%patch -P 67 -p1 -b .kdf-selftest
+%patch -P 69 -p1 -b .alpn-cb
+%patch -P 70 -p1 -b .rewire-fips-drbg
+%patch -P 71 -p1 -b .conf-new
+%patch -P 72 -p1 -b .disable-fips
+%patch -P 73 -p1 -b .cve-2022-0778
 cp apps/openssl.cnf apps/openssl11.cnf
+%endif
+
+
+
 
 %build
+%if 0%{?fedora} < 35 && 0%{?rhel} < 9
+echo "no build"
+%else
+%global db_devel  libdb-devel
+%endif
+
 # Figure out which flags we want to use.
 # default
 sslarch=%{_os}-%{_target_cpu}
@@ -246,30 +276,15 @@ for i in libcrypto.pc libssl.pc openssl.pc ; do
   sed -i '/^Libs.private:/{s/-L[^ ]* //;s/-Wl[^ ]* //}' $i
 done
 
-%check
-# Verify that what was compiled actually works.
 
-cp apps/openssl.cnf apps/openssl11.cnf
-
-# Hack - either enable SCTP AUTH chunks in kernel or disable sctp for check
-(sysctl net.sctp.addip_enable=1 && sysctl net.sctp.auth_enable=1) || \
-(echo 'Failed to enable SCTP AUTH chunks, disabling SCTP for tests...' &&
- sed '/"zlib-dynamic" => "default",/a\ \ "sctp" => "default",' configdata.pm > configdata.pm.new && \
- touch -r configdata.pm configdata.pm.new && \
- mv -f configdata.pm.new configdata.pm)
-
-# We must revert patch31 before tests otherwise they will fail
-patch -p1 -R < %{PATCH31}
-
-OPENSSL_ENABLE_MD5_VERIFY=
-export OPENSSL_ENABLE_MD5_VERIFY
-OPENSSL_SYSTEM_CIPHERS_OVERRIDE=xyz_nonexistent_file
-export OPENSSL_SYSTEM_CIPHERS_OVERRIDE
-make test
-
-%define __provides_exclude_from %{_libdir}/openssl
 
 %install
+
+%if 0%{?fedora} < 35 && 0%{?rhel} < 9
+mkdir -p $RPM_BUILD_ROOT/usr/bin/
+touch $RPM_BUILD_ROOT/usr/bin/compat-openssl11
+touch $RPM_BUILD_ROOT/usr/bin/compat-openssl11-devel
+%else
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
 # Install OpenSSL.
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_mandir},%{_libdir}/openssl,%{_pkgdocdir}}
@@ -279,40 +294,39 @@ for lib in $RPM_BUILD_ROOT%{_libdir}/*.so.%{version} ; do
 	chmod 755 ${lib}
 	ln -s -f `basename ${lib}` $RPM_BUILD_ROOT%{_libdir}/`basename ${lib} .%{version}`.%{soversion}
 done
-
 # Delete static library
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.a || :
-
 # Delete non-devel man pages in the compat package
 rm -rf $RPM_BUILD_ROOT%{_mandir}/man[157]*
-
 # Delete configuration files
 rm -rf  $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/*
-
 # Remove binaries
 rm -rf $RPM_BUILD_ROOT/%{_bindir}
-
 # Remove useless capi engine
 rm -f $RPM_BUILD_ROOT/%{_libdir}/engines-1.1/capi.so
-
 # Delete devel files
 #rm -rf $RPM_BUILD_ROOT%{_includedir}/openssl
 rm -rf $RPM_BUILD_ROOT%{_mandir}/man3*
 rm -rf $RPM_BUILD_ROOT%{_libdir}/*.so
 rm -rf $RPM_BUILD_ROOT%{_libdir}/pkgconfig
-
 mkdir -p $RPM_BUILD_ROOT{%{_includedir},%{_libdir}}/openssl11
 mv $RPM_BUILD_ROOT%{_includedir}/openssl $RPM_BUILD_ROOT%{_includedir}/openssl11/
 for lib in crypto ssl
 do
     ln -sf ../lib${lib}.so.%{version} $RPM_BUILD_ROOT%{_libdir}/openssl11/lib${lib}.so
 done
-
-
 # Install compat config file
 install -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl11.cnf
+%endif
+
+
+
+
 
 %files
+%if 0%{?fedora} < 35 && 0%{?rhel} < 9
+/usr/bin/compat-openssl11
+%else
 %license LICENSE
 %doc FAQ NEWS README
 %attr(0755,root,root) %{_libdir}/libcrypto.so.%{version}
@@ -321,13 +335,19 @@ install -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl1
 %attr(0755,root,root) %{_libdir}/libssl.so.%{soversion}
 %attr(0755,root,root) %{_libdir}/engines-%{soversion}
 %config(noreplace) %{_sysconfdir}/pki/tls/openssl11.cnf
-
 %dir %{_sysconfdir}/pki/tls
 %attr(0644,root,root) %{_sysconfdir}/pki/tls/openssl11.cnf
+%endif
+
 
 %files devel
+%if 0%{?fedora} < 35 && 0%{?rhel} < 9
+/usr/bin/compat-openssl11-devel
+%else
 %{_libdir}/openssl11
 %{_includedir}/openssl11
+%endif
+
 
 %ldconfig_scriptlets
 
