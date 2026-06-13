@@ -12,11 +12,11 @@
 
 %{?scl:%scl_package    php-pecl-zip}
 
-%if ( 0%{?scl:1} && 0%{?rhel} == 8 ) || 0%{?rhel} >= 9
+#%if ( 0%{?scl:1} && 0%{?rhel} == 8 ) || 0%{?rhel} >= 9
 %bcond_without         move_to_opt
-%else
-%bcond_with            move_to_opt
-%endif
+#%else
+#%bcond_with            move_to_opt
+#%endif
 
 %bcond_without         tests
 
@@ -43,7 +43,7 @@
 %global ini_name  30-%{pecl_name}.ini
 
 Summary:      A ZIP archive management extension
-Name:         %{?scl_prefix}php-pecl-zip
+Name:         php56-php-pecl-zip
 Version:      %{upstream_version}%{?upstream_prever:~%{upstream_lower}}
 %forgemeta
 Release:      2%{?dist}
