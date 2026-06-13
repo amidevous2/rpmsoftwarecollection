@@ -14,6 +14,8 @@
 ##     2nd build --without move_to_opt for module
 ## FOR EL-9
 ##     build as remi-libzip
+%{?scl:%global _scl_vendor remi}
+%{?scl:%global _vendor remi}
 
 %global libname libzip
 %global soname  5
