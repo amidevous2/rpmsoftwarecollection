@@ -1,5 +1,7 @@
 %{?scl:%scl_package autoconf}
 %{!?scl:%global pkg_name %{name}}
+%{?scl:%global _scl_vendor remi}
+%{?scl:%global _vendor remi}
 
 # Enable Emacs support
 %bcond_without autoconf_enables_emacs
