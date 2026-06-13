@@ -56,7 +56,7 @@ Autoreq: 0
 Summary: Utilities from the general purpose cryptography library with TLS implementation
 Name: php56-openssl
 Version: 1.1.1k
-Release: 5%{?dist}
+Release: 6%{?dist}
 Epoch: 1
 # We have to remove certain patented algorithms from the openssl source
 # tarball with the hobble-openssl script which is included below.
@@ -161,10 +161,10 @@ releases.
 
 %package devel
 Summary: Development package for %{pkg_name}
-Requires: %{?scl_prefix}%{name} = %{epoch}:%{version}-%{release}
-%if 0%{?fedora} < 35 && 0%{?rhel} < 9
+Requires: %{?scl_prefix}openssl
+#%if 0%{?fedora} < 35 && 0%{?rhel} < 9
 Requires: %{?scl_prefix}openssl-devel
-%endif
+#%endif
 
 
 
