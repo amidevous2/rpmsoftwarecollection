@@ -25,16 +25,16 @@
 %bcond_with     tests
 %endif
 
-%if 0%{?vendeur:1} && 0%{?rhel} >= 8
-%bcond_without move_to_opt
-%else
+#%if 0%{?vendeur:1} && 0%{?rhel} >= 8
+#%bcond_without move_to_opt
+#%else
 %bcond_with    move_to_opt
-%endif
+#%endif
 
 %if %{with move_to_opt}
 %global _prefix /opt/remi/php56
 %global __arch_install_post /bin/true
-Name:    %{?vendeur:%{vendeur}-}%{libname}
+Name:    php56-%{libname}
 %else
 Name:    %{libname}
 %endif
