@@ -32,7 +32,7 @@
 #%endif
 
 %if %{with move_to_opt}
-%global _prefix /opt/remi/php56
+%global _prefix /opt/remi/php56/root/usr
 %global __arch_install_post /bin/true
 Name:    php56-%{libname}
 %else
@@ -40,7 +40,7 @@ Name:    %{libname}
 %endif
 
 Version: 1.11.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: C library for reading, creating, and modifying zip archives
 
 License: BSD-3-Clause
