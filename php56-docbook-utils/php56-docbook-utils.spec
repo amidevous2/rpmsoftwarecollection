@@ -27,24 +27,24 @@ BuildRequires: make
 
 BuildArch: noarch
 Source0: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/%{pkg_name}-%{version}.tar.gz
-Source1: db2html
-Source2: gdp-both.dsl
+Source1: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-utils/db2html
+Source2: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-utils/gdp-both.dsl
 #We will ship newer version of docbook2man-spec.pl for better handling of docbook2man conversion
 #You could check it at http://sourceforge.net/projects/docbook2x/
-Source3: docbook2man-spec.pl
+Source3: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-utils/docbook2man-spec.pl
 
 Obsoletes: %{?scl_prefix}stylesheets < %{version}-%{release}
 Provides: %{?scl_prefix}stylesheets = %{version}-%{release}
 
-Patch0: docbook-utils-spaces.patch
-Patch1: docbook-utils-2ndspaces.patch
-Patch2: docbook-utils-w3mtxtconvert.patch
-Patch3: docbook-utils-grepnocolors.patch
-Patch4: docbook-utils-sgmlinclude.patch
-Patch5: docbook-utils-rtfmanpage.patch
-Patch6: docbook-utils-papersize.patch
-Patch7: docbook-utils-nofinalecho.patch
-Patch8: docbook-utils-newgrep.patch
+Patch0: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-utils/docbook-utils-spaces.patch
+Patch1: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-utils/docbook-utils-2ndspaces.patch
+Patch2: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-utils/docbook-utils-w3mtxtconvert.patch
+Patch3: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-utils/docbook-utils-grepnocolors.patch
+Patch4: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-utils/docbook-utils-sgmlinclude.patch
+Patch5: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-utils/docbook-utils-rtfmanpage.patch
+Patch6: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-utils/docbook-utils-papersize.patch
+Patch7: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-utils/docbook-utils-nofinalecho.patch
+Patch8: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-utils/docbook-utils-newgrep.patch
 
 
 %description
