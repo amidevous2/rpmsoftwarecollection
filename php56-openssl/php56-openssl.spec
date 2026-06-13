@@ -326,10 +326,10 @@ set -ex
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_mandir},%{_libdir}/openssl,%{_pkgdocdir}}
 %make_install
 #rename so.%{soversion} so.%{version} $RPM_BUILD_ROOT%{_libdir}/*.so.%{soversion}
-for lib in $RPM_BUILD_ROOT%{_libdir}/*.so.%{version} ; do
-	chmod 755 ${lib}
-	ln -s -f `basename ${lib}` $RPM_BUILD_ROOT%{_libdir}/`basename ${lib} .%{version}`.%{soversion}
-done
+#for lib in $RPM_BUILD_ROOT%{_libdir}/*.so.%{version} ; do
+#	chmod 755 ${lib}
+#	ln -s -f `basename ${lib}` $RPM_BUILD_ROOT%{_libdir}/`basename ${lib} .%{version}`.%{soversion}
+#done
 # Install compat config file
 install -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl11.cnf
 #%#endif
