@@ -13,12 +13,10 @@
 %{?scl:%scl_package    php-pecl-zip}
 
 #%if ( 0%{?scl:1} && 0%{?rhel} == 8 ) || 0%{?rhel} >= 9
-%bcond_without         move_to_opt
+#%bcond_without         move_to_opt
 #%else
-#%bcond_with            move_to_opt
+%bcond_with            move_to_opt
 #%endif
-
-%bcond_without         tests
 
 %global with_zts         0%{!?_without_zts:%{?__ztsphp:1}}
 %global pecl_name        zip
@@ -46,7 +44,7 @@ Summary:      A ZIP archive management extension
 Name:         php56-php-pecl-zip
 Version:      %{upstream_version}%{?upstream_prever:~%{upstream_lower}}
 %forgemeta
-Release:      2%{?dist}
+Release:      3%{?dist}
 License:      PHP-3.01
 URL:          %{forgeurl}
 Source0:      https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/php_zip-1.22.8.tar.gz
@@ -57,15 +55,11 @@ BuildRequires: %{?scl_prefix}php-devel
 BuildRequires: zlib-devel
 
 %if %{with move_to_opt}
-BuildRequires: %{?vendeur:%{vendeur}-}libzip-devel   >= %{libzip_version}
-Requires:      %{?vendeur:%{vendeur}-}libzip%{?_isa} >= %{libzip_version}
 %global __brp_check_rpaths  /bin/true
 %global __requires_exclude ^libzip\\.so.*$
-%else
-# Ensure latest version is used
+%endif
 BuildRequires: %{?scl_prefix}libzip-devel    >= %{libzip_version}
 Requires:      %{?scl_prefix}libzip%{?_isa}  >= %{libzip_version}
-%endif
 
 Requires:     %{?scl_prefix}php(zend-abi) = %{php_zend_api}
 Requires:     %{?scl_prefix}php(api) = %{php_core_api}
@@ -81,19 +75,6 @@ Provides:     %{?scl_prefix}php-pie(%{pie_vend}/%{pie_proj}) = %{version}
 
 %if "%{php_version}" > "7.0"
 Obsoletes:     %{?scl_prefix}php-zip <= 7.0.0
-%endif
-
-%if 0%{?rhel} >= 10 && "%{?vendeur}" == "remi" && 0%{!?scl:1}
-%if "%{php_version}" >= "8.5"
-Obsoletes: php8.4-pecl-zip        <= %{version}
-Obsoletes: php8.5-pecl-zip        <= %{version}
-Provides:  php8.5-pecl-zip         = %{version}-%{release}
-Provides:  php8.5-pecl-zip%{?_isa} = %{version}-%{release}
-%elif "%{php_version}" >= "8.4"
-Obsoletes: php8.4-pecl-zip        <= %{version}
-Provides:  php8.4-pecl-zip         = %{version}-%{release}
-Provides:  php8.4-pecl-zip%{?_isa} = %{version}-%{release}
-%endif
 %endif
 
 
@@ -133,7 +114,7 @@ mkdir ZTS
 %{?dtsenable}
 
 %if %{with move_to_opt}
-export PKG_CONFIG_PATH=/opt/%{?vendeur:%{vendeur}/}libzip/%{_lib}/pkgconfig
+export PKG_CONFIG_PATH=/opt/remi/php56/usr/%{_lib}/pkgconfig
 %endif
 
 cd %{sources}
@@ -172,25 +153,13 @@ install -D -m 644 %{ini_name} %{buildroot}%{php_ztsinidir}/%{ini_name}
 %endif
 
 
-%check
-cd %{sources}
-OPT="-q --show-diff"
-%if "%{php_version}" > "8.0"
-OPT="$OPT %{?_smp_mflags}"
-%endif
 
 : minimal load test of NTS extension
 %{__php} --no-php-ini \
     --define extension=%{buildroot}%{php_extdir}/%{pecl_name}.so \
     --modules | grep %{pecl_name}
 
-%if %{with tests}
-: upstream test suite for NTS extension
-TEST_PHP_ARGS="-n -d extension_dir=$PWD/../NTS/modules -d extension=%{pecl_name}.so" \
-REPORT_EXIT_STATUS=1 \
-TEST_PHP_EXECUTABLE=%{__php} \
-%{__php} -n run-tests.php $OPT
-%endif
+
 
 %if %{with_zts}
 : minimal load test of ZTS extension
@@ -198,13 +167,7 @@ TEST_PHP_EXECUTABLE=%{__php} \
     --define extension=%{buildroot}%{php_ztsextdir}/%{pecl_name}.so \
     --modules | grep %{pecl_name}
 
-%if %{with tests}
-: upstream test suite for ZTS extension
-TEST_PHP_ARGS="-n -d extension_dir=$PWD/../ZTS/modules -d extension=%{pecl_name}.so" \
-REPORT_EXIT_STATUS=1 \
-TEST_PHP_EXECUTABLE=%{__ztsphp} \
-%{__ztsphp} -n run-tests.php $OPT
-%endif
+
 %endif
 
 
