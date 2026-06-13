@@ -8,6 +8,8 @@
 #
 # Please preserve changelog entries
 #
+%{?scl:%global _scl_vendor remi}
+%{?scl:%global _vendor remi}
 %if 0%{?scl:1}
 %scl_package php
 %else
