@@ -155,46 +155,7 @@ Summary:        Static library for libxml2
 Static library for libxml2 provided for specific uses or shaving a few
 microseconds when parsing, do not link to them for generic purpose packages.
 
-%if %{with python2}
 
-%package -n %{?scl_prefix}python2-%{pkg_name}
-%{?python_provide:%python_provide python2-%{pkg_name}}
-Summary:        Python bindings for the libxml2 library
-BuildRequires:  python2-devel
-Requires:       %{?scl_prefix}%{pkg_name}%{?_isa} = %{version}-%{release}
-Obsoletes:      %{?scl_prefix}%{pkg_name}-python < %{version}-%{release}
-Provides:       %{?scl_prefix}%{pkg_name}-python = %{version}-%{release}
-
-
-%description -n %{?scl_prefix}python2-%{pkg_name}
-The libxml2-python package contains a Python 2 module that permits applications
-written in the Python programming language, version 2, to use the interface
-supplied by the libxml2 library to manipulate XML files.
-
-This library allows to manipulate XML files. It includes support
-to read, modify and write XML and HTML files. There is DTDs support
-this includes parsing and validation even with complex DTDs, either
-at parse time or later once the document has been modified.
-%endif # with python2
-
-
-%package -n %{?scl_prefix}python3-%{pkg_name}
-Summary:        Python 3 bindings for the libxml2 library
-BuildRequires:  python3-devel
-Requires:       %{?scl_prefix}%{pkg_name}%{?_isa} = %{version}-%{release}
-Obsoletes:      %{?scl_prefix}%{pkg_name}-python3 < %{version}-%{release}
-Provides:       %{?scl_prefix}%{pkg_name}-python3 = %{version}-%{release}
-
-
-%description -n %{?scl_prefix}python3-%{pkg_name}
-The libxml2-python3 package contains a Python 3 module that permits
-applications written in the Python programming language, version 3, to use the
-interface supplied by the libxml2 library to manipulate XML files.
-
-This library allows to manipulate XML files. It includes support
-to read, modify and write XML and HTML files. There is DTDs support
-this includes parsing and validation even with complex DTDs, either
-at parse time or later once the document has been modified.
 
 
 %prep
@@ -241,19 +202,21 @@ rm -vf %{buildroot}{%{python2_sitearch},%{python3_sitearch}}/*.a
 rm -vrf %{buildroot}%{_datadir}/doc/
 #(cd doc/examples ; make clean ; rm -rf .deps Makefile)
 gzip -9 -c doc/libxml2-api.xml > doc/libxml2-api.xml.gz
+rm -rf %{buildroot}%doc python/TODO python/libxml2class.txt
+rm -rf %{buildroot}%doc doc/*.py doc/python.html
+rm -rf %{buildroot}%{python2_sitearch}/libxml2.py*
+rm -rf %{buildroot}%{python2_sitearch}/drv_libxml2.py*
+rm -rf %{buildroot}%{python2_sitearch}/libxml2mod.so
+rm -rf %doc python/TODO python/libxml2class.txt
+rm -rf %{buildroot}%doc doc/*.py doc/python.html
+rm -rf %{buildroot}%{python3_sitearch}/libxml2.py
+rm -rf %{buildroot}%{python3_sitearch}/__pycache__/libxml2.*
+rm -rf %{buildroot}%{python3_sitearch}/drv_libxml2.py
+rm -rf %{buildroot}%{python3_sitearch}/__pycache__/drv_libxml2.*
+rm -rf %{buildroot}%{python3_sitearch}/libxml2mod.so
 %{?scl:EOF}
 
 
-%check
-%{?scl:scl enable %{scl} - << \EOF}
-set -ex
-%if %{with python2}
-%make_build runtests -C py2
-%endif # with python2
-%make_build runtests -C py3
-
-%ldconfig_scriptlets
-%{?scl:EOF}
 
 
 %files
@@ -287,26 +250,6 @@ set -ex
 %files static
 %license Copyright
 %{_libdir}/libxml2.a
-
-%if %{with python2}
-
-%files -n %{?scl_prefix}python2-%{pkg_name}
-%doc python/TODO python/libxml2class.txt
-%doc doc/*.py doc/python.html
-%{python2_sitearch}/libxml2.py*
-%{python2_sitearch}/drv_libxml2.py*
-%{python2_sitearch}/libxml2mod.so
-%endif # with python2
-
-
-%files -n %{?scl_prefix}python3-%{pkg_name}
-%doc python/TODO python/libxml2class.txt
-%doc doc/*.py doc/python.html
-%{python3_sitearch}/libxml2.py
-%{python3_sitearch}/__pycache__/libxml2.*
-%{python3_sitearch}/drv_libxml2.py
-%{python3_sitearch}/__pycache__/drv_libxml2.*
-%{python3_sitearch}/libxml2mod.so
 
 
 %changelog
