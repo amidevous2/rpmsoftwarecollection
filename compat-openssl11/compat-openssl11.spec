@@ -187,9 +187,6 @@ cp apps/openssl.cnf apps/openssl11.cnf
 %if 0%{?fedora} < 35 && 0%{?rhel} < 9
 echo "no build"
 %else
-%global db_devel  libdb-devel
-%endif
-
 # Figure out which flags we want to use.
 # default
 sslarch=%{_os}-%{_target_cpu}
@@ -279,6 +276,9 @@ make all
 for i in libcrypto.pc libssl.pc openssl.pc ; do
   sed -i '/^Libs.private:/{s/-L[^ ]* //;s/-Wl[^ ]* //}' $i
 done
+%endif
+
+
 
 
 
