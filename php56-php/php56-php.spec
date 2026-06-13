@@ -30,7 +30,7 @@
 %global oci8ver     2.0.12
 
 # Use for first build of PHP (before pecl/zip and pecl/jsonc)
-#%bcond_with bootstrap
+%bcond_without bootstrap
 
 # Adds -z now to the linker flags
 %global _hardened_build 1
@@ -141,7 +141,7 @@
 Summary: PHP scripting language for creating dynamic web sites
 Name: php56-php
 Version: 5.6.40
-Release: 47%{?dist}
+Release: 48%{?dist}
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
 # TSRM is licensed under BSD
