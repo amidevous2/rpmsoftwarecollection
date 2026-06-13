@@ -3,10 +3,10 @@
 %{?scl:%global _scl_vendor remi}
 %{?scl:%global _vendor remi}
 
-#%#{?scl:%global _scl_prefix /opt/remi}
-#%#{?scl:%global _scl_root /opt/remi/php56/root/}
-#%#{?scl:%global _prefix /opt/remi/php56/root/usr}
-#%#{?scl:%global _libdir /opt/remi/php56/root/usr/lib64}
+%{?scl:%global _scl_prefix /opt/remi}
+%{?scl:%global _scl_root /opt/remi/php56/root/}
+%{?scl:%global _prefix /opt/remi/php56/root/usr}
+%{?scl:%global _libdir /opt/remi/php56/root/usr/lib64}
 # no debug infos with:
 #%#global debug_package %{nil}
 
