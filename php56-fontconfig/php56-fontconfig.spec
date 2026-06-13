@@ -234,6 +234,8 @@ fi
 # fonts.conf is not supposed to be modified.
 # If you want to do so, you should use local.conf instead.
 #%config %{_prefix}/share/fontconfig/conf.avail/fonts.conf
+%{_sysconfdir}/fonts/conf.d/*conf
+%{_sysconfdir}/fonts/fonts.conf
 %config(noreplace) %{_prefix}/share/fontconfig/conf.avail/*.conf
 %dir %{_prefix}/lib/fontconfig/cache
 %{_mandir}/man1/*
