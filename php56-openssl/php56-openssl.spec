@@ -342,11 +342,11 @@ install -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl1
 #%#else
 %license LICENSE
 %doc FAQ NEWS README
-%attr(0755,root,root) %{_libdir}/libcrypto.so.%{version}
-%attr(0755,root,root) %{_libdir}/libcrypto.so.%{soversion}
-%attr(0755,root,root) %{_libdir}/libssl.so.%{version}
-%attr(0755,root,root) %{_libdir}/libssl.so.%{soversion}
-%attr(0755,root,root) %{_libdir}/engines-%{soversion}
+#%attr(0755,root,root) %{_libdir}/libcrypto.so.%{version}
+#%attr(0755,root,root) %{_libdir}/libcrypto.so.%{soversion}
+#%attr(0755,root,root) %{_libdir}/libssl.so.%{version}
+#%attr(0755,root,root) %{_libdir}/libssl.so.%{soversion}
+#%attr(0755,root,root) %{_libdir}/engines-%{soversion}
 %config(noreplace) %{_sysconfdir}/pki/tls/openssl11.cnf
 %dir %{_sysconfdir}/pki/tls
 %attr(0644,root,root) %{_sysconfdir}/pki/tls/openssl11.cnf
