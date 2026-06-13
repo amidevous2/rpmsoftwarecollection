@@ -31,8 +31,10 @@ Autoreq: 0
 %endif
 
 Name:           php56-libxml2
-Version:        2.9.7
-Release:        21%{?dist}.4
+#Version:        2.9.7
+Version:        2.9.13
+#Release:        21%{?dist}.4
+Release:        14%{?dist}
 Summary:        Library providing XML and HTML support
 
 License:        MIT
@@ -40,76 +42,94 @@ URL:            http://xmlsoft.org/
 Source:         https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download//libxml2-%{version}.tar.gz
 Patch0:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-multilib.patch
 # workaround for #877567 - Very weird bug gzip decompression bug in "recent" libxml2 versions
-Patch1:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.0-do-not-check-crc.patch
+#Patch1:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.0-do-not-check-crc.patch
+Patch1:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.8-python3-unicode-errors.patch
 # In python3.6 _PyVerify_fd is no more
 #  http://bugs.python.org/issue23524
-Patch2:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.4-remove-pyverify_fd.patch
+#Patch2:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.4-remove-pyverify_fd.patch
+Patch2:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2022-29824.patch
 # https://codereview.chromium.org/2539003002
-Patch3:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-CVE-2016-9597.patch
+#Patch3:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-CVE-2016-9597.patch
+Patch3:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2022-40303.patch
 # Fix some crashes under Python 3
 # https://bugzilla.gnome.org/show_bug.cgi?id=789714
-Patch4:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-python3-unicode-errors.patch
+#Patch4:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-python3-unicode-errors.patch
+Patch4:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2022-40304.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1565322
-Patch5:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-CVE-2018-9251.patch
+#Patch5:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-CVE-2018-9251.patch
+Patch5:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2023-28484.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1595989
-Patch6:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-CVE-2018-14404.patch
+#Patch6:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-CVE-2018-14404.patch
+Patch6:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2023-28484.2.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1793001
-Patch7:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-CVE-2019-19956.patch
+#Patch7:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-CVE-2019-19956.patch
+Patch7:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2023-29469.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1799786
-Patch8:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2020-7595.patch
+#Patch8:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2020-7595.patch
+Patch8:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.11.0-fix-CVE-2023-39615.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1810058
 Patch9:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2019-20388.patch
+Patch9:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.11.6-CVE-2024-25062.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1878252
-Patch10:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2020-24977.patch
+#Patch10:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2020-24977.patch
+Patch10:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2022-49043.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1956976
-Patch11:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2021-3516.patch
+#Patch11:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2021-3516.patch
+Patch11:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2024-56171.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1957001
-Patch12:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2021-3517.patch
+#Patch12:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2021-3517.patch
+Patch12:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-24928.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1957028
-Patch13:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2021-3518.patch
+#Patch13:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2021-3518.patch
+Patch13:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-6021.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1957284
-Patch14:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2021-3537.patch
+#Patch14:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2021-3537.patch
+Patch14:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-49794.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1958783
-Patch15:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2021-3541.patch
+#Patch15:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2021-3541.patch
+Patch15:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-7425.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2057664
-Patch16:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2022-23308.patch
+#Patch16:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2022-23308.patch
+Patch16:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.12.5-CVE-2025-32415.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2082298
-Patch17:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2022-29824.patch
+#Patch17:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2022-29824.patch
+Patch17:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-32414.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2120781
-Patch18:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2016-3709.patch
+#Patch18:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2016-3709.patch
+Patch18:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/RHEL-119283.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2136563
-Patch19:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2022-40303.patch
+#Patch19:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2022-40303.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2136568
-Patch20:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2022-40304.patch
+#Patch20:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2022-40304.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2186692
-Patch21:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2023-28484.patch
-Patch22:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2023-28484.2.patch
-Patch23:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2023-29469.patch
+#Patch21:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2023-28484.patch
+#Patch22:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2023-28484.2.patch
+#Patch23:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2023-29469.patch
 # https://issues.redhat.com/browse/RHEL-5179
-Patch24:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.11.0-fix-CVE-2023-39615.patch
+#Patch24:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.11.0-fix-CVE-2023-39615.patch
 # https://issues.redhat.com/browse/RHEL-31056
-Patch25:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2024-25062.patch
+#Patch25:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2024-25062.patch
 # https://issues.redhat.com/browse/RHEL-76289
-Patch26:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2022-49043.patch
+#Patch26:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2022-49043.patch
 # https://issues.redhat.com/browse/RHEL-80122
-Patch27:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2024-56171.patch
+#Patch27:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2024-56171.patch
 # https://issues.redhat.com/browse/RHEL-80137
-Patch28:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-24928.patch
+#Patch28:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-24928.patch
 # https://issues.redhat.com/browse/RHEL-88198
-Patch29:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-32414.patch
+#Patch29:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-32414.patch
 # https://issues.redhat.com/browse/RHEL-74345
-Patch30:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-clamp-output-bytes-overflow.patch
+#Patch30:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-clamp-output-bytes-overflow.patch
 # https://issues.redhat.com/browse/RHEL-96498
-Patch31:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-6021.patch
+#Patch31:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-6021.patch
 # https://issues.redhat.com/browse/RHEL-96398
 # https://issues.redhat.com/browse/RHEL-96424
-Patch32:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-49794.patch
+#Patch32:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.13-CVE-2025-49794.patch
 # https://issues.redhat.com/browse/RHEL-102797
-Patch33:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2025-7425.patch
+#Patch33:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2025-7425.patch
 # https://issues.redhat.com/browse/RHEL-100177
-Patch34:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.12.5-CVE-2025-32415.patch
+#Patch34:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.12.5-CVE-2025-32415.patch
 # https://issues.redhat.com/browse/RHEL-119279
-Patch35:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2025-9714.patch
+#Patch35:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-libxml2/libxml2-2.9.7-CVE-2025-9714.patch
 
 %{?scl:Requires: %{scl}-runtime}
 %{?scl:BuildRequires: %{scl}-runtime}
@@ -167,6 +187,8 @@ microseconds when parsing, do not link to them for generic purpose packages.
 set -ex
 %autosetup -n %{pkg_name}-%{version} -p1
 find doc -type f -executable -print -exec chmod 0644 {} ';'
+#### Remove files generated by python/generator.py to force regenerating them
+rm python/{libxml2-py.c,libxml2-py.h,libxml2-export.c}
 %{?scl:EOF}
 
 
