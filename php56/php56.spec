@@ -48,7 +48,7 @@ Autoreq: 0
 Summary:       Package that installs PHP 5.6
 Name:          %scl_name
 Version:       5.6
-Release:       9%{?dist}
+Release:       10%{?dist}
 Group:         Development/Languages
 License:       GPL-2.0-or-later
 
@@ -113,6 +113,7 @@ Summary:   System-wide wrappers for the %{name} package
 Requires:  %{?scl_name}-runtime%{?_isa} = %{version}-%{release}
 Requires:  %{?scl_name}-php-cli%{?_isa}
 Requires:  %{?scl_name}-php-common%{?_isa}
+Requires:  %{?scl_name}-php-devel%{?_isa}
 Conflicts: php-common
 Conflicts: php-cli
 Conflicts: php54-syspaths
@@ -228,6 +229,9 @@ mkdir -p %{buildroot}%{_root_bindir}
 ln -s %{_bindir}/php     %{buildroot}%{_root_bindir}/php
 ln -s %{_bindir}/phar    %{buildroot}%{_root_bindir}/phar
 ln -s %{_bindir}/php-cgi %{buildroot}%{_root_bindir}/php-cgi
+ln -s %{_bindir}/php-config %{buildroot}%{_root_bindir}/php-config
+ln -s %{_bindir}/phpize %{buildroot}%{_root_bindir}/phpize
+ln -s %{_bindir}/php-cgi %{buildroot}%{_root_bindir}/php-cgi
 mkdir -p %{buildroot}%{_root_mandir}/man1
 ln -s %{_mandir}/man1/php.1.gz     %{buildroot}%{_root_mandir}/man1/php.1.gz
 ln -s %{_mandir}/man1/phar.1.gz    %{buildroot}%{_root_mandir}/man1/phar.1.gz
@@ -292,6 +296,8 @@ restorecon -R %{_localstatedir} &>/dev/null || :
 %{_root_bindir}/php
 %{_root_bindir}/phar
 %{_root_bindir}/php-cgi
+%{_root_bindir}/php-config
+%{_root_bindir}/phpize
 %{_root_mandir}/man1/php.1.gz
 %{_root_mandir}/man1/phar.1.gz
 %{_root_mandir}/man1/php-cgi.1.gz
