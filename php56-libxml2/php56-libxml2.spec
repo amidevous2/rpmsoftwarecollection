@@ -8,14 +8,14 @@
 %bcond_without python2
 %endif
 
-Name:           %{?scl_prefix}libxml2
+Name:           php56-libxml2
 Version:        2.9.7
 Release:        21%{?dist}.4
 Summary:        Library providing XML and HTML support
 
 License:        MIT
 URL:            http://xmlsoft.org/
-Source:         ftp://xmlsoft.org/libxml2/libxml2-%{version}.tar.gz
+Source:         https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download//libxml2-%{version}.tar.gz
 Patch0:         libxml2-multilib.patch
 # workaround for #877567 - Very weird bug gzip decompression bug in "recent" libxml2 versions
 Patch1:         libxml2-2.9.0-do-not-check-crc.patch
