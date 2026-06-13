@@ -297,7 +297,7 @@ BuildRequires: httpd-filesystem
 %endif
 
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-BuildRequires: libstdc++-devel, openssl-devel, compat-openssl11-devel
+BuildRequires: libstdc++-devel, openssl-devel, php56-openssl-devel
 %else
 BuildRequires: libstdc++-devel, openssl-devel
 %endif
@@ -518,7 +518,7 @@ Requires: libedit-devel%{?_isa}
 Requires: libxml2-devel%{?_isa}
 
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-Requires: openssl-devel%{?_isa}, compat-openssl11-devel
+Requires: openssl-devel%{?_isa}, php56-openssl-devel
 %else
 Requires: openssl-devel%{?_isa}
 %endif
@@ -563,7 +563,7 @@ Group: Development/Languages
 License: PHP
 Requires: %{?scl_prefix}php-common%{?_isa} = %{version}-%{release}
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-BuildRequires: krb5-devel, openssl-devel, compat-openssl11-devel, libc-client-devel
+BuildRequires: krb5-devel, openssl-devel, php56-openssl-devel, libc-client-devel
 %else
 BuildRequires: krb5-devel, openssl-devel, libc-client-devel
 %endif
@@ -584,7 +584,7 @@ Group: Development/Languages
 License: PHP
 Requires: %{?scl_prefix}php-common%{?_isa} = %{version}-%{release}
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-BuildRequires: cyrus-sasl-devel, openldap-devel, openssl-devel, compat-openssl11-devel
+BuildRequires: cyrus-sasl-devel, openldap-devel, openssl-devel, php56-openssl-devel
 %else
 BuildRequires: cyrus-sasl-devel, openldap-devel, openssl-devel
 %endif
@@ -647,7 +647,7 @@ Requires: %{?scl_prefix}php-pdo%{?_isa} = %{version}-%{release}
 Provides: %{?scl_prefix}php_database
 Provides: %{?scl_prefix}php-pdo_pgsql, %{?scl_prefix}php-pdo_pgsql%{?_isa}
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-BuildRequires: krb5-devel, openssl-devel, compat-openssl11-devel, postgresql-devel
+BuildRequires: krb5-devel, openssl-devel, php56-openssl-devel, postgresql-devel
 %else
 BuildRequires: krb5-devel, openssl-devel, postgresql-devel
 %endif
