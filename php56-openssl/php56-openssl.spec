@@ -1,5 +1,7 @@
 %{?scl:%scl_package openssl}
 %{!?scl:%global pkg_name %{name}}
+%{?scl:%global _scl_prefix /opt/remi}
+%{?scl:%global _scl_root /opt/remi/php56/root/}
 
 # no debug infos with:
 %global debug_package %{nil}
@@ -160,9 +162,9 @@ Development package for %{pkg_name}.
 %{?scl:scl enable %{scl} - << \EOF}
 set -ex
 %setup -q -n openssl-%{version}
-%if 0%{?fedora} < 35 && 0%{?rhel} < 9
-echo "no build"
-%else
+#%#if 0%{?fedora} < 35 && 0%{?rhel} < 9
+#echo "no build"
+#%#else
 # The hobble_openssl is called here redundantly, just to be sure.
 # The tarball has already the sources removed.
 chmod +x %{SOURCE1}
@@ -205,19 +207,16 @@ cp %{SOURCE13} test/
 %patch -P 72 -p1 -b .disable-fips
 %patch -P 73 -p1 -b .cve-2022-0778
 cp apps/openssl.cnf apps/openssl11.cnf
-%endif
-
-
-
+#%#endif
 %{?scl:EOF}
 
 
 %build
 %{?scl:scl enable %{scl} - << \EOF}
 set -ex
-%if 0%{?fedora} < 35 && 0%{?rhel} < 9
-echo "no build"
-%else
+#%#if 0%{?fedora} < 35 && 0%{?rhel} < 9
+#echo "no build"
+#%#else
 # Figure out which flags we want to use.
 # default
 sslarch=%{_os}-%{_target_cpu}
@@ -307,7 +306,7 @@ make all
 for i in libcrypto.pc libssl.pc openssl.pc ; do
   sed -i '/^Libs.private:/{s/-L[^ ]* //;s/-Wl[^ ]* //}' $i
 done
-%endif
+#%#endif
 
 
 
@@ -319,11 +318,11 @@ done
 %{?scl:scl enable %{scl} - << \EOF}
 set -ex
 
-%if 0%{?fedora} < 35 && 0%{?rhel} < 9
-mkdir -p $RPM_BUILD_ROOT/usr/bin/
-touch $RPM_BUILD_ROOT/usr/bin/compat-openssl11
-touch $RPM_BUILD_ROOT/usr/bin/compat-openssl11-devel
-%else
+#%#if 0%{?fedora} < 35 && 0%{?rhel} < 9
+#mkdir -p $RPM_BUILD_ROOT/usr/bin/
+#touch $RPM_BUILD_ROOT/usr/bin/compat-openssl11
+#touch $RPM_BUILD_ROOT/usr/bin/compat-openssl11-devel
+#%#else
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
 # Install OpenSSL.
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_mandir},%{_libdir}/openssl,%{_pkgdocdir}}
@@ -335,18 +334,14 @@ for lib in $RPM_BUILD_ROOT%{_libdir}/*.so.%{version} ; do
 done
 # Install compat config file
 install -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl11.cnf
-%endif
-
-
-
-
+#%#endif
 %{?scl:EOF}
 
 
 %files
-%if 0%{?fedora} < 35 && 0%{?rhel} < 9
-/usr/bin/compat-openssl11
-%else
+#%#if 0%{?fedora} < 35 && 0%{?rhel} < 9
+#/usr/bin/compat-openssl11
+#%#else
 %license LICENSE
 %doc FAQ NEWS README
 %attr(0755,root,root) %{_libdir}/libcrypto.so.%{version}
@@ -357,17 +352,17 @@ install -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl1
 %config(noreplace) %{_sysconfdir}/pki/tls/openssl11.cnf
 %dir %{_sysconfdir}/pki/tls
 %attr(0644,root,root) %{_sysconfdir}/pki/tls/openssl11.cnf
-%endif
+#%#endif
 
 
 
 %files devel
-%if 0%{?fedora} < 35 && 0%{?rhel} < 9
-/usr/bin/compat-openssl11-devel
-%else
+#%#if 0%{?fedora} < 35 && 0%{?rhel} < 9
+#/usr/bin/compat-openssl11-devel
+#%#else
 %{_libdir}/openssl
 %{_includedir}/openssl
-%endif
+#%#endif
 
 
 %ldconfig_scriptlets
