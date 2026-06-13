@@ -515,7 +515,7 @@ Requires: libtool
 # see "php-config --libs"
 Requires: krb5-devel%{?_isa}
 Requires: libedit-devel%{?_isa}
-Requires: libxml2-devel%{?_isa}
+Requires: %{?scl_prefix}libxml2-devel%{?_isa}
 
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
 Requires: openssl-devel%{?_isa}, php56-openssl-devel
@@ -703,7 +703,7 @@ Group: Development/Languages
 # All files licensed under PHP version 3.01
 License: PHP
 Requires: %{?scl_prefix}php-common%{?_isa} = %{version}-%{release}
-BuildRequires: libxml2-devel
+BuildRequires: %{?scl_prefix}libxml2-devel
 
 %description soap
 The %{?scl_prefix}php-soap package contains a dynamic shared object that will add
@@ -798,7 +798,7 @@ Provides: %{?scl_prefix}php-wddx, %{?scl_prefix}php-wddx%{?_isa}
 Provides: %{?scl_prefix}php-xmlreader, %{?scl_prefix}php-xmlreader%{?_isa}
 Provides: %{?scl_prefix}php-xmlwriter, %{?scl_prefix}php-xmlwriter%{?_isa}
 Provides: %{?scl_prefix}php-xsl, %{?scl_prefix}php-xsl%{?_isa}
-BuildRequires: libxslt-devel >= 1.0.18-1, libxml2-devel >= 2.4.14-1
+BuildRequires: libxslt-devel >= 1.0.18-1, %{?scl_prefix}libxml2-devel
 
 %description xml
 The %{?scl_prefix}php-xml package contains dynamic shared objects which add support
