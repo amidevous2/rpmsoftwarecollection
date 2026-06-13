@@ -183,6 +183,8 @@ mkdir py3
 %make_build -C py2
 %endif # with python2
 %make_build -C py3
+rm -rf usr/lib/debug
+rm -rf usr/src/debug
 %{?scl:EOF}
 
 
@@ -215,6 +217,10 @@ rm -rf %{buildroot}%{python3_sitearch}/drv_libxml2.py
 rm -rf %{buildroot}%{python3_sitearch}/__pycache__/drv_libxml2.*
 rm -rf %{buildroot}%{python3_sitearch}/libxml2mod.so
 rm -rf %{buildroot}/usr/lib/debug/
+rm -rf %{buildroot}/usr/src/debug
+rm -rf usr/lib/debug
+rm -rf usr/src/debug
+
 %{?scl:EOF}
 
 
