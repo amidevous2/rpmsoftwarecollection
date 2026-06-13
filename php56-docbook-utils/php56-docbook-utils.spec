@@ -12,18 +12,18 @@ License: GPLv2+
 
 Requires: %{?scl_prefix}docbook-style-dsssl >= 1.72
 Requires: %{?scl_prefix}docbook-dtds
-Requires: %{?scl_prefix}perl-SGMLSpm >= 1.03ii
-Requires: %{?scl_prefix}which %{?scl_prefix}grep %{?scl_prefix}gawk
-Requires: %{?scl_prefix}text-www-browser
+Requires: perl-SGMLSpm >= 1.03ii
+Requires: which grep %{?scl_prefix}gawk
+Requires: text-www-browser
 
 # In the absence of an already-installed text-www-browser, prefer lynx
 Suggests: lynx
 
 %{?scl:Requires: %{scl}-runtime}
 %{?scl:BuildRequires: %{scl}-runtime}
-BuildRequires: %{?scl_prefix}perl-generators
-BuildRequires: %{?scl_prefix}perl-SGMLSpm, %{?scl_prefix}openjade, %{?scl_prefix}docbook-style-dsssl
-BuildRequires: %{?scl_prefix}make
+BuildRequires: perl-generators
+BuildRequires: perl-SGMLSpm, openjade, docbook-style-dsssl
+BuildRequires: make
 
 BuildArch: noarch
 Source0: ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/%{pkg_name}-%{version}.tar.gz
@@ -54,11 +54,11 @@ for comparing SGML files.
 
 
 %package pdf
-Requires: %{?scl_prefix}texlive-jadetex >= 7
+Requires: texlive-jadetex >= 7
 Requires: %{?scl_prefix}docbook-utils = %{version}
-Requires: %{?scl_prefix}tex(dvips)
-Requires: %{?scl_prefix}texlive-collection-fontsrecommended
-Requires: %{?scl_prefix}texlive-collection-htmlxml
+Requires: tex(dvips)
+Requires: texlive-collection-fontsrecommended
+Requires: texlive-collection-htmlxml
 License: GPL+
 Obsoletes: %{?scl_prefix}stylesheets-db2pdf <= %{version}-%{release}
 Provides: %{?scl_prefix}stylesheets-db2pdf = %{version}-%{release}
