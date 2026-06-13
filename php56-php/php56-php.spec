@@ -14,14 +14,32 @@
 %scl_package php
 %else
 %global pkg_name          %{name}
-%global _root_sysconfdir  %{_sysconfdir}
-%global _root_bindir      %{_bindir}
-%global _root_sbindir     %{_sbindir}
-%global _root_includedir  %{_includedir}
-%global _root_libdir      %{_libdir}
-%global _root_prefix      %{_prefix}
+%global _root_sysconfdir  /etc
+%global _root_bindir      /usr/bin
+%global _root_sbindir     /usr/sbin
+%global _root_includedir  /usr/include
+%global _root_libdir      /usr/lib64
+%global _root_prefix      /usr
 %global _root_initddir    %{_initddir}
 %endif
+%{?scl:%global _scl_vendor remi}
+%{?scl:%global _vendor remi}
+%{?scl:%global _scl_prefix /opt/remi}
+%{?scl:%global _scl_root /opt/remi/php56/root/}
+%{?scl:%global _prefix /opt/remi/php56/root/usr}
+%{?scl:%global _sysconfdir /opt/remi/php56/root/etc}
+%{?scl:%global _exec_prefix /opt/remi/php56/root/usr}
+%{?scl:%global _includedir /opt/remi/php56/root/usr/include}
+%{?scl:%global _bindir /opt/remi/php56/root/usr/bin}
+%{?scl:%global _sbindir /opt/remi/php56/root/usr/sbin}
+%{?scl:%global _libdir /opt/remi/php56/root/usr/lib64}
+%{?scl:%global _libexecdir /opt/remi/php56/root/usr/libexec}
+%{?scl:%global _datadir /opt/remi/php56/root/usr/share}
+%{?scl:%global _infodir /opt/remi/php56/root/usr/share/info}
+%{?scl:%global _mandir /opt/remi/php56/root/usr/share/man}
+%{?scl:%global _docdir /opt/remi/php56/root/usr/share/doc}
+
+
 
 # API/ABI check
 %global apiver      20131106
@@ -143,7 +161,7 @@
 Summary: PHP scripting language for creating dynamic web sites
 Name: php56-php
 Version: 5.6.40
-Release: 49%{?dist}
+Release: 49.99%{?dist}
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
 # TSRM is licensed under BSD
