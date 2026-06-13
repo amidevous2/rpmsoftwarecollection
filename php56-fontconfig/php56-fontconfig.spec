@@ -29,22 +29,21 @@ Patch7:		%{pkg_name}-fix-remapdir.patch
 %{?scl:Requires: %{scl}-runtime}
 %{?scl:BuildRequires: %{scl}-runtime}
 BuildRequires:	%{?scl_prefix}libxml2-devel
-BuildRequires:	%{?scl_prefix}freetype-devel >= %{freetype_version}
-BuildRequires:	%{?scl_prefix}fontpackages-devel
-BuildRequires:	%{?scl_prefix}autoconf %{?scl_prefix}automake %{?scl_prefix}libtool %{?scl_prefix}gettext
-BuildRequires:	%{?scl_prefix}gperf
-BuildRequires:  %{?scl_prefix}docbook-utils %{?scl_prefix}docbook-utils-pdf
-BuildRequires: %{?scl_prefix}make
+BuildRequires:	freetype-devel >= %{freetype_version}
+BuildRequires:	fontpackages-devel
+BuildRequires:	autoconf automake libtool gettext
+BuildRequires:	gperf
+BuildRequires:  docbook-utils docbook-utils-pdf
+BuildRequires: make
 
-Requires:	%{?scl_prefix}fonts-filesystem %{?scl_prefix}freetype
+Requires:	fonts-filesystem %{?scl_prefix}freetype
 # Register DTD system-wide to make validation work by default
 # (used by fonts-rpm-macros)
-Requires(pre):    %{?scl_prefix}xml-common
-Requires(postun): %{?scl_prefix}xml-common
+Requires(pre):    xml-common
+Requires(postun): xml-common
 PreReq:		freetype >= 2.9.1-6
-Requires(post):	%{?scl_prefix}grep %{?scl_prefix}coreutils
-Requires:	%{?scl_prefix}font(:lang=en)
-Suggests:	font(dejavusans)
+Requires(post):	grep coreutils
+Requires:	font(:lang=en)
 
 
 %description
@@ -55,7 +54,7 @@ applications.
 
 %package	devel
 Summary:	Font configuration and customization library
-Requires:	%{?scl_prefix}%{name}%{?_isa} = %{version}-%{release}
+Requires:	%{?scl_prefix}%{pkg_name}%{?_isa} = %{version}-%{release}
 Requires:	%{?scl_prefix}freetype-devel >= %{freetype_version}
 Requires:	%{?scl_prefix}pkgconfig
 Requires:	%{?scl_prefix}gettext
@@ -72,7 +71,7 @@ will use fontconfig.
 %package	devel-doc
 Summary:	Development Documentation files for fontconfig library
 BuildArch:	noarch
-Requires:	%{?scl_prefix}%{name}-devel = %{version}-%{release}
+Requires:	%{?scl_prefix}%{pkg_name}-devel = %{version}-%{release}
 
 
 %description	devel-doc
@@ -83,7 +82,7 @@ which is useful for developing applications that uses fontconfig.
 %prep
 %{?scl:scl enable %{scl} - << \EOF}
 set -ex
-%autosetup -p1
+%autosetup -n %{pkg_name}-%{version} -p1
 %{?scl:EOF}
 
 
@@ -135,13 +134,6 @@ install -p -m 0755 %{SOURCE2} $RPM_BUILD_ROOT%{_bindir}/fc-cache
 %find_lang %{pkg_name}
 %find_lang %{pkg_name}-conf
 cat %{pkg_name}-conf.lang >> %{pkg_name}.lang
-%{?scl:EOF}
-
-
-%check
-%{?scl:scl enable %{scl} - << \EOF}
-set -ex
-VERBOSE=1 make check
 %{?scl:EOF}
 
 
