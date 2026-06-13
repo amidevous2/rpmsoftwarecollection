@@ -16,7 +16,7 @@
 %{?scl:%global _datadir /opt/remi/php56/root/usr/share}
 %{?scl:%global _infodir /opt/remi/php56/root/usr/share/info}
 %{?scl:%global _mandir /opt/remi/php56/root/usr/share/man}
-%{?scl:%global _mandir /opt/remi/php56/root/usr/share/doc}
+%{?scl:%global _docdir /opt/remi/php56/root/usr/share/doc}
 # no debug infos with:
 #%#global debug_package %{nil}
 
