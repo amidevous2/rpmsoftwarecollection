@@ -1,5 +1,21 @@
 %{?scl:%scl_package fontconfig}
 %{!?scl:%global pkg_name %{name}}
+%{?scl:%global _scl_vendor remi}
+%{?scl:%global _vendor remi}
+%{?scl:%global _scl_prefix /opt/remi}
+%{?scl:%global _scl_root /opt/remi/php56/root/}
+%{?scl:%global _prefix /opt/remi/php56/root/usr}
+%{?scl:%global _sysconfdir /opt/remi/php56/root/etc}
+%{?scl:%global _exec_prefix /opt/remi/php56/root/usr}
+%{?scl:%global _includedir /opt/remi/php56/root/usr/include}
+%{?scl:%global _bindir /opt/remi/php56/root/usr/bin}
+%{?scl:%global _sbindir /opt/remi/php56/root/usr/sbin}
+%{?scl:%global _libdir /opt/remi/php56/root/usr/lib64}
+%{?scl:%global _libexecdir /opt/remi/php56/root/usr/libexec}
+%{?scl:%global _datadir /opt/remi/php56/root/usr/share}
+%{?scl:%global _infodir /opt/remi/php56/root/usr/share/info}
+%{?scl:%global _mandir /opt/remi/php56/root/usr/share/man}
+%{?scl:%global _docdir /opt/remi/php56/root/usr/share/doc}
 
 
 # ifdef'd in source code but runtime dep will be made for FT_Done_MM_Var symbol in freetype-2.9.1
@@ -9,7 +25,7 @@
 Summary:	Font configuration and customization library
 Name:		%{?scl_prefix}fontconfig
 Version:	2.14.0
-Release:	2%{?dist}
+Release:	2.99%{?dist}
 # src/ftglue.[ch] is in Public Domain
 # src/fccache.c contains Public Domain code
 # fc-case/CaseFolding.txt is in the UCD
