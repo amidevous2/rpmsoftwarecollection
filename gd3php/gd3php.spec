@@ -11,6 +11,8 @@
 #global prever    dev
 #global commit    725ba9de4005144d137d2a7a70f760068fc3d306
 #global short     %%(c=%%{commit}; echo ${c:0:7})
+%{?scl:%global _scl_vendor remi}
+%{?scl:%global _vendor remi}
 
 %bcond_without      tests
 
