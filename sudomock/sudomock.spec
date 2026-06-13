@@ -6,7 +6,7 @@
 
 %define __os_install_post %{nil}
 
-# disable automatic dependency and provides generation with:
+# disable automatic dependency and provides generation with:#
 %define __find_provides %{nil} 
 %define __find_requires %{nil} 
 %define _use_internal_dependency_generator 0
