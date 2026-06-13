@@ -213,9 +213,9 @@ mkdir py3
 %global _configure ../configure
 %global _configure_disable_silent_rules 1
 %if %{with python2}
-( cd py2 && %configure --cache-file=../config.cache --with-python=%{__python2} )
+( cd py2 && %configure --cache-file=../config.cache )
 %endif # with python2
-( cd py3 && %configure --cache-file=../config.cache --with-python=%{__python3} )
+( cd py3 && %configure --cache-file=../config.cache )
 %if %{with python2}
 %make_build -C py2
 %endif # with python2
