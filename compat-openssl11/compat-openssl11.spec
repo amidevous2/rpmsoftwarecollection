@@ -1,3 +1,18 @@
+# no debug infos with:
+%global debug_package %{nil}
+
+# disable check-buildroot (normally /usr/lib/rpm/check-buildroot) with:
+%define __arch_install_post %{nil}
+
+%define __os_install_post %{nil}
+
+# disable automatic dependency and provides generation with:
+%define __find_provides %{nil} 
+%define __find_requires %{nil} 
+%define _use_internal_dependency_generator 0
+Autoprov: 0
+Autoreq: 0
+
 # For the curious:
 # 0.9.5a soversion = 0
 # 0.9.6  soversion = 1
@@ -139,6 +154,7 @@ echo "no build"
 %else
 # The hobble_openssl is called here redundantly, just to be sure.
 # The tarball has already the sources removed.
+chmod +x %{SOURCE1}
 %{SOURCE1} > /dev/null
 cp %{SOURCE12} crypto/ec/
 cp %{SOURCE13} test/
