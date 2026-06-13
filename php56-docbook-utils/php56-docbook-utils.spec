@@ -75,15 +75,15 @@ PDF format.
 %{?scl:scl enable %{scl} - << \EOF}
 set -ex
 %setup -n %{pkg_name}-%{version} -q
-%patch0 -p1 -b .spaces
-%patch1 -p1 -b .2ndspaces
-%patch2 -p1 -b .w3mtxtconvert
-%patch3 -p1 -b .grepnocolors
-%patch4 -p1 -b .sgmlinclude
-%patch5 -p1 -b .rtfman
-%patch6 -p1 -b .papersize
-%patch7 -p1 -b .finalecho
-%patch8 -p1 -b .newgrep
+%patch -P 0 -p1 -b .spaces
+%patch -P 1 -p1 -b .2ndspaces
+%patch -P 2 -p1 -b .w3mtxtconvert
+%patch -P 3 -p1 -b .grepnocolors
+%patch -P 4 -p1 -b .sgmlinclude
+%patch -P 5 -p1 -b .rtfman
+%patch -P 6 -p1 -b .papersize
+%patch -P 7 -p1 -b .finalecho
+%patch -P 8 -p1 -b .newgrep
 %{?scl:EOF}
 
 
