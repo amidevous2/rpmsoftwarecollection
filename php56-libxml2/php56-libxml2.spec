@@ -6,7 +6,17 @@
 %{?scl:%global _scl_prefix /opt/remi}
 %{?scl:%global _scl_root /opt/remi/php56/root/}
 %{?scl:%global _prefix /opt/remi/php56/root/usr}
+%{?scl:%global _sysconfdir /opt/remi/php56/root/etc}
+%{?scl:%global _exec_prefix /opt/remi/php56/root/usr}
+%{?scl:%global _includedir /opt/remi/php56/root/usr/include}
+%{?scl:%global _bindir /opt/remi/php56/root/usr/bin}
+%{?scl:%global _sbindir /opt/remi/php56/root/usr/sbin}
 %{?scl:%global _libdir /opt/remi/php56/root/usr/lib64}
+%{?scl:%global _libexecdir /opt/remi/php56/root/usr/libexec}
+%{?scl:%global _datadir /opt/remi/php56/root/usr/share}
+%{?scl:%global _infodir /opt/remi/php56/root/usr/share/info}
+%{?scl:%global _mandir /opt/remi/php56/root/usr/share/man}
+%{?scl:%global _mandir /opt/remi/php56/root/usr/share/doc}
 # no debug infos with:
 #%#global debug_package %{nil}
 
@@ -255,8 +265,8 @@ rm -rf usr/src/debug
 
 %files
 %license Copyright
-#%doc AUTHORS NEWS README TODO
-%{_docdir}/libxml2/*
+#%#doc AUTHORS NEWS README TODO
+#%#{_docdir}/libxml2/*
 %{_libdir}/libxml2.so.2*
 %{_mandir}/man3/libxml.3*
 %{_bindir}/xmllint
