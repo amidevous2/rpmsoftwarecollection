@@ -18,7 +18,7 @@
 %{?scl:%global _docdir /opt/remi/php56/root/usr/share/doc}
 
 
-# ifdef'd in source code but runtime dep will be made for FT_Done_MM_Var symbol in freetype-2.9.1
+## ifdef'd in source code but runtime dep will be made for FT_Done_MM_Var symbol in freetype-2.9.1
 # so update the build deps as well to keep deps consistency between runtime and build time.
 %global freetype_version 2.9.1
 
