@@ -7,25 +7,25 @@ Version: 1.3.2
 Release: 72%{?dist}
 Requires: %{?scl_prefix}sgml-common
 URL: http://openjade.sourceforge.net/
-Source: http://download.sourceforge.net/openjade/openjade-%{version}.tar.gz
+Source: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-openjade/openjade-%{version}.tar.gz
 #config.sub and config.guess from upstream sources (Mar 25th 2013).
 #http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD
 #http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD
 #I can't get them from autoreconf, because of the very strange openjade structure of config files
-Source2:config.guess
-Source3:config.sub
+Source2: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-openjade/config.guess
+Source3: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-openjade/config.sub
 #fix build on ppc64
-Patch0: openjade-ppc64.patch
+Patch0: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-openjade/openjade-ppc64.patch
 #do not link against -lnsl
-Patch1: openjade-1.3.1-nsl.patch
+Patch1: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-openjade/openjade-1.3.1-nsl.patch
 #Fix dependent libs for libogrove (bug #198232).
-Patch2: openjade-deplibs.patch
+Patch2: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-openjade/openjade-deplibs.patch
 #do not require OpenSP libosp.la file for build(#485114)
-Patch3: openjade-nola.patch
+Patch3: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-openjade/openjade-nola.patch
 #upstream bug tracker fix for build with gcc46
-Patch4: openjade-1.3.2-gcc46.patch
+Patch4: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-openjade/openjade-1.3.2-gcc46.patch
 #use Getopt:Std to prevent build failure
-Patch5: openjade-getoptperl.patch
+Patch5: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-openjade/openjade-getoptperl.patch
 License: DMIT
 
 #Last jade version is from Red Hat 6.2
