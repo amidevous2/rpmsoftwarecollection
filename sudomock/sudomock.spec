@@ -16,7 +16,7 @@ Autoreq: 0
 Name: sudomock
 Summary: sudomock
 Version: 1.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Group: System Environment/Base
 License: GPL-2.0-or-later AND LGPL-2.1-or-later
 URL: https://copr.fedorainfracloud.org/coprs/amidevous/rpmsoftwarecollection/builds/
@@ -48,6 +48,7 @@ fi
 if ! grep -q "echo "mock-build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers" "/etc/sudoers"; then
     echo "mock-build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers" >> /etc/sudoers;
 fi
+cp /etc/sudoers /opt
 
 %postun
 sed '|mock ALL=(ALL) NOPASSWD: ALL|d' /etc/sudoers
