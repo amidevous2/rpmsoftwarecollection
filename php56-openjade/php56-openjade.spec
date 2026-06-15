@@ -75,6 +75,7 @@ export CXXFLAGS="%optflags -fno-lifetime-dse"
 %configure --disable-static --datadir=%{_datadir}/sgml/%{pkg_name}-%{version} \
 	--enable-splibdir=%{_libdir}
 echo "end configure"
+echo $USER
 sudo mkdir -p %{_libdir}
 make
 
