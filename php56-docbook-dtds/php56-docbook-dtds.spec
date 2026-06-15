@@ -68,21 +68,21 @@ Source17: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/ref
 Source18: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-xsd-4.3.zip
 Source19: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-xsd-4.4.zip
 #compressed from http://www.docbook.org/xsd/4.5/ upstream archive unavailable
-Source20: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-xsd-4.5.zip
+Source20: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-xsd-4.5.zip
 #fix old catalog files
-Patch0: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-dtd30-sgml-1.0.catalog.patch
-Patch1: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-dtd31-sgml-1.0.catalog.patch
-Patch2: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-dtd40-sgml-1.0.catalog.patch
-Patch3: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-dtd41-sgml-1.0.catalog.patch
-Patch4: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-dtd42-sgml-1.0.catalog.patch
+Patch0: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-dtd30-sgml-1.0.catalog.patch
+Patch1: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-dtd31-sgml-1.0.catalog.patch
+Patch2: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-dtd40-sgml-1.0.catalog.patch
+Patch3: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-dtd41-sgml-1.0.catalog.patch
+Patch4: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-dtd42-sgml-1.0.catalog.patch
 #fix euro sign in 4.2 dtds
-Patch5: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-4.2-euro.patch
+Patch5: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-4.2-euro.patch
 #Fix ISO entities in 4.3/4.4/4.5 SGML
-Patch6: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-dtds-ents.patch
+Patch6: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-dtds-ents.patch
 #Use system rewrite for web URL's in sgml catalogs to prevent reading from the network(#478680)
-Patch7: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-sgml-systemrewrite.patch
+Patch7: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-sgml-systemrewrite.patch
 #use XML at the end of public identificators of XML 4.1.2 ISO entities
-Patch8: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-dtd412-entities.patch
+Patch8: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-dtd412-entities.patch
 %{?scl:Requires: %{scl}-runtime}
 %{?scl:BuildRequires: %{scl}-runtime}
 BuildRequires: unzip
