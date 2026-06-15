@@ -46,27 +46,27 @@ Requires: %{?scl_prefix}xml-common
 
 
 BuildArch: noarch
-Source0: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbk30.zip
-Source1: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbk31.zip
-Source2: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbk40.zip
-Source3: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbk41.zip
-Source4: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbkx412.zip
-Source5: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-4.2.zip
-Source6: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-xml-4.2.zip
-Source7: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-4.3.zip
-Source8: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-xml-4.3.zip
-Source9: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-4.4.zip
-Source10: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-xml-4.4.zip
-Source11: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-4.5.zip
-Source12: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-xml-4.5.zip
-Source13: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-rng-4.2.zip
-Source14: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-rng-4.3.zip
-Source15: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-rng-4.4.zip
+Source0: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbk30.zip
+Source1: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbk31.zip
+Source2: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbk40.zip
+Source3: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbk41.zip
+Source4: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbkx412.zip
+Source5: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-4.2.zip
+Source6: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-xml-4.2.zip
+Source7: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-4.3.zip
+Source8: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-xml-4.3.zip
+Source9: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-4.4.zip
+Source10: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-xml-4.4.zip
+Source11: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-4.5.zip
+Source12: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-xml-4.5.zip
+Source13: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-rng-4.2.zip
+Source14: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-rng-4.3.zip
+Source15: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-rng-4.4.zip
 #compressed from http://www.docbook.org/rng/4.5/ upstream archive unavailable
 Source16: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-rng-4.5.zip
-Source17: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-xsd-4.2.zip
-Source18: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-xsd-4.3.zip
-Source19: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-xsd-4.4.zip
+Source17: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-xsd-4.2.zip
+Source18: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-xsd-4.3.zip
+Source19: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-xsd-4.4.zip
 #compressed from http://www.docbook.org/xsd/4.5/ upstream archive unavailable
 Source20: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-xsd-4.5.zip
 #fix old catalog files
