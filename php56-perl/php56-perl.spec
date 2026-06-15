@@ -90,7 +90,7 @@ Version:        %{perl_version}
 Release:        452%{?dist}
 Summary:        Practical Extraction and Report Language
 Url:            https://www.perl.org/
-Source0:        https://www.cpan.org/src/5.0/perl-%{perl_version}.tar.xz
+Source0:        https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/perl-%{perl_version}.tar.xz
 Source3:        macros.perl
 #Systemtap tapset and example that make use of systemtap-sdt-devel
 # build requirement. Written by lberk; Not yet upstream.
