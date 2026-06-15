@@ -35,7 +35,7 @@ Autoreq: 0
 
 Name: php56-sgml-common
 Version: 0.6.3
-Release: 58%{?dist}
+Release: 59%{?dist}
 
 Summary: Common SGML catalog and DTD files
 
@@ -70,7 +70,7 @@ Patch2: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/
 BuildRequires: make
 BuildRequires: %{?scl_prefix}libxml2-devel
 BuildRequires: automake
-Requires: %{_bindir}/basename
+Requires: /usr/bin/basename
 
 
 %description
