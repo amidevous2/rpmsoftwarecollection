@@ -12,7 +12,7 @@
 %global dual_life 0
 %global perl_bootstrap 1
 %global rebuild_from_scratch %{defined perl_bootstrap}
-
+#
 
 # This overrides filters from build root (/usr/lib/rpm/macros.d/macros.perl)
 # intentionally (unversioned perl(DB) is removed and versioned one is kept).
