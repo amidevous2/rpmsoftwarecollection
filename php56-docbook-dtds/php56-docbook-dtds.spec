@@ -63,7 +63,7 @@ Source13: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/ref
 Source14: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-rng-4.3.zip
 Source15: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-rng-4.4.zip
 #compressed from http://www.docbook.org/rng/4.5/ upstream archive unavailable
-Source16: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtdsdocbook-rng-4.5.zip
+Source16: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-dtds/docbook-rng-4.5.zip
 Source17: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-xsd-4.2.zip
 Source18: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-xsd-4.3.zip
 Source19: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-docbook-dtds/docbook-xsd-4.4.zip
