@@ -95,10 +95,10 @@ but that don't need to be included in main package.
 %prep
 %{?scl:scl enable %{scl} - << \EOF}
 set -ex
-%setup -n %{pkg_name}-%{version} -q
-%patch0 -p1 -b .umask
-%patch1 -p1 -b .xmldir
-%patch2 -p1 -b .quotes
+%autosetup -n %{pkg_name}-%{version} -p1
+#%#patch -P 0 -p1 -b .umask
+#%#patch1 -p1 -b .xmldir
+#%#patch2 -p1 -b .quotes
 
 # replace bogus links with files
 automakedir=`ls -1d /usr/share/automake* | head -n +1`
