@@ -326,8 +326,9 @@ BuildRequires:  gdbm-devel
 %endif
 # git for PATCH-perl-134329-Use-after-free-in-regcomp.c.patch
 BuildRequires:  git-core
-# glibc-common for iconv
+# glibc-common and glibc-gconv-extra for iconv
 BuildRequires:  glibc-common
+BuildRequires:  glibc-gconv-extra
 %if %{with perl_enables_groff}
 # Build-require groff tools for populating %%Config correctly, bug #135101
 BuildRequires:  groff-base
