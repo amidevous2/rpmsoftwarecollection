@@ -191,7 +191,7 @@ cp -p doc/HTML/*.html __dist_doc/html/
 %{?scl:EOF}
 
 
-%pre -n xml-common
+%pre -n %{?scl_prefix}xml-common
 %{?scl:scl enable %{scl} - << \EOF}
 set -ex
 if [ $1 -gt 1 ] && [ -e %{_sysconfdir}/xml/catalog ]; then
