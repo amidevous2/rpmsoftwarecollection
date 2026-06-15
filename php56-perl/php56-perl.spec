@@ -316,7 +316,7 @@ Patch301:       https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollecti
 # Update some of the bundled modules
 # see http://fedoraproject.org/wiki/Perl/perl.spec for instructions
 
-BuildRequires:  bash
+BuildRequires:  bash, /usr/bin/dtrace
 BuildRequires:  bzip2-devel
 BuildRequires:  coreutils
 BuildRequires:  findutils
