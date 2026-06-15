@@ -109,7 +109,7 @@
 %global with_oci8     %{?_with_oci8:1}%{!?_with_oci8:0}
 
 %global with_imap      1
-%global with_interbase 1
+%global with_interbase 0
 %global with_mcrypt    1
 %global with_freetds   1
 %global with_tidy      1
@@ -1355,7 +1355,7 @@ ln -sf ../configure
     --with-zlib \
     --with-layout=GNU \
     --with-kerberos \
-    --with-libxml-dir=%{_root_prefix} \
+    --with-libxml-dir=%{_prefix} \
 %if 0%{?fedora} >= 28 || 0%{?rhel} >= 6
     --with-system-tzdata \
 %endif
