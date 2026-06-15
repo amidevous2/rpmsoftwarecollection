@@ -35,7 +35,7 @@ Provides: %{?scl_prefix}jade = %{version}-%{release}
 %{?scl:BuildRequires: %{scl}-runtime}
 BuildRequires: make
 BuildRequires: gcc-c++
-BuildRequires: opensp-devel
+BuildRequires: opensp-devel, sudomock
 
 BuildRequires: perl-interpreter
 BuildRequires: perl-POSIX
@@ -75,6 +75,7 @@ export CXXFLAGS="%optflags -fno-lifetime-dse"
 %configure --disable-static --datadir=%{_datadir}/sgml/%{pkg_name}-%{version} \
 	--enable-splibdir=%{_libdir}
 echo "end configure"
+sudo mkdir -p %{_libdir}
 make
 
 %{?scl:EOF}
