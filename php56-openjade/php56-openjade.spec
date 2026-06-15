@@ -74,6 +74,7 @@ cp -p %{SOURCE2} %{SOURCE3} config/
 export CXXFLAGS="%optflags -fno-lifetime-dse"
 %configure --disable-static --datadir=%{_datadir}/sgml/%{pkg_name}-%{version} \
 	--enable-splibdir=%{_libdir}
+echo "end configure"
 make
 
 %{?scl:EOF}
