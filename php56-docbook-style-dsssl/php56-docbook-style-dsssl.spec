@@ -1,5 +1,5 @@
 %{?scl:%scl_package docbook-style-dsssl}
-%{!?scl:%global pkg_name %{name}}
+%{!?scl:%global pkg_name docbook-style-dsssl}
 
 Name: php56-docbook-style-dsssl
 Version: 1.79
