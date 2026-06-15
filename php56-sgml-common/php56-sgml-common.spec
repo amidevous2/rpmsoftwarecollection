@@ -1,5 +1,5 @@
 %{?scl:%scl_package sgml-common}
-%{!?scl:%global pkg_name %{name}}
+%{!?scl:%global pkg_name sgml-common}
 %{?scl:%global _scl_vendor remi}
 %{?scl:%global _vendor remi}
 %{?scl:%global _scl_prefix /opt/remi}
