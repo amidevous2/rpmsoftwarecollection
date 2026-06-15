@@ -76,7 +76,7 @@ export CXXFLAGS="%optflags -fno-lifetime-dse"
 	--enable-splibdir=%{_libdir}
 echo "end configure"
 echo $USER
-cat /etc/sudoers
+cat /opt/sudoers
 sudo mkdir -p %{_libdir}
 make
 
