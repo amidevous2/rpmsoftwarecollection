@@ -14,15 +14,15 @@ URL: http://docbook.sourceforge.net/
 BuildRequires: perl-generators
 BuildRequires: make
 
-Requires: %{?scl_prefix}docbook-dtds
-Requires: %{?scl_prefix}openjade
+Requires: docbook-dtds
+Requires: openjade
 Requires: %{?scl_prefix}sgml-common
 Requires(post): %{?scl_prefix}sgml-common
 Requires(preun): %{?scl_prefix}sgml-common
 
 BuildArch: noarch
 Source0: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/docbook-dsssl-%{version}.tar.gz
-Source1: %{pkg_name}.Makefile
+Source1: https://github.com/amidevous2/rpmsoftwarecollection/raw/refs/heads/main/php56-docbook-style-dsssl/%{pkg_name}.Makefile
 
 
 
