@@ -1,5 +1,35 @@
 %{?scl:%scl_package sgml-common}
 %{!?scl:%global pkg_name %{name}}
+%{?scl:%global _scl_vendor remi}
+%{?scl:%global _vendor remi}
+%{?scl:%global _scl_prefix /opt/remi}
+%{?scl:%global _scl_root /opt/remi/php56/root/}
+%{?scl:%global _prefix /opt/remi/php56/root/usr}
+%{?scl:%global _sysconfdir /opt/remi/php56/root/etc}
+%{?scl:%global _exec_prefix /opt/remi/php56/root/usr}
+%{?scl:%global _includedir /opt/remi/php56/root/usr/include}
+%{?scl:%global _bindir /opt/remi/php56/root/usr/bin}
+%{?scl:%global _sbindir /opt/remi/php56/root/usr/sbin}
+%{?scl:%global _libdir /opt/remi/php56/root/usr/lib64}
+%{?scl:%global _libexecdir /opt/remi/php56/root/usr/libexec}
+%{?scl:%global _datadir /opt/remi/php56/root/usr/share}
+%{?scl:%global _infodir /opt/remi/php56/root/usr/share/info}
+%{?scl:%global _mandir /opt/remi/php56/root/usr/share/man}
+%{?scl:%global _docdir /opt/remi/php56/root/usr/share/doc}
+# no debug infos with:
+#%#global debug_package %{nil}
+
+# disable check-buildroot (normally /usr/lib/rpm/check-buildroot) with:
+%define __arch_install_post %{nil}
+
+%define __os_install_post %{nil}
+
+# disable automatic dependency and provides generation with:
+%define __find_provides %{nil} 
+%define __find_requires %{nil} 
+%define _use_internal_dependency_generator 0
+Autoprov: 0
+Autoreq: 0
 
 %global xmlxsdver 2009/01
 
@@ -20,20 +50,20 @@ URL: https://www.w3.org/2003/entities/
 
 Source0: https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/%{pkg_name}-%{version}.tgz
 # Following 4 from openjade/pubtext - same maintainer as in SGML-common, so up2date:
-Source1: xml.dcl
-Source2: xml.soc
-Source3: html.dcl
-Source4: html.soc
-Source5: http://www.w3.org/%{xmlxsdver}/xml.xsd
-Source6: http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd
-Source7: http://www.w3.org/2001/XMLSchema.dtd
-Source8: http://www.w3.org/2001/datatypes.dtd
-Source9: sgmlwhich.1
-Source10: sgml.conf.5
+Source1: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/xml.dcl
+Source2: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/xml.soc
+Source3: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/html.dcl
+Source4: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/html.soc
+Source5: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/xml.xsd
+Source6: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/xmldsig-core-schema.xsd
+Source7: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/XMLSchema.dtd
+Source8: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/datatypes.dtd
+Source9: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/sgmlwhich.1
+Source10: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/sgml.conf.5
 
-Patch0: sgml-common-umask.patch
-Patch1: sgml-common-xmldir.patch
-Patch2: sgml-common-quotes.patch
+Patch0: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/sgml-common-umask.patch
+Patch1: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/sgml-common-xmldir.patch
+Patch2: https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-sgml-common/sgml-common-quotes.patch
 
 %{?scl:Requires: %{scl}-runtime}
 %{?scl:BuildRequires: %{scl}-runtime}
