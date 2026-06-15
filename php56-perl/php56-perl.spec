@@ -91,225 +91,225 @@ Release:        452%{?dist}
 Summary:        Practical Extraction and Report Language
 Url:            https://www.perl.org/
 Source0:        https://github.com/amidevous2/rpmsoftwarecollection/releases/download/download/perl-%{perl_version}.tar.xz
-Source3:        macros.perl
+Source3:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/macros.perl
 #Systemtap tapset and example that make use of systemtap-sdt-devel
 # build requirement. Written by lberk; Not yet upstream.
-Source4:        perl.stp
-Source5:        perl-example.stp
+Source4:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl.stp
+Source5:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-example.stp
 # Tom Christiansen confirms Pod::Html uses the same license as perl
-Source6:        Pod-Html-license-clarification
+Source6:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/Pod-Html-license-clarification
 
 # Pregenerated dependencies for bootstrap.
 # If your RPM tool fails on including the source file, then you forgot to
 # define _sourcedir macro to point to the directory with the sources.
-Source7:        gendep.macros
+Source7:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/gendep.macros
 %if %{defined perl_bootstrap}
 %include %{SOURCE7}
 %endif
 
 # Removes date check, Fedora/RHEL specific
-Patch1:         perl-perlbug-tag.patch
+Patch1:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-perlbug-tag.patch
 
 # Fedora/RHEL only (64bit only)
-Patch2:         perl-5.8.0-libdir64.patch
+Patch2:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.8.0-libdir64.patch
 
 # Fedora/RHEL specific (use libresolv instead of libbind), bug #151127
-Patch3:         perl-5.10.0-libresolv.patch
+Patch3:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.10.0-libresolv.patch
 
 # FIXME: May need the "Fedora" references removed before upstreaming
 # patches ExtUtils-MakeMaker
-Patch4:         perl-USE_MM_LD_RUN_PATH.patch
+Patch4:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-USE_MM_LD_RUN_PATH.patch
 
 # Provide maybe_command independently, bug #1129443
-Patch5:         perl-5.22.1-Provide-ExtUtils-MM-methods-as-standalone-ExtUtils-M.patch
+Patch5:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.22.1-Provide-ExtUtils-MM-methods-as-standalone-ExtUtils-M.patch
 
 # The Fedora builders started randomly failing this futime test
 # only on x86_64, so we just don't run it. Works fine on normal
 # systems.
-Patch6:         perl-5.10.0-x86_64-io-test-failure.patch
+Patch6:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.10.0-x86_64-io-test-failure.patch
 
 # switch off test, which is failing only on koji (fork)
-Patch7:         perl-5.14.1-offtest.patch
+Patch7:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.14.1-offtest.patch
 
 # Define SONAME for libperl.so
-Patch8:         perl-5.16.3-create_libperl_soname.patch
+Patch8:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.16.3-create_libperl_soname.patch
 
 # Install libperl.so to -Dshrpdir value
-Patch9:         perl-5.22.0-Install-libperl.so-to-shrpdir-on-Linux.patch
+Patch9:         https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.22.0-Install-libperl.so-to-shrpdir-on-Linux.patch
 
 # Make *DBM_File desctructors thread-safe, bug #1107543, RT#61912
-Patch10:        perl-5.18.2-Destroy-GDBM-NDBM-ODBM-SDBM-_File-objects-only-from-.patch
+Patch10:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.18.2-Destroy-GDBM-NDBM-ODBM-SDBM-_File-objects-only-from-.patch
 
 # Replace ExtUtils::MakeMaker dependency with ExtUtils::MM::Utils.
 # This allows not to require perl-devel. Bug #1129443
-Patch11:        perl-5.22.1-Replace-EU-MM-dependnecy-with-EU-MM-Utils-in-IPC-Cmd.patch
+Patch11:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.22.1-Replace-EU-MM-dependnecy-with-EU-MM-Utils-in-IPC-Cmd.patch
 
 # Link XS modules to pthread library to fix linking with -z defs,
 # <https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/3RHZEHLRUHJFF2XGHI5RB6YPDNLDR4HG/>
-Patch12:        perl-5.27.8-hints-linux-Add-lphtread-to-lddlflags.patch
+Patch12:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.27.8-hints-linux-Add-lphtread-to-lddlflags.patch
 
 # Pass the correct CFLAGS to dtrace
-Patch13:        perl-5.28.0-Pass-CFLAGS-to-dtrace.patch
+Patch13:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.28.0-Pass-CFLAGS-to-dtrace.patch
 
 # Do not panic when outputting a warning, RT#134059, fixed after 5.31.0
-Patch15:        perl-5.31.0-PATCH-perl-134059-panic-outputting-a-warning.patch
+Patch15:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-PATCH-perl-134059-panic-outputting-a-warning.patch
 
 # Fix memory handling when parsing string literals, fixed after 5.31.0
-Patch16:        perl-5.31.0-S_scan_const-Properly-test-if-need-to-grow.patch
+Patch16:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-S_scan_const-Properly-test-if-need-to-grow.patch
 
 # Fix an undefined behavior in shifting IV variables, fixed after 5.31.0
-Patch17:        perl-5.31.0-Create-fcn-for-lossless-conversion-of-NV-to-IV.patch
-Patch18:        perl-5.30.0-pp.c-Add-two-UNLIKELY-s.patch
-Patch19:        perl-5.30.0-Remove-undefined-behavior-from-IV-shifting.patch
+Patch17:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-Create-fcn-for-lossless-conversion-of-NV-to-IV.patch
+Patch18:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.30.0-pp.c-Add-two-UNLIKELY-s.patch
+Patch19:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.30.0-Remove-undefined-behavior-from-IV-shifting.patch
 
 # Fix stacking file test operators, CPAN RT#127073, fixed after 5.31.0
-Patch20:        perl-5.31.0-Don-t-use-PL_check-op_type-to-check-for-filetets-ops.patch
+Patch20:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-Don-t-use-PL_check-op_type-to-check-for-filetets-ops.patch
 
 # Fix a crash in SIGALARM handler when waiting on a child process to be closed,
 # RT#122112, fixed after 5.31.0
-Patch21:        perl-5.31.0-perl-122112-test-for-signal-handler-death-in-pclose.patch
-Patch22:        perl-5.31.0-perl-122112-a-simpler-fix-for-pclose-aborted-by-a-si.patch
-Patch23:        perl-5.31.0-perl-122112-remove-some-interfering-debug-output.patch
+Patch21:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-perl-122112-test-for-signal-handler-death-in-pclose.patch
+Patch22:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-perl-122112-a-simpler-fix-for-pclose-aborted-by-a-si.patch
+Patch23:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-perl-122112-remove-some-interfering-debug-output.patch
 
 # Fix a crash with a negative precision in sprintf function, RT#134008,
 # fixed after 5.31.0
-Patch25:        perl-5.31.0-perl-134008-an-alternative-test.patch
+Patch25:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-perl-134008-an-alternative-test.patch
 
 # Prevent from wrapping a width in a numeric format string, RT#133913,
 # fixed after 5.31.0
-Patch27:        perl-5.31.0-perl-133913-limit-numeric-format-results-to-INT_MAX.patch
+Patch27:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-perl-133913-limit-numeric-format-results-to-INT_MAX.patch
 
 # Fix subroutine protypes to track reference aliases, RT#134072,
 # fixed after 5.31.0
-Patch28:        perl-5.31.0-perl-134072-allow-foo-bar-to-work-in-main.patch
+Patch28:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-perl-134072-allow-foo-bar-to-work-in-main.patch
 
 # Fix changing packet destination sent from a UDP IO::Socket object,
 # RT#133936, fixed after 5.31.0
-Patch30:        perl-5.31.0-perl-133936-ensure-TO-is-honoured-for-UDP-sock-send.patch
-Patch31:        perl-5.31.0-perl-133936-document-differences-between-IO-Socket-a.patch
-Patch32:        perl-5.31.0-perl-133936-make-send-a-bit-saner.patch
+Patch30:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-perl-133936-ensure-TO-is-honoured-for-UDP-sock-send.patch
+Patch31:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-perl-133936-document-differences-between-IO-Socket-a.patch
+Patch32:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-perl-133936-make-send-a-bit-saner.patch
 
 # Fix %%{^CAPTURE_ALL} to be an alias for %%- variable, RT#131867,
 # fixed after 5.31.0
-Patch37:        perl-5.31.0-CAPTURE_ALL-was-intended-to-be-an-alias-for-make-it-.patch
+Patch37:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-CAPTURE_ALL-was-intended-to-be-an-alias-for-make-it-.patch
 
 # Fix %%{^CAPTURE} value when used after @{^CAPTURE}, RT#134193,
 # fixed after 5.31.0
-Patch38:        perl-5.31.0-perl-134193-allow-CAPTURE-to-work-when-CAPTURE-comes.patch
-Patch39:        perl-5.31.0-perl-134193-make-the-varname-match-the-names.patch
+Patch38:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-perl-134193-allow-CAPTURE-to-work-when-CAPTURE-comes.patch
+Patch39:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.0-perl-134193-make-the-varname-match-the-names.patch
 
 # Fix a test for a crash in SIGALARM handler when waiting on a child process to
 # be closed, RT#122112, fixed after 5.31.1
-Patch40:        perl-5.31.1-perl-122112-make-sure-SIGPIPE-is-delivered-if-we-tes.patch
+Patch40:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.1-perl-122112-make-sure-SIGPIPE-is-delivered-if-we-tes.patch
 
 # Fix a crash on an uninitialized warning when processing a multideref node,
 # RT#134275, fixed after 5.31.1
-Patch41:        perl-5.31.1-avoid-SEGV-with-uninit-warning-with-multideref.patch
+Patch41:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.1-avoid-SEGV-with-uninit-warning-with-multideref.patch
 
 # Preserve append mode when opening anonymous files, RT#134221,
 # fixed after 5.31.1
-Patch42:        perl-5.30.0-perl-134221-support-append-mode-for-open-.-undef.patch
-Patch43:        perl-5.31.1-perl-134221-support-append-mode-temp-files-on-Win32-.patch
-Patch44:        perl-5.31.1-perl-134221-support-O_APPEND-for-open-.-undef-on-VMS.patch
+Patch42:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.30.0-perl-134221-support-append-mode-for-open-.-undef.patch
+Patch43:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.1-perl-134221-support-append-mode-temp-files-on-Win32-.patch
+Patch44:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.1-perl-134221-support-O_APPEND-for-open-.-undef-on-VMS.patch
 
 # Fix propagating non-string variables in an exception value, RT#134291,
 # fixed after 5.31.2
-Patch45:        perl-5.31.2-perl-134291-propagate-non-PVs-in-in-bare-die.patch
+Patch45:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.2-perl-134291-propagate-non-PVs-in-in-bare-die.patch
 
 # Include trailing zero in scalars holding trie data, RT#134207,
 # fixed after 5.31.2
-Patch46:        perl-5.31.2-include-a-trailing-0-in-SVs-holding-trie-info.patch
+Patch46:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.2-include-a-trailing-0-in-SVs-holding-trie-info.patch
 
 # Fix a use after free in debugging output of a collation,
 # in upstream after 5.31.2
-Patch48:        perl-5.31.2-locale.c-Stop-Coverity-warning.patch
+Patch48:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.2-locale.c-Stop-Coverity-warning.patch
 
 # Fix a NULL pointer dereference in PerlIOVia_pushed(), fixed after 5.31.2
-Patch49:        perl-5.31.2-PerlIO-Via-check-arg-is-non-NULL-before-using-it.patch
+Patch49:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.2-PerlIO-Via-check-arg-is-non-NULL-before-using-it.patch
 
 # Fix a crash when setting $@ on unwinding a call stack, RT#134266,
 # fixed after 5.31.2
-Patch50:        perl-5.30.0-perl-134266-make-sure-is-writable-when-we-write-to-i.patch
+Patch50:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.30.0-perl-134266-make-sure-is-writable-when-we-write-to-i.patch
 
 # Fix parsing a denominator when parsing a Unicode property name,
 # fixed after 5.31.2
-Patch51:        perl-5.31.2-regcomp.c-Don-t-read-off-the-end-of-buffer.patch
+Patch51:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.2-regcomp.c-Don-t-read-off-the-end-of-buffer.patch
 
 # Fix a documentation about a future API change, fixed after 5.31.2
-Patch52:        perl-5.31.2-perlapi-5.30-promise-not-met-change-to-5.32.patch
+Patch52:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.2-perlapi-5.30-promise-not-met-change-to-5.32.patch
 
 # Do not run File-Find tests in parallel, fixed after 5.31.2
-Patch53:        perl-5.31.2-Run-tests-in-ext-File-Find-t-in-series.patch
+Patch53:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.2-Run-tests-in-ext-File-Find-t-in-series.patch
 
 # Fix parsing a Unicode property name when compiling a regular expression,
 # fixed after 5.31.3
-Patch54:        perl-5.31.3-regcomp.c-Fix-wrong-limit-test.patch
+Patch54:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.3-regcomp.c-Fix-wrong-limit-test.patch
 
 # Do not interpret 0x and 0b prefixes when numifying strings, RT#134230,
 # fixed after 5.31.3
-Patch56:        perl-5.31.3-perl-134230-don-t-interpret-0x-0b-when-numifying-str.patch
+Patch56:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.3-perl-134230-don-t-interpret-0x-0b-when-numifying-str.patch
 
 # Fix a buffer overflow when compiling a regular expression with many
 # branches, RT#134329, fixed after 5.31.3
 # This is a binary patch and requires git.
-Patch58:        perl-5.30.0-PATCH-perl-134329-Use-after-free-in-regcomp.c.patch
+Patch58:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.30.0-PATCH-perl-134329-Use-after-free-in-regcomp.c.patch
 
 # Correct a misspelling in perlrebackslash documentation, RT#134395,
 # fixed after 5.31.3
-Patch59:        perl-5.31.3-Supply-missing-right-brace-in-regex-example.patch
+Patch59:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.3-Supply-missing-right-brace-in-regex-example.patch
 
 # Fix a detection for futimes, RT#134432, fixed after 5.31.3
-Patch61:        perl-5.31.3-Configure-Include-stdlib.h-in-futimes-check.patch
-Patch62:        perl-5.31.3-Florian-Weimer-is-now-a-perl-author.patch
+Patch61:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.3-Configure-Include-stdlib.h-in-futimes-check.patch
+Patch62:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.3-Florian-Weimer-is-now-a-perl-author.patch
 
 # Fix overloading for binary and octal floats, RT#125557,
 # in upstream after 5.31.3
-Patch63:        perl-5.30.1-perl-125557-correctly-handle-overload-for-bin-oct-fl.patch
+Patch63:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.30.1-perl-125557-correctly-handle-overload-for-bin-oct-fl.patch
 
 # Fix handling undefined array members in Dumpvalue, RT#134441,
 # in upstream after 5.31.4
-Patch64:        perl-5.31.4-Handle-undefined-values-correctly.patch
+Patch64:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.4-Handle-undefined-values-correctly.patch
 
 # Fix taint mode documentation regarding @INC, in upstream after 5.31.5
-Patch65:        perl-5.31.5-Fix-taint-mode-INC-documentation.patch
-Patch66:        perl-5.31.5-Be-clearer-about-taint-s-effect-on-INC.patch
+Patch65:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.5-Fix-taint-mode-INC-documentation.patch
+Patch66:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.5-Be-clearer-about-taint-s-effect-on-INC.patch
 
 # Fix handling a layer argument in Tie::StdHandle::BINMODE(), RT#132475,
 # in upstream after 5.31.5
-Patch67:        perl-5.31.5-Tie-StdHandle-BINMODE-handle-layer-argument.patch
+Patch67:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.5-Tie-StdHandle-BINMODE-handle-layer-argument.patch
 
 # Fix an unintended upgrade to UTF-8 in the middle of a transliteration,
 # in upstream after 5.31.5
-Patch68:        perl-5.31.5-toke.c-Fix-bug-tr-upgrading-to-UTF-8-in-middle.patch
-Patch69:        perl-5.31.5-toke.c-comment-changes.patch
+Patch68:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.5-toke.c-Fix-bug-tr-upgrading-to-UTF-8-in-middle.patch
+Patch69:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.5-toke.c-comment-changes.patch
 
 # Fix a race in File::stat() tests, GH#17234, in upstream after 5.31.5
-Patch70:        perl-5.31.5-prevent-a-race-between-name-based-stat-and-an-open-m.patch
+Patch70:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.5-prevent-a-race-between-name-based-stat-and-an-open-m.patch
 
 # Fix a buffer overread when parsing a number, GH#17279,
 # in upstream after 5.31.5
-Patch71:        perl-5.30.1-handle-s-being-updated-without-len-being-updated.patch
+Patch71:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.30.1-handle-s-being-updated-without-len-being-updated.patch
 
 # Fix GCC 10 version detection, <https://github.com/Perl/perl5/pull/17295>,
 # in upstream after 5.31.5
-Patch72:        perl-5.31.5-Adapt-Configure-to-GCC-version-10.patch
+Patch72:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.5-Adapt-Configure-to-GCC-version-10.patch
 
 # Fix a memory leak when compiling a regular expression with a non-word class,
 # GH#17218, in upsream after 5.31.5
-Patch73:        perl-5.31.5-PATCH-gh-17218-memory-leak.patch
+Patch73:        https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.31.5-PATCH-gh-17218-memory-leak.patch
 
 # Link XS modules to libperl.so with EU::CBuilder on Linux, bug #960048
-Patch200:       perl-5.16.3-Link-XS-modules-to-libperl.so-with-EU-CBuilder-on-Li.patch
+Patch200:       https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.16.3-Link-XS-modules-to-libperl.so-with-EU-CBuilder-on-Li.patch
 
 # Link XS modules to libperl.so with EU::MM on Linux, bug #960048
-Patch201:       perl-5.16.3-Link-XS-modules-to-libperl.so-with-EU-MM-on-Linux.patch
+Patch201:       https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.16.3-Link-XS-modules-to-libperl.so-with-EU-MM-on-Linux.patch
 
 # SCL specific patches
 # Fix perlvar pod rhbz#957079
-Patch300:       perl-5.16.3-perlvar-pod.patch
+Patch300:       https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-5.16.3-perlvar-pod.patch
 
 # Patch makefile to create preload for each build
-Patch301:       perl-scl-use-preload-each-time.patch
+Patch301:       https://raw.githubusercontent.com/amidevous2/rpmsoftwarecollection/refs/heads/main/php56-perl/perl-scl-use-preload-each-time.patch
 
 # Update some of the bundled modules
 # see http://fedoraproject.org/wiki/Perl/perl.spec for instructions
@@ -2835,54 +2835,54 @@ Perl extension for Version Objects
 
 %prep
 %setup -q -n perl-%{perl_version}
-%patch1 -p1
+%patch -P 1 -p1
 %ifarch %{multilib_64_archs}
-%patch2 -p1
+%patch -P 2 -p1
 %endif
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
-%patch15 -p1
-%patch16 -p1
-%patch17 -p1
-%patch18 -p1
-%patch19 -p1
-%patch20 -p1
-%patch21 -p1
-%patch22 -p1
-%patch23 -p1
-%patch25 -p1
-%patch27 -p1
-%patch28 -p1
-%patch30 -p1
-%patch31 -p1
-%patch32 -p1
-%patch37 -p1
-%patch38 -p1
-%patch39 -p1
-%patch40 -p1
-%patch41 -p1
-%patch42 -p1
-%patch43 -p1
-%patch44 -p1
-%patch45 -p1
-%patch46 -p1
-%patch48 -p1
-%patch49 -p1
-%patch50 -p1
-%patch51 -p1
-%patch52 -p1
-%patch53 -p1
-%patch54 -p1
-%patch56 -p1
+%patch -P 3 -p1
+%patch -P 4 -p1
+%patch -P 5 -p1
+%patch -P 6 -p1
+%patch -P 7 -p1
+%patch -P 8 -p1
+%patch -P 9 -p1
+%patch -P 10 -p1
+%patch -P 11 -p1
+%patch -P 12 -p1
+%patch -P 13 -p1
+%patch -P 15 -p1
+%patch -P 16 -p1
+%patch -P 17 -p1
+%patch -P 18 -p1
+%patch -P 19 -p1
+%patch -P 20 -p1
+%patch -P 21 -p1
+%patch -P 22 -p1
+%patch -P 23 -p1
+%patch -P 25 -p1
+%patch -P 27 -p1
+%patch -P 28 -p1
+%patch -P 30 -p1
+%patch -P 31 -p1
+%patch -P 32 -p1
+%patch -P 37 -p1
+%patch -P 38 -p1
+%patch -P 39 -p1
+%patch -P 40 -p1
+%patch -P 41 -p1
+%patch -P 42 -p1
+%patch -P 43 -p1
+%patch -P 44 -p1
+%patch -P 45 -p1
+%patch -P 46 -p1
+%patch -P 48 -p1
+%patch -P 49 -p1
+%patch -P 50 -p1
+%patch -P 51 -p1
+%patch -P 52 -p1
+%patch -P 53 -p1
+%patch -P 54 -p1
+%patch -P 56 -p1
 # PATCH-perl-134329-Use-after-free-in-regcomp.c.patch is a binary patch
 git init-db .
 git config --replace-all gc.auto 0 # Prevent from racing with "rm -rf .git"
@@ -2892,24 +2892,24 @@ git add .
 git commit --message 'Import'
 git am < %{PATCH58}
 rm -rf .git # Perl tests examine a git repository
-%patch59 -p1
-%patch61 -p1
-%patch62 -p1
-%patch63 -p1
-%patch64 -p1
-%patch65 -p1
-%patch66 -p1
-%patch67 -p1
-%patch68 -p1
-%patch69 -p1
-%patch70 -p1
-%patch71 -p1
-%patch72 -p1
-%patch73 -p1
-%patch200 -p1
-%patch201 -p1
-%patch300 -p1
-%patch301 -p1
+%patch -P 59 -p1
+%patch -P 61 -p1
+%patch -P 62 -p1
+%patch -P 63 -p1
+%patch -P 64 -p1
+%patch -P 65 -p1
+%patch -P 66 -p1
+%patch -P 67 -p1
+%patch -P 68 -p1
+%patch -P 69 -p1
+%patch -P 70 -p1
+%patch -P 71 -p1
+%patch -P 72 -p1
+%patch -P 73 -p1
+%patch -P 200 -p1
+%patch -P 201 -p1
+%patch -P 300 -p1
+%patch -P 301 -p1
 
 # Update libperl soname
 %{?scl:sed -i 's|@scl@|%{?scl_prefix}|g' Makefile.SH}
