@@ -3204,23 +3204,23 @@ find $RPM_BUILD_ROOT -type f -name '*.bs' -empty -delete
 chmod -R u+w $RPM_BUILD_ROOT/*
 
 # miniperl? As an interpreter? How odd. Anyway, a symlink does it:
-rm %{build_privlib}/ExtUtils/xsubpp
+rm -rf %{build_privlib}/ExtUtils/xsubpp
 ln -s ../../../bin/xsubpp %{build_privlib}/ExtUtils/
 
 # Don't need the .packlist
-rm %{build_archlib}/.packlist
+rm -rf %{build_archlib}/.packlist
 
 # Do not distribute File::Spec::VMS as it works on VMS only (bug #973713)
 # We cannot remove it in %%prep because dist/Cwd/t/Spec.t test needs it.
-rm %{build_archlib}/File/Spec/VMS.pm
-rm $RPM_BUILD_ROOT%{_mandir}/man3/File::Spec::VMS.3*
+rm -rf %{build_archlib}/File/Spec/VMS.pm
+rm -rf $RPM_BUILD_ROOT%{_mandir}/man3/File::Spec::VMS.3*
 
 # Fix some manpages to be UTF-8
 mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1/
 pushd $RPM_BUILD_ROOT%{_mandir}/man1/
   for i in perl588delta.1 perldelta.1 ; do
     iconv -f MS-ANSI -t UTF-8 $i --output new-$i
-    rm $i
+    rm -rf $i
     mv new-$i $i
   done
 popd
@@ -3228,7 +3228,7 @@ popd
 # for now, remove Bzip2:
 # Why? Now is missing Bzip2 files and provides
 ##find $RPM_BUILD_ROOT -name Bzip2 | xargs rm -r
-##find $RPM_BUILD_ROOT -name '*B*zip2*'| xargs rm
+##find $RPM_BUILD_ROOT -name '*B*zip2*'| xargs rm -rf
 
 # tests -- FIXME need to validate that this all works as expected
 mkdir -p %{buildroot}%{perl5_testdir}/perl-tests
