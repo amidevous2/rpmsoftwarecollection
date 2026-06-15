@@ -10,7 +10,7 @@
 %global tapsetdir   %{_datadir}/systemtap/tapset
 
 %global dual_life 0
-#%#global rebuild_from_scratch %{defined perl_bootstrap}
+#%#global rebuild_from_scratch #%#{defined perl_bootstrap}
 %global perl_bootstrap 0
 
 %if %{perl_bootstrap} == 1
@@ -340,7 +340,7 @@ BuildRequires:  groff-base
 %endif
 BuildRequires:  libdb-devel
 BuildRequires:  make
-%if !%{defined perl_bootstrap}
+%if %{perl_bootstrap} == 1
 BuildRequires:  %{?scl_prefix}perl-interpreter
 BuildRequires:  %{?scl_prefix}perl-generators
 %endif
@@ -663,7 +663,7 @@ Requires:       %{?scl_prefix}perl(IO::Compress::Bzip2) >= 2.015
 # IO::String not used if perl supports useperlio which is true
 # Use Compress::Zlib's version for IO::Uncompress::Bunzip2
 Requires:       %{?scl_prefix}perl(IO::Uncompress::Bunzip2) >= 2.015
-%if !%{defined perl_bootstrap}
+%if %{perl_bootstrap} == 1
 Requires:       %{?scl_prefix}perl(Text::Diff)
 %endif
 %if %{perl_bootstrap} == 1
@@ -864,11 +864,11 @@ Requires:       make
 Requires:       %{?scl_prefix}perl(Archive::Tar) >= 1.50
 Requires:       %{?scl_prefix}perl(base)
 Requires:       %{?scl_prefix}perl(Data::Dumper)
-%if !%{defined perl_bootstrap}
+%if %{perl_bootstrap} == 1
 Requires:       %{?scl_prefix}perl(Devel::Size)
 %endif
 Requires:       %{?scl_prefix}perl(ExtUtils::Manifest)
-%if !%{defined perl_bootstrap}
+%if %{perl_bootstrap} == 1
 Requires:       %{?scl_prefix}perl(File::HomeDir) >= 0.65
 %endif
 Requires:       %{?scl_prefix}perl(File::Temp) >= 0.16
@@ -877,13 +877,13 @@ Requires:       %{?scl_prefix}perl(Net::Config)
 Requires:       %{?scl_prefix}perl(Net::FTP)
 Requires:       %{?scl_prefix}perl(POSIX)
 Requires:       %{?scl_prefix}perl(Term::ReadLine)
-%if !%{defined perl_bootstrap}
+%if %{perl_bootstrap} == 1
 Requires:       %{?scl_prefix}perl(URI)
 Requires:       %{?scl_prefix}perl(URI::Escape)
 %endif
 Requires:       %{?scl_prefix}perl(User::pwent)
 # Optional but higly recommended:
-%if !%{defined perl_bootstrap}
+%if %{perl_bootstrap} == 1
 Requires:       %{?scl_prefix}perl(Archive::Zip)
 Requires:       %{?scl_prefix}perl(Compress::Bzip2)
 Requires:       %{?scl_prefix}perl(CPAN::Meta) >= 2.110350
@@ -2923,7 +2923,7 @@ rm -rf .git # Perl tests examine a git repository
 %{?scl:sed -i 's|@scl@|%{?scl_prefix}|g' Makefile.SH}
 %{!?scl:sed -i 's|@scl@||g' Makefile.SH}
 
-%if !%{defined perl_bootstrap}
+%if %{perl_bootstrap} == 1
 # Local patch tracking
 perl -x patchlevel.h \
     'Fedora Patch1: Removes date check, Fedora/RHEL specific' \
