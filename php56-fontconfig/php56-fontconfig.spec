@@ -48,6 +48,7 @@ Patch7:		%{pkg_name}-fix-remapdir.patch
 BuildRequires:	%{?scl_prefix}libxml2-devel
 BuildRequires:	freetype-devel >= %{freetype_version}
 BuildRequires:	fontpackages-devel
+BuildRequires:	python3
 BuildRequires:	autoconf automake libtool gettext
 BuildRequires:	gperf
 BuildRequires:  %{?scl_prefix}docbook-utils %{?scl_prefix}docbook-utils-pdf
