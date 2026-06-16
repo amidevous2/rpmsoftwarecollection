@@ -8,38 +8,18 @@
 #
 # Please preserve changelog entries
 #
-%{?scl:%global _scl_vendor remi}
-%{?scl:%global _vendor remi}
 %if 0%{?scl:1}
 %scl_package php
 %else
 %global pkg_name          %{name}
-%global _root_sysconfdir  /etc
-%global _root_bindir      /usr/bin
-%global _root_sbindir     /usr/sbin
-%global _root_includedir  /usr/include
-%global _root_libdir      /usr/lib64
-%global _root_prefix      /usr
+%global _root_sysconfdir  %{_sysconfdir}
+%global _root_bindir      %{_bindir}
+%global _root_sbindir     %{_sbindir}
+%global _root_includedir  %{_includedir}
+%global _root_libdir      %{_libdir}
+%global _root_prefix      %{_prefix}
 %global _root_initddir    %{_initddir}
 %endif
-%{?scl:%global _scl_vendor remi}
-%{?scl:%global _vendor remi}
-%{?scl:%global _scl_prefix /opt/remi}
-%{?scl:%global _scl_root /opt/remi/php56/root/}
-%{?scl:%global _prefix /opt/remi/php56/root/usr}
-%{?scl:%global _sysconfdir /opt/remi/php56/root/etc}
-%{?scl:%global _exec_prefix /opt/remi/php56/root/usr}
-%{?scl:%global _includedir /opt/remi/php56/root/usr/include}
-%{?scl:%global _bindir /opt/remi/php56/root/usr/bin}
-%{?scl:%global _sbindir /opt/remi/php56/root/usr/sbin}
-%{?scl:%global _libdir /opt/remi/php56/root/usr/lib64}
-%{?scl:%global _libexecdir /opt/remi/php56/root/usr/libexec}
-%{?scl:%global _datadir /opt/remi/php56/root/usr/share}
-%{?scl:%global _infodir /opt/remi/php56/root/usr/share/info}
-%{?scl:%global _mandir /opt/remi/php56/root/usr/share/man}
-%{?scl:%global _docdir /opt/remi/php56/root/usr/share/doc}
-
-
 
 # API/ABI check
 %global apiver      20131106
@@ -109,7 +89,7 @@
 %global with_oci8     %{?_with_oci8:1}%{!?_with_oci8:0}
 
 %global with_imap      1
-%global with_interbase 0
+%global with_interbase 1
 %global with_mcrypt    1
 %global with_freetds   1
 %global with_tidy      1
@@ -161,7 +141,7 @@
 Summary: PHP scripting language for creating dynamic web sites
 Name: php56-php
 Version: 5.6.40
-Release: 50%{?dist}
+Release: 51%{?dist}
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
 # TSRM is licensed under BSD
@@ -315,9 +295,9 @@ BuildRequires: httpd-filesystem
 %endif
 
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-BuildRequires: libstdc++-devel, php56-openssl-devel
+BuildRequires: libstdc++-devel, openssl-devel, compat-openssl11-devel
 %else
-BuildRequires: libstdc++-devel, php56-openssl-devel
+BuildRequires: libstdc++-devel, openssl-devel
 %endif
 
 %if %{with_sqlite3}
@@ -533,12 +513,12 @@ Requires: libtool
 # see "php-config --libs"
 Requires: krb5-devel%{?_isa}
 Requires: libedit-devel%{?_isa}
-Requires: %{?scl_prefix}libxml2-devel%{?_isa}
+Requires: libxml2-devel%{?_isa}
 
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-Requires: php56-openssl-devel
+Requires: openssl-devel%{?_isa}, compat-openssl11-devel
 %else
-Requires: php56-openssl-devel
+Requires: openssl-devel%{?_isa}
 %endif
 
 
@@ -581,9 +561,9 @@ Group: Development/Languages
 License: PHP
 Requires: %{?scl_prefix}php-common%{?_isa} = %{version}-%{release}
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-BuildRequires: krb5-devel, php56-openssl-devel, libc-client-devel
+BuildRequires: krb5-devel, openssl-devel, compat-openssl11-devel, libc-client-devel
 %else
-BuildRequires: krb5-devel, php56-openssl-devel, libc-client-devel
+BuildRequires: krb5-devel, openssl-devel, libc-client-devel
 %endif
 
 
@@ -602,9 +582,9 @@ Group: Development/Languages
 License: PHP
 Requires: %{?scl_prefix}php-common%{?_isa} = %{version}-%{release}
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-BuildRequires: cyrus-sasl-devel, openldap-devel, php56-openssl-devel
+BuildRequires: cyrus-sasl-devel, openldap-devel, openssl-devel, compat-openssl11-devel
 %else
-BuildRequires: cyrus-sasl-devel, openldap-devel, php56-openssl-devel
+BuildRequires: cyrus-sasl-devel, openldap-devel, openssl-devel
 %endif
 
 %description ldap
@@ -665,9 +645,9 @@ Requires: %{?scl_prefix}php-pdo%{?_isa} = %{version}-%{release}
 Provides: %{?scl_prefix}php_database
 Provides: %{?scl_prefix}php-pdo_pgsql, %{?scl_prefix}php-pdo_pgsql%{?_isa}
 %if 0%{?fedora} >= 35 || 0%{?rhel} >= 9
-BuildRequires: krb5-devel, php56-openssl-devel, postgresql-devel
+BuildRequires: krb5-devel, openssl-devel, compat-openssl11-devel, postgresql-devel
 %else
-BuildRequires: krb5-devel, php56-openssl-devel, postgresql-devel
+BuildRequires: krb5-devel, openssl-devel, postgresql-devel
 %endif
 
 %description pgsql
@@ -721,7 +701,7 @@ Group: Development/Languages
 # All files licensed under PHP version 3.01
 License: PHP
 Requires: %{?scl_prefix}php-common%{?_isa} = %{version}-%{release}
-BuildRequires: %{?scl_prefix}libxml2-devel
+BuildRequires: libxml2-devel
 
 %description soap
 The %{?scl_prefix}php-soap package contains a dynamic shared object that will add
@@ -816,7 +796,7 @@ Provides: %{?scl_prefix}php-wddx, %{?scl_prefix}php-wddx%{?_isa}
 Provides: %{?scl_prefix}php-xmlreader, %{?scl_prefix}php-xmlreader%{?_isa}
 Provides: %{?scl_prefix}php-xmlwriter, %{?scl_prefix}php-xmlwriter%{?_isa}
 Provides: %{?scl_prefix}php-xsl, %{?scl_prefix}php-xsl%{?_isa}
-BuildRequires: libxslt-devel >= 1.0.18-1, %{?scl_prefix}libxml2-devel
+BuildRequires: libxslt-devel >= 1.0.18-1, libxml2-devel >= 2.4.14-1
 
 %description xml
 The %{?scl_prefix}php-xml package contains dynamic shared objects which add support
@@ -1355,7 +1335,7 @@ ln -sf ../configure
     --with-zlib \
     --with-layout=GNU \
     --with-kerberos \
-    --with-libxml-dir=%{_prefix} \
+    --with-libxml-dir=%{_root_prefix} \
 %if 0%{?fedora} >= 28 || 0%{?rhel} >= 6
     --with-system-tzdata \
 %endif
