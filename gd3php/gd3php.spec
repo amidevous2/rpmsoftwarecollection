@@ -1,4 +1,4 @@
-## remirepo spec file for gd3php
+## remirepo spec file for gd3php v1
 # renamed for parallel installation, from:
 #
 # Fedora spec file for gd
