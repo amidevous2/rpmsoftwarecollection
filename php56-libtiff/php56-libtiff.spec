@@ -1,3 +1,4 @@
+#news
 %{?scl:%scl_package libtiff}
 %{!?scl:%global pkg_name %{name}}
 
