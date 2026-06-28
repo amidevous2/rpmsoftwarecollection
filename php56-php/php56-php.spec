@@ -89,7 +89,7 @@
 %global with_oci8     %{?_with_oci8:1}%{!?_with_oci8:0}
 
 %global with_imap      1
-%global with_interbase 1
+%global with_interbase 0
 %global with_mcrypt    1
 %global with_freetds   1
 %global with_tidy      1
