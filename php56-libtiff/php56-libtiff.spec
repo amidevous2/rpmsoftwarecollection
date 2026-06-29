@@ -113,7 +113,7 @@ image files using the libtiff library.
 
 
 %prep
-%{?scl:scl enable %{scl} - << \EOF}
+%{?scl:scl enable %{scl} - << \EOG}
 set -ex
 %autosetup -p1 -n tiff-%{version}
 
@@ -125,11 +125,11 @@ aclocal -I . -I m4
 automake --add-missing --copy
 autoconf
 autoheader
-%{?scl:EOF}
+%{?scl:EOG}
 
 
 %build
-%{?scl:scl enable %{scl} - << \EOF}
+%{?scl:scl enable %{scl} - << \EOG}
 set -ex
 export CFLAGS="%{optflags} -fno-strict-aliasing"
 %configure --enable-ld-version-script
@@ -140,11 +140,11 @@ make htmldoc
 popd
 
 %make_build
-%{?scl:EOF}
+%{?scl:EOG}
 
 
 %install
-%{?scl:scl enable %{scl} - << \EOF}
+%{?scl:scl enable %{scl} - << \EOG}
 set -ex
 %make_install
 
@@ -205,17 +205,17 @@ EOF
 fi
 
 %ldconfig_scriptlets
-%{?scl:EOF}
+%{?scl:EOG}
 
 
 %check
-%{?scl:scl enable %{scl} - << \EOF}
+%{?scl:scl enable %{scl} - << \EOG}
 set -ex
 LD_LIBRARY_PATH=$PWD:$LD_LIBRARY_PATH make check
 
 # don't include documentation Makefiles, they are a multilib hazard
 find html -name 'Makefile*' | xargs rm
-%{?scl:EOF}
+%{?scl:EOG}
 
 
 %files
