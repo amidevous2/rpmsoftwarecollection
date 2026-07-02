@@ -85,7 +85,7 @@ BuildRequires: fontconfig-devel
 BuildRequires: gettext-devel
 BuildRequires: libjpeg-devel
 BuildRequires: libpng-devel
-BuildRequires: libtiff-devel
+BuildRequires: php56-libtiff-devel
 %if %{with webp}
 %if 0%{?rhel} == 7
 BuildRequires: libwebp7-devel
